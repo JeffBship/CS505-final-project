@@ -25,12 +25,12 @@ public class Mirror
     public void AddWidget(Widget widget)
     {
         int i = 0;
-            while (Widgets[i]!=null && i < 4)
+            while (Widgets[i]!=null)
             {
                 i++;
             }
             Widgets[i] = widget;
-            System.out.println("Widget added");
+            
     }
     /**
      * Removes Widget from mirror
@@ -38,7 +38,7 @@ public class Mirror
      * 
      * @return void
      */
-    public void RemoveWidget(Widget widget)
+    public boolean RemoveWidget(Widget widget)
     {
         int i = 0;
         boolean removed = false;
@@ -55,6 +55,7 @@ public class Mirror
                 i++;
             }
         }
+        return removed;
     }
     /**
      * Gets Widget at specified index
