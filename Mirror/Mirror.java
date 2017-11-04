@@ -5,7 +5,7 @@
  * @Emily Park 
  * @version 1.0
  */
-public class Mirror 
+public class Mirror
 {
     private Widget[] Widgets = new Widget[4];
     private Widget activeWidget;
@@ -25,7 +25,7 @@ public class Mirror
     public void AddWidget(Widget widget)
     {
         int i = 0;
-            while (Widgets[i] && i < 4)
+            while (Widgets[i]!=null && i < 4)
             {
                 i++;
             }
@@ -42,11 +42,11 @@ public class Mirror
     {
         int i = 0;
         boolean removed = false;
-        while (i < 4 && removed = false)
+        while (i < 4 && removed == false)
         {
             if (Widgets[i] == widget)
             {
-                Widgets[i] = NULL;
+                Widgets[i] = null;
                 System.out.println("Widget removed");
                 removed = true;
             }
