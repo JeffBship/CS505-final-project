@@ -28,22 +28,23 @@ public class Mirror_test
     @Before
     public void setUp()
     {
-       Mirror mirror;
-       Widget widgetOne = new Widget();
-       Widget widgetTwo = new Widget();
-       Widget widgetThree = new Widget();
-       Widget widgetFour = new Widget();
-       Widget widgetFive = new Widget();
-       Widget widgetNull = null;
+       
     }
+    
     @Test
     public void testGetInstance(){
-        assertEquals(mirror.GetInstance());
+        System.out.println("GetInstance");
+        Mirror result = Mirror.GetInstance();
+        
+        assertEquals(result.getClass().getName(),"Mirror");
     }
     @Test
     public void testNullAdd(){
-        mirror.AddWidget(widgetNull);
-        assertEquals(widgetNull,mirror.getWidget(0));
+        Mirror instance = Mirror.GetInstance();
+        Widget w = null;
+        instance.AddWidget(null);
+        
+        assertEquals(w,instance.GetWidget(0));
     }
     @Test
     public void testOneAdd(){
