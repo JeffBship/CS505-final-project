@@ -94,4 +94,8 @@ public class Mirror
     {
         return mirror;
     }
+    public static void ResetSingleton()
+    {
+        mirror = new Mirror();
+    }
 }

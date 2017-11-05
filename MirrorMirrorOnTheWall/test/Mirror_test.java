@@ -26,9 +26,9 @@ public class Mirror_test
      * Called before every test case method.
      */
     @Before
-    public void setUp()
+    public void resetSingleton()
     {
-       
+       Mirror.ResetSingleton();
     }
     
     @Test
@@ -48,71 +48,201 @@ public class Mirror_test
     }
     @Test
     public void testOneAdd(){
+        Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
         mirror.AddWidget(widgetOne);
-        assertEquals(widgetOne,mirror.getWidget(0));
+        assertEquals(widgetOne,instance.GetWidget(0));
     }
     @Test
     public void testTwoAdd(){
-        mirror.AddWidget(widgetTwo);
-        assertEquals(widgetTwo, mirror.getWidget(1));
+        Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        assertEquals(widgetTwo, instance.getWidget(1));
     }
      @Test
     public void testThreeAdd(){
-        mirror.AddWidget(widgetThree);
-        assertEquals(widgetThree, mirror.getWidget(2));
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        assertEquals(widgetThree, instance.getWidget(2));
     }
      @Test
     public void testFourAdd(){
-        mirror.AddWidget(widgetFour);
-        assertEquals(widgetTFour, mirror.getWidget(3));
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertEquals(widgetFour, instance.getWidget(3));
     }
      @Test
     public void testFiveAdd(){
-        assertEquals(mirror.AddWidget(widgetFive), IndexOutOfBoundsException);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	Widget widgetFive = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertEquals(instance.AddWidget(widgetFive), IndexOutOfBoundsException);
     }
     @Test
     public void knobZero(){
-        assertequals(mirror.SetActive(0),widgetOne);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.SetActive(0),widgetOne);
     }
     @Test
     public void knobNinety(){
-        assertequals(mirror.SetActive(90),widgetTwo);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.SetActive(90),widgetTwo);
     }
     @Test
     public void knobOneEighty(){
-        assertequals(mirror.SetActive(180),widgetThree);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.SetActive(180),widgetThree);
     }
     @Test
     public void knobTwoSeventy(){
-        assertequals(mirror.SetActive(270),widgetFour);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.SetActive(270),widgetFour);
     }
     @Test
     public void knobFiveTwenty(){
-        assertequals(mirror.SetActive(520),widgetTwo);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.SetActive(520),widgetTwo);
     }
     @Test
     public void testFiveRemove(){
-        assertequals(mirror.RemoveWidget(widgetFive), false);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetFive), false);
     }
     @Test
     public void testFourRemove(){
-        assertequals(mirror.RemoveWidget(widgetFour), true);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetFour), true);
     }
     @Test
     public void testThreeRemove(){
-        assertequals(mirror.RemoveWidget(widgetThree), true);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetThree), true);
     }
     @Test
     public void testTwoRemove(){
-        assertequals(mirror.RemoveWidget(widgetTwo), true);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetTwo), true);
     }
     @Test
     public void testOneRemove(){
-        assertequals(mirror.RemoveWidget(widgetOne), true);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetOne), true);
     }
     @Test
     public void testNullRemove(){
-        assertequals(mirror.RemoveWidget(widgetNull), false);
+	Mirror instance = Mirror.GetInstance();
+	Widget widgetOne = new Widget();
+	Widget widgetTwo = new Widget();
+	Widget widgetThree = new Widget();
+	Widget widgetFour = new Widget();
+	Widget widgetNull = null;
+	instance.AddWidget(widgetOne);
+        instance.AddWidget(widgetTwo);
+        instance.AddWidget(widgetThree);
+        instance.AddWidget(widgetFour);
+        assertequals(instance.RemoveWidget(widgetNull), false);
     }
     /**
      * Tears down the test fixture.
