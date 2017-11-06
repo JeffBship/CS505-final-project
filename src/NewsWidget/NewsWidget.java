@@ -1,3 +1,7 @@
+/**
+ * @author Jeff Blankenship
+ */
+
 
 package NewsWidget;
 
