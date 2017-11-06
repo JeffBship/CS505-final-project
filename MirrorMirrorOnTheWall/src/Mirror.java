@@ -9,7 +9,7 @@ public class Mirror
 {
     private Widget[] Widgets = new Widget[4];
     private Widget activeWidget;
-    public static final Mirror mirror = new Mirror();
+    public static Mirror mirror = new Mirror();
 
     /**
      * Constructor for objects of class Mirror
