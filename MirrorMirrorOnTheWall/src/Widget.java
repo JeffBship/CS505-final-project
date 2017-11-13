@@ -3,33 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import cs505.group1.state.*;
 /**
  *
  * @author melmulcahy
  * @since 11/4/2016
  */
-public abstract class Widget implements NetObserver {
+public abstract class Widget extends ButtonContext implements NetObserver {
     private NetConnector netConnector;
-    /**
-     * Display the inactive state
-     */
-    public void showInactiveState(){
-	//TODO: Implement States
-        System.out.println("Show Inactive State");
-    }
+    
+    public abstract void showInactiveState();
+    
     public abstract void showNoNetworkState();
     
-    /**
-     * No sure what to do with this yet.
-     * @param o
-     * @param arg 
-     */
-    @Override
-    public void update(Observable o, Object arg) {
-        //TODO: implement this.
-        System.out.println("Update");
-    }
+
     /**
     * If there is no network connection, display the no network state
     * @param isConnected status of the network connection
@@ -45,6 +32,18 @@ public abstract class Widget implements NetObserver {
         }
         
     }
+
+    @Override
+    public abstract void singlePress();
+
+    @Override
+    public abstract void doublePress();
+
+    @Override
+    public abstract void longPress();
+
+    @Override
+    public abstract String toString();
     
     
 }
