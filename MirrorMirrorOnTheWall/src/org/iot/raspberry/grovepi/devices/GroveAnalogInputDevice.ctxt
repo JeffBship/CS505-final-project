@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=in
+comment0.target=GroveAnalogInputDevice(org.iot.raspberry.grovepi.GroveAnalogIn)
+comment1.params=
+comment1.target=void\ run()
+comment2.params=newValue
+comment2.target=void\ onChange(byte[])
+comment3.params=listener
+comment3.target=void\ setListener(GroveInputDeviceListener)
+comment4.params=
+comment4.target=java.lang.Object\ get()
+comment5.params=data
+comment5.target=java.lang.Object\ get(byte[])
+numComments=6
