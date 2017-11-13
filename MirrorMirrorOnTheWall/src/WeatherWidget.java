@@ -85,15 +85,6 @@ public class WeatherWidget extends Widget {
     {
         return weatherWidget;
     }
-    
-    /**
-     * Display the inactive state
-     */
-    @Override
-    public void showInactiveState() {
-        //TODO: Implement States
-        System.out.println("Show Inactive State");
-    }
 
     /**
      * show the no network state
@@ -105,33 +96,6 @@ public class WeatherWidget extends Widget {
         System.out.println("Show No Network State");
     }
 
-   /**
-    * If there is no network connection, display the no network state
-    * @param isConnected status of the network connection
-    */
-    
-    @Override
-    public void update(boolean isConnected) {
-        
-        //TODO: Implement States
-        if(!isConnected)
-        {
-            showNoNetworkState();
-        }
-        
-    }
-
-    /**
-     * No sure what to do with this yet.
-     * @param o
-     * @param arg 
-     */
-    @Override
-    public void update(Observable o, Object arg) {
-        //TODO: implement this.
-        System.out.println("Update");
-    }
-    
     /**
      * Resets the instance of the singleton to a new object. 
      */
