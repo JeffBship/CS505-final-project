@@ -1,4 +1,6 @@
 
+import WeatherStates.WeatherInactiveState;
+import cs505.group1.state.ButtonState;
 import java.util.Observable;
 
 /*
@@ -7,6 +9,7 @@ import java.util.Observable;
 
 /**
  *  @since 11/4/2016
+ * @version 2017.11.12
  * @author melmulcahy
  */
 public class WeatherWidget extends Widget {
@@ -16,11 +19,15 @@ public class WeatherWidget extends Widget {
     private String location;
     private static WeatherWidget weatherWidget = new WeatherWidget();
     
-    private WeatherWidget()
+    /**
+     * Default constructor. Sets location to New Britain, CT.
+     */
+    protected WeatherWidget()
     {
         this.location = "New Britain, CT";
     }
-    
+
+
     /**
      *
      * @return the current weather (rain, snow, etc...)
@@ -93,7 +100,7 @@ public class WeatherWidget extends Widget {
     public void showNoNetworkState() {
         
         //TODO: Implement States
-        System.out.println("Show No Network State");
+        setState(new NoNetworkConnectionState());
     }
 
     /**
@@ -115,5 +122,42 @@ public class WeatherWidget extends Widget {
                  (this.getCurrentWeather().equals(w.getCurrentWeather())) &&
                  (this.getLocation().equals(w.getLocation())));
     }
+
+    @Override
+    public void singlePress() {
+        ButtonState currentState = getState();
+        currentState.singlePress();
+    }
+
+    @Override
+    public void doublePress() {
+        ButtonState currentState = getState();
+        currentState.doublePress();
+    }
+
+    @Override
+    public void longPress() {
+        ButtonState currentState = getState();
+        currentState.longPress();
+    }
+
+    @Override
+    public String toString() {
+        
+        ButtonState currentState = getState();
+        return currentState.toString();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void showInactiveState() {
+        
+        setState(new WeatherInactiveState());
+    }
+
     
 }
