@@ -60,9 +60,49 @@ public class Weather_Service
          String response = httpcon.getResponseMessage();
          JSONObject jsonLocationSearch = new JSONObject(response);
          
-         jsonLocationSearch.get("Key");
+         //jsonLocationSearch.get("Key");
          
          return jsonLocationSearch.get("Key").toString();
         
+    }
+    
+    
+    public String GetDailyForcast(){
+        try
+        {
+            String locationKey = GetLocationKey(WeatherWidget.getInstance().getLocation());
+            
+            HttpURLConnection httpcon = (HttpURLConnection) ((new URL(URL+"/forecasts/v1/daily/1day/" + locationKey).openConnection()));
+         httpcon.setRequestMethod("GET");
+         httpcon.connect();
+         /*
+          * Output user credentials over HTTP Output Stream
+          */
+         
+         String currentLocation = WeatherWidget.getInstance().getLocation();
+         
+         byte[] outputBytes = ("{'apikey': '" + API_KEY +"', 'language':'en-us', 'details':false, 'details':false, 'metrics':false,}").getBytes("UTF-8");
+         
+         OutputStream os = httpcon.getOutputStream();
+         os.write(outputBytes);
+         os.close();
+         /*
+          * Call Function setCookie and pass the HttpUrlConnection. Set Function
+          * will return a Cookie String used to authenticate user.
+          */
+         
+         String response = httpcon.getResponseMessage();
+         JSONObject jsonForcast = new JSONObject(response);
+         
+         JSONObject jsonHeadline = jsonForcast.getJSONObject("Headline");
+         JSONObject jsonDaily = jsonForcast.getJSONObject("DailyForecasts");
+         
+         return jsonHeadline.get("Text").toString();
+        
+        }
+        catch(Exception ex){
+            
+        }
+        return "";
     }
 }
