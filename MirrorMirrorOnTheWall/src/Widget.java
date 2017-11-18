@@ -16,7 +16,10 @@ public abstract class Widget extends ButtonContext implements NetObserver {
     
     public abstract void showNoNetworkState();
     
-
+    public Widget(ButtonState buttonState){
+        super(buttonState);  //calls the parent class constructor
+        this.buttonState = buttonState; 
+    }
     /**
     * If there is no network connection, display the no network state
     * @param isConnected status of the network connection
