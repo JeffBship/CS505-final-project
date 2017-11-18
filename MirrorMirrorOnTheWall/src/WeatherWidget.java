@@ -1,4 +1,5 @@
 
+import WeatherStates.HourlyDayForcastState;
 import WeatherStates.WeatherInactiveState;
 import cs505.group1.state.ButtonState;
 import java.util.Observable;
@@ -17,14 +18,16 @@ public class WeatherWidget extends Widget {
     private String currentWeather = "";
     private int currentTemperature = 0;
     private String location;
-    private static WeatherWidget weatherWidget = new WeatherWidget();
+    private static WeatherWidget weatherWidget = new WeatherWidget(new HourlyDayForcastState());
     
     /**
      * Default constructor. Sets location to New Britain, CT.
      */
-    protected WeatherWidget()
+    protected WeatherWidget(ButtonState buttonState)
     {
-        this.location = "New Britain, CT";
+      super(buttonState);  //calls the parent class constructor
+      this.buttonState = buttonState;
+      this.location = "New Britain, CT";
     }
 
 
@@ -108,7 +111,7 @@ public class WeatherWidget extends Widget {
      */
     public static void resetSingleton()
     {
-        weatherWidget = new WeatherWidget();
+        weatherWidget = new WeatherWidget(new HourlyDayForcastState());
     }
     
     /**

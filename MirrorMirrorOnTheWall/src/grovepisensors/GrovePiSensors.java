@@ -1,5 +1,6 @@
 package grovepisensors;
 
+import com.pi4j.io.i2c.I2CFactory;
 import org.iot.raspberry.grovepi.pi4j.GrovePi4J;
 import java.io.IOException;
 /**
@@ -16,7 +17,7 @@ public class GrovePiSensors {
      */
     private static boolean testingButton = true;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException {
         int buttonPin = 6;
         int rotaryPin = 2;
         int bufferLength = 4;
