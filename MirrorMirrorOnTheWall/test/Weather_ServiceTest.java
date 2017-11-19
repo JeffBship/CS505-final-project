@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import WeatherWidget.Weather_Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import static org.hamcrest.CoreMatchers.*;
@@ -24,7 +25,7 @@ public class Weather_ServiceTest {
     @Test
     public void testGetDailyForecast() {
         System.out.println("GetDailyForecast");
-        Weather_Service instance = new Weather_Service();
+        Weather_Service instance = Weather_Service.getInstance();
         HashMap<String,String> result = instance.GetDailyForecast();
         assertThat(result, not(new HashMap()));
     }
@@ -35,7 +36,7 @@ public class Weather_ServiceTest {
     @Test
     public void testGetWeeklyForecast() {
         System.out.println("GetWeeklyForecast");
-        Weather_Service instance = new Weather_Service();
+        Weather_Service instance = Weather_Service.getInstance();
         String expResult = "";
         ArrayList result = instance.GetWeeklyForecast();
         assertThat(result, not(new ArrayList<HashMap>()));
@@ -47,7 +48,7 @@ public class Weather_ServiceTest {
     @Test
     public void testGetHourlyForecast() {
         System.out.println("GetHourlyForecast");
-        Weather_Service instance = new Weather_Service();
+        Weather_Service instance = Weather_Service.getInstance();
         String expResult = "";
         ArrayList<HashMap> result = instance.GetHourlyForecast();
         assertThat(result, not(new ArrayList<HashMap>()));
