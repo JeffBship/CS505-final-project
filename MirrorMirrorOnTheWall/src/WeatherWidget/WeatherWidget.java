@@ -162,5 +162,10 @@ public class WeatherWidget extends Widget {
         setState(new WeatherInactiveState());
     }
 
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
