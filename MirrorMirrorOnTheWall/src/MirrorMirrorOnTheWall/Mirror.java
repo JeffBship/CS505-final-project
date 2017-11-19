@@ -15,6 +15,7 @@ public class Mirror
     private Widget[] Widgets = new Widget[4];
     private Widget activeWidget;
     public static Mirror mirror = new Mirror();
+    public Quadrant quadrant;
 
     /**
      * Constructor for objects of class Mirror
@@ -70,6 +71,7 @@ public class Mirror
      */
     public Widget GetWidget(int index)
     {
+	
         return Widgets[index];
     }
     /**
@@ -78,17 +80,29 @@ public class Mirror
      * 
      * @return widget
      */
-    public Widget SetActive(int degree)
+    public Widget SetActive(double degree)
     {
         degree = degree % 360;
-        if (degree >= 0 && degree < 90)
+        if (degree >= 0.00 && degree < 90.00)
+	    setQuadrant(Quadrant.ONE);
             return GetWidget(0);
-        else if (degree >= 90 && degree < 180)
+        else if (degree >= 90.00 && degree < 180.00)
+	    setQuadrant(Quadrant.TWO);
             return GetWidget(1);
-        else if (degree >= 180 && degree < 270)
+        else if (degree >= 180.00 && degree < 270.00)
+	    setQuadrant(Quadrant.THREE);
             return GetWidget(2);
         else
+	    setQuadrant(Quadrant.FOUR);
             return GetWidget(3);
+    }
+    /**
+    * Sets quadrant
+    * @param[in] num: quadrant state
+    */
+    public void setQuadrant(Quadrant num)
+    {
+	name = num;
     }
     /**
      * Gets instance of Mirror object
