@@ -5,7 +5,7 @@ package NewsWidget;
  *Story class provides an object to store titles and descriptions of news stories.
  * @author Jeff Blankenship
  */
-class Story {
+public class Story {
   String title;
   String description;
   
@@ -13,7 +13,7 @@ class Story {
    * Constructor
    * @param title 
    */
-  Story(String title){
+  public Story(String title){
     this.title = title;
     this.description = "";
   }
@@ -22,7 +22,7 @@ class Story {
    * Sets the title of the Story object to the passed string
    * @param title string
    */
-  void setTitle(String title){
+  public void setTitle(String title){
     this.title = title;
   }
   
@@ -30,7 +30,7 @@ class Story {
    * Obtains the title of the Story object.
    * @return String title
    */
-  String getTitle(){
+  public String getTitle(){
     return title;
   }
   
@@ -38,7 +38,7 @@ class Story {
    * 
    * @param description 
    */
-  void setDescription(String description){
+  public void setDescription(String description){
     this.description = description;
   }
   

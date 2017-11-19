@@ -1,3 +1,9 @@
+/*
+this is a temporary file used for example code using JFrame.
+@web http://helloraspberrypi.blogspot.com/
+@author Andr.oid Eric  https://plus.google.com/+AndroidEric
+*/
+
 package NewsWidget;
 
 import java.awt.BorderLayout;
