@@ -15,11 +15,11 @@ public abstract class GroveInputSensorListener {
     /**
      * A list of all observers that this listener notifies.
      */ 
-    protected CopyOnWriteArrayList<GroveInputSensorObserver> observers = new CopyOnWriteArrayList<GroveInputSensorObserver>();
+    protected CopyOnWriteArrayList<GroveInputSensorObserver> observers = new CopyOnWriteArrayList<>();
     /**
      * Responsible for making the intermittent calls to read the input sensor
      */
-    protected final ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+    private ScheduledExecutorService exec; 
     /**
      * Adds the observer to the list of observers.
      * @param observer the observer to be added
@@ -41,12 +41,28 @@ public abstract class GroveInputSensorListener {
      * @param delay the number of milliseconds between consecutive reads or calls of r's run() method
      */
     protected void startListening(Runnable r, int delay){
+        exec = Executors.newSingleThreadScheduledExecutor();
         exec.scheduleAtFixedRate(r, 0, delay, TimeUnit.MILLISECONDS);
     }
     
+    /**
+     * Stops the readings of the input sensor's values
+     */
+    protected void stopListening(){
+        if (!exec.isShutdown())
+            exec.shutdown();
+    }
     /**
      * Implementation to be provided by subclasses. Notifies all observers of the values recently read from the input sensor.
      * @param b the byte array that was read from the sensor.
      */
     protected abstract void notifyObservers(byte[] b);
+    
+    /**
+     * Gets the list of Observers that this Listener is responsible for notifying
+     * @return the list of observers
+     */
+    public CopyOnWriteArrayList<GroveInputSensorObserver> getObservers(){
+        return observers;
+    }
 }

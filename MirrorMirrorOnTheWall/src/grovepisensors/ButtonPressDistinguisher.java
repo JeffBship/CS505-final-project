@@ -33,7 +33,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      */
     private Thread thread = new Thread(this);
     /**
-     * The number of milliseconds the button must be held down for a Long Press
+     * The number of milliseconds the button must be held down for a Long Press.
      */
     private final int LONG_PRESS_TIME_INTERVAL = 1000;
     /**
@@ -41,9 +41,9 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      */
     private final int DOUBLE_PRESS_TIME_INTERVAL = 1000;
     /**
-     * Holds String description of last press type. One of: 'SINGLE', 'DOUBLE', 'LONG'
+     * Holds what last type of press was.
      */
-    private String pressType;
+    private ButtonPress pressType;
     /**
      * Updates the recorded times of button presses and releases. If a Long Press or a Double Press
      * occurs, this method notifies the appropriate object.  If a Single Press is detected, this method
@@ -62,13 +62,13 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
         } else{                             //button was just released
             lastRelease = timeOfAction;           
             if (lastRelease - lastPress > LONG_PRESS_TIME_INTERVAL){
-                pressType = "LONG";
-                System.out.println("Long Press");   //or call StateContext's LongPress()
+                pressType = ButtonPress.LONG;
+                notifyWidgets();
             }
             else{
                 if (thread.isAlive()){ //if thread still waiting, it's a double press        
-                    pressType = "DOUBLE";
-                    System.out.println("Double Press");
+                    pressType = ButtonPress.DOUBLE;
+                    notifyWidgets();
                     waitingForSecondPress = false;
                 }else{ //this press is not second press of a double press, must wait
                     waitingForSecondPress = true;
@@ -79,7 +79,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
         }   
     }        
     /**
-     * Invoked by this instance's update method when it detects a Single Press.  If the Single Press is not followed by another within
+     * Invoked by update method of this class when it detects a Single Press.  If the Single Press is not followed by another within
      * the predetermined period of time.  The run method determines that a Single Press has occurred and notifies the appropriate objec
      * @Override run in interface Runnable
      */
@@ -87,19 +87,19 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
         try{
             Thread.sleep(DOUBLE_PRESS_TIME_INTERVAL);  //after "enough" time has elapsed,
             if(waitingForSecondPress){              //and still waiting for second press, then it's a single press
-                pressType = "SINGLE";
-                System.out.println("Single Press");  //or call State Context's singlePress()
+                pressType = ButtonPress.SINGLE;
+                notifyWidgets();
                 waitingForSecondPress = false;
             }                
         }catch (InterruptedException e){
             e.printStackTrace();
         }
     }
+    
     /**
-     * Gets the String representation of the last press
-     * @return One of: 'SINGLE', 'DOUBLE', 'LONG'
+     * Responsible for notifying active widget of press type that has just occurred.
      */
-    public String getLastPressType(){
-        return pressType;
+    public void notifyWidgets(){
+        System.out.println(pressType + " press");
     }
 }

@@ -14,4 +14,9 @@ public interface GroveInputSensorObserver{
      * @param b The data read from the Grove input sensor and passed from a subclass of GroveInputSensorListener
      */
     public void update(byte[] b);
+    
+    /**
+     * Responsible for notifying widgets of whatever event subclasses have detected.
+     */
+    public void notifyWidgets();
 }
