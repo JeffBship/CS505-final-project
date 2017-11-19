@@ -102,7 +102,7 @@ public class Mirror
     */
     public void setQuadrant(Quadrant num)
     {
-	name = num;
+	quadrant = num;
     }
     /**
      * Gets instance of Mirror object
