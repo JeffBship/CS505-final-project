@@ -1,34 +1,42 @@
-package NewsWidget;
+package NewsChainOfResponsibility;
 
-import java.net.MalformedURLException;
+import NewsWidget.Story;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.text.SimpleAttributeSet;
 
-public class CnnRSS {
-  final String URL = "http://rss.cnn.com/rss/edition.rss";
-  ArrayList<Story> storyList = getRSS(URL);
+/**
+ * CnnRSS is a concrete handler in the RSS Chain of Responsibility
+ * @author Jeff Blankenship 
+ */
+class CnnRSS extends RSShandler {
+    
+  public CnnRSS(){
+    successor = null;
+    //try to get storyList
+    storyList = makeStoryList();
+    bigFont = Font.bigCNN();
+    smallFont = Font.smallCNN();
+    //if no storyList, go to successor
+    if (storyList.isEmpty() || storyList.get(0).getTitle().equals("IOException") ) {
+      successor = new FoxRSS();
+      storyList = successor.getStoryList();
+      bigFont = successor.getBigFont();
+      smallFont = successor.getSmallFont();
+    }
+  };
   
-  
-  public CnnRSS() {
-    storyList = getRSS(URL);
-  }
-  
-  public ArrayList<Story> getStoryList(){
-    return this.storyList;
-  }
-
-  @SuppressWarnings("ConvertToTryWithResources")
-  private static ArrayList<Story> getRSS(String url){
-    ArrayList<Story> result = new ArrayList<>();
+  @Override
+  public ArrayList<Story>  makeStoryList(){
+    ArrayList<Story> cnnList = new ArrayList<>();
     String source = ""; 
-    //loading one object for testing and debugging purposes
-    //result.add(new Story("Fake News"));
-    //result.get(0).setDescription("It's all make believe.");
       try{
         //designate and open the rss feed
-        URL rssUrl = new URL (url);
-        InputStreamReader streamReader = new InputStreamReader(rssUrl.openStream());
+        URL url = new URL ("http://rss.cnn.com/rss/edition.rss");
+        url = new URL ("jeffbship.com"); //for testing, force a fail from this RSShandler
+        
+        InputStreamReader streamReader = new InputStreamReader(url.openStream());
         BufferedReader reader = new BufferedReader(streamReader);
         //obtain all data from the rss feed, load it into source
         String line; 
@@ -38,7 +46,7 @@ public class CnnRSS {
         reader.close();
       //Report IOExceptions associated with the rss stream    
       } catch (IOException ex){
-        result.add(new Story("IOException"));
+        cnnList.add(new Story("IOException"));
       }
     //expressions to look for in parsing the stream
     final String TITLESTART = "<title><![CDATA[";
@@ -61,8 +69,30 @@ public class CnnRSS {
         newStory.setDescription(source.substring(0,source.indexOf(DESCEND)));
         source = source.substring( source.indexOf(DESCEND) + DESCEND.length() );
       }
-      result.add(newStory);
+      cnnList.add(newStory);
     }
-    return result;
+    return cnnList;
+  };
+  
+  
+  @Override
+  public ArrayList<Story> getStoryList(){
+    return storyList;
   }
+  
+  @Override
+  public SimpleAttributeSet getBigFont(){
+    return bigFont;
+  };
+  
+  @Override
+  public SimpleAttributeSet getSmallFont(){
+    return smallFont;
+  };
+  
+  @Override
+  void setSuccessor(RSShandler rss){
+    successor = rss;
+  }
+
 }

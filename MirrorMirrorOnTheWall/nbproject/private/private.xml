@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/cs505/group1/state/ButtonState.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/Story.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/cs505/group1/adapter/ButtonToRobotAdapter.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsAdapter.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/WeatherStates/HourlyDayForcastState.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/hello.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsWidget.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsState.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/cs505/group1/state/ButtonContext.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/CnnRSS.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/RSS.java</file>
+        </group>
     </open-files>
 </project-private>
