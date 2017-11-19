@@ -31,12 +31,19 @@ public class GroveAnalogInputSensorListener extends GroveInputSensorListener imp
     public GroveAnalogInputSensorListener(GrovePi grovePi, int pin, int bufferSize) throws IOException{
         sensor = new GroveAnalogIn(grovePi, pin, bufferSize);
         sensor.setListener(this);
-        startListening(sensor, READ_DELAY);
+    }
+    
+    /**
+     * Initiates the readings of the input sensor's values
+     */
+    public void startListening(){
+        this.startListening(sensor, READ_DELAY);
     }
     
     /**
      * Notifies all observers of the new values read from the input sensor
      * @param b the byte array read from the sensor.
+     * @Override notifyObservers in GroveInputSensorListener
      */
     protected void notifyObservers(byte[] b){
         for (GroveInputSensorObserver o : observers){
@@ -47,6 +54,7 @@ public class GroveAnalogInputSensorListener extends GroveInputSensorListener imp
     /**
      * Tells an instance of this class to notify its observers of the new values read from the input sensor.
      * @param newValue The byte array read from the input sensor.
+     * @Override onChange in GroveAnalogInListener
      */
     public void onChange(byte[] newValue){
         notifyObservers(newValue);
