@@ -35,11 +35,11 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
     /**
      * The current state.
      */
-    private int currentState;
+    private Quadrant currentState;
     /**
      * The previous state.
      */
-    private int oldState;
+    private Quadrant oldState;
     
     /**
      * Instantiates a RotaryStateDeterminer with the provided number of states
@@ -63,12 +63,26 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
      */        
     public void update(byte[] b){
         double degrees = getDegrees(b);
-        oldState = currentState;
-        for (int i = 0; i < NUM_STATES; i++)
-            if (i * DEGREE_RANGE < degrees && degrees < (i+1) * DEGREE_RANGE)
-                 currentState = i+1;
-        if (oldState != currentState)
-            notifyWidgets();
+	if (degrees >= 0.00 && degrees < 90.00)
+	    setQuadrant(Quadrant.ONE);
+        else if (degree >= 90.00 && degree < 180.00)
+	    setQuadrant(Quadrant.TWO);
+        else if (degree >= 180.00 && degree < 270.00)
+	    setQuadrant(Quadrant.THREE);
+        else
+	    setQuadrant(Quadrant.FOUR);
+    }
+    /**
+    * Sets quadrant
+    * @param[in] num: quadrant state
+    */
+    public void setQuadrant(Quadrant num)
+    {
+	oldState = currentState;
+	currentState = num;
+	if (oldState != currentState){
+		System.out.println(currentState);
+	}
     }
      /**
      * Computes the current angle in degrees of the Grove rotary sensor based on the byte array read from the sensor
@@ -81,12 +95,5 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
         double voltage = sensorValue * ADC_REF / 1023;
         double degrees = voltage * FULL_ANGLE / GROVE_VCC;
         return degrees;
-    }
-    
-    /**
-     * Responsible for notifying widgets of state change
-     */
-    public void notifyWidgets(){
-        System.out.println("State: " + currentState);
     }
 }
