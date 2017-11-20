@@ -80,30 +80,18 @@ public class Mirror
      * 
      * @return widget
      */
-    public Widget SetActive(double degree)
+    public Widget SetActive()
     {
-        degree = degree % 360;
-        if (degree >= 0.00 && degree < 90.00)
-	    setQuadrant(Quadrant.ONE);
+        if (quadrant == "one")
             return GetWidget(0);
-        else if (degree >= 90.00 && degree < 180.00)
-	    setQuadrant(Quadrant.TWO);
+        else if (quadrant == "two")
             return GetWidget(1);
-        else if (degree >= 180.00 && degree < 270.00)
-	    setQuadrant(Quadrant.THREE);
+        else if (quadrant == "three")
             return GetWidget(2);
         else
-	    setQuadrant(Quadrant.FOUR);
             return GetWidget(3);
     }
-    /**
-    * Sets quadrant
-    * @param[in] num: quadrant state
-    */
-    public void setQuadrant(Quadrant num)
-    {
-	quadrant = num;
-    }
+    
     /**
      * Gets instance of Mirror object
      * 
