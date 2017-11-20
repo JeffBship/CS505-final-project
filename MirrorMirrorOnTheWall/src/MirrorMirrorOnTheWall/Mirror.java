@@ -82,11 +82,11 @@ public class Mirror
      */
     public Widget SetActive()
     {
-        if (quadrant == "one")
+        if (quadrant == Quadrant.ONE)
             return GetWidget(0);
-        else if (quadrant == "two")
+        else if (quadrant == Quadrant.TWO)
             return GetWidget(1);
-        else if (quadrant == "three")
+        else if (quadrant == Quadrant.THREE)
             return GetWidget(2);
         else
             return GetWidget(3);
