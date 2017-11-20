@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import MirrorMirrorOnTheWall.NetConnector;
+import WeatherWidget.WeatherWidget;
 import java.util.Observable;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -180,24 +182,6 @@ public class WeatherWidgetTest {
         assertEquals("",outContent.toString());
     }
 
-    /**
-     * Test of update method, of class WeatherWidget.
-     */
-    @Test
-    public void testUpdate_Observable_Object() {
-        System.out.println("update");
-        Observable o = NetConnector.getInstance();
-        Object arg = null;
-        WeatherWidget instance = WeatherWidget.getInstance();
-        
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        
-        System.setOut(new PrintStream(outContent));
-        
-        instance.update(o, arg);
-        
-        assertEquals("Update\n",outContent.toString());
-    }
 
 
     /**

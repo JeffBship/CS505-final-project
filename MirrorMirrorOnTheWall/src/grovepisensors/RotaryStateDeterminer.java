@@ -1,5 +1,6 @@
 package grovepisensors;
 
+import MirrorMirrorOnTheWall.Quadrant;
 import org.iot.raspberry.grovepi.GroveUtil;
 /**
  * The RotaryStateDeterminer class receives updates from a GroveAnalogInputSensorListener object.
@@ -27,19 +28,29 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
     /**
      * The number of different states 
      */
-    private int NUM_STATES = 4;
+    private final int NUM_STATES;
     /**
      * The range in degrees of an interval that is associated with a distinct state.
      */
-    private double DEGREE_RANGE = FULL_ANGLE / NUM_STATES;
+    private final double DEGREE_RANGE;
     /**
      * The current state.
      */
-    private int state;
+    private Quadrant currentState;
     /**
      * The previous state.
      */
-    private int oldState;
+    private Quadrant oldState;
+    
+    /**
+     * Instantiates a RotaryStateDeterminer with the provided number of states
+     * @param numberOfStates the number of different states to recognize and distinguish
+     */    
+    public RotaryStateDeterminer(int numberOfStates){
+        NUM_STATES = numberOfStates;
+        DEGREE_RANGE = FULL_ANGLE / NUM_STATES;
+    }
+    
     /**
      * Updates an instance of this class of the current angle of a Grove rotary sensor. If the state has changed,
      * notifies the appropriate object elsewhere.
@@ -50,26 +61,45 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
      * @See GroveAnalogInputSensorListener
      * @See GroveRotarySensor
      * @See GroveRotaryValue
-     */    
+     */        
     public void update(byte[] b){
         double degrees = getDegrees(b);
-        oldState = state;
-        for (int i = 0; i < NUM_STATES; i++)
-            if (i * DEGREE_RANGE < degrees && degrees < (i+1) * DEGREE_RANGE)
-                 state = i+1;
-        if (oldState != state)
-            System.out.println("State: " + state);
+	if (degrees >= 0.00 && degrees < 90.00)
+	    setQuadrant(Quadrant.ONE);
+        else if (degrees >= 90.00 && degrees < 180.00)
+	    setQuadrant(Quadrant.TWO);
+        else if (degrees >= 180.00 && degrees < 270.00)
+	    setQuadrant(Quadrant.THREE);
+        else
+	    setQuadrant(Quadrant.FOUR);
+    }
+    /**
+    * Sets quadrant
+    * @param[in] num: quadrant state
+    */
+    public void setQuadrant(Quadrant num)
+    {
+	oldState = currentState;
+	currentState = num;
+	if (oldState != currentState){
+		System.out.println(currentState);
+	}
     }
      /**
      * Computes the current angle in degrees of the Grove rotary sensor based on the byte array read from the sensor
      * @param b the byte[] read from the rotary sensor
      * @return the angle of the rotary sensor
      */
-    public double getDegrees(byte[] b){
+    private double getDegrees(byte[] b){
         int[] v = GroveUtil.unsign(b);
         double sensorValue = (v[1]*256) + v[2];
         double voltage = sensorValue * ADC_REF / 1023;
         double degrees = voltage * FULL_ANGLE / GROVE_VCC;
         return degrees;
+    }
+
+    @Override
+    public void notifyWidgets() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

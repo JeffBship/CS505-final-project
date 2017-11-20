@@ -30,7 +30,13 @@ public class GroveDigitalInputSensorListener extends GroveInputSensorListener im
     public GroveDigitalInputSensorListener(GrovePi grovePi, int pin) throws IOException{
         sensor = new GroveDigitalIn(grovePi, pin);
         sensor.setListener(this);
-        startListening(sensor, READ_DELAY);
+    }
+    
+    /**
+     * Initiates the readings of the input sensor's values
+     */
+    public void startListening(){
+        this.startListening(sensor, READ_DELAY);
     }
     
      /**
@@ -48,6 +54,7 @@ public class GroveDigitalInputSensorListener extends GroveInputSensorListener im
      * Tells an instance of this class to notify its observers of the new values read from the input sensor.
      * @param newValue The new state of the digital sensor.
      * @param oldValue The old state of the digital sensor.
+     * @Override onChange in GroveDigitalInListener
      */
     public void onChange(boolean oldValue, boolean newValue){
         notifyObservers(null);
