@@ -3,13 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/Weather_Service.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/grovepisensors/RotaryStateDeterminer.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/States/HourlyDayForcastState.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/MirrorMirrorOnTheWall/Mirror.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/WeatherWidget.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/MirrorMirrorOnTheWall/Quadrant.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/state/ButtonContext.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/GrovePiSensors.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/RotaryStateDeterminer.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/GroveInputSensorObserver.java</file>
+            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/MirrorMirrorOnTheWall/Quadrant.java</file>
         </group>
     </open-files>
 </project-private>
