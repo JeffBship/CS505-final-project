@@ -4,6 +4,7 @@ import NewsWidget.Story;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.text.SimpleAttributeSet;
 
 /**
@@ -13,28 +14,25 @@ import javax.swing.text.SimpleAttributeSet;
 class FoxRSS extends RSShandler {
     
   public FoxRSS(){
-    successor = null;
-    //try to get storyList
-    storyList = makeStoryList();
-    bigFont = Font.bigFOX();
-    smallFont = Font.smallFOX();
-    //if no storyList, go to successor
-    if (storyList.isEmpty() || storyList.get(0).getTitle().equals("IOException") ) {
-      successor = new failRSS();
-      storyList = successor.getStoryList();
-      bigFont = successor.getBigFont();
-      smallFont = successor.getSmallFont();
-    }
-  };
+    rssObject = new RSSobject();
+    rssObject.setSuccessor(null);
+    rssObject.setStoryList(makeStoryList());
+    rssObject.setBigFont(Font.bigFox());
+    rssObject.setSmallFont(Font.smallFox());
+  }
   
   @Override
   public ArrayList<Story>  makeStoryList(){
     ArrayList<Story> foxList = new ArrayList<>();
     String source = ""; 
       try{
-        //designate and open the rss feed
-        URL url = new URL ("http://feeds.foxnews.com/foxnews/latest");
-        //url = new URL ("jeffbship.com"); //for testing, force a fail from this RSShandler
+        //designate and open the rss feed, ramdom bad url to exercise the chain
+        URL url;
+        if (new Random().nextInt(100)<FAILRATE){
+          url = new URL("http://JeffBlankenship.com");
+        }else{
+          url = new URL ("http://feeds.foxnews.com/foxnews/latest");
+        }
         InputStreamReader streamReader = new InputStreamReader(url.openStream());
         BufferedReader reader = new BufferedReader(streamReader);
         //obtain all data from the rss feed, load it into source
@@ -76,28 +74,5 @@ class FoxRSS extends RSShandler {
       foxList.add(newStory);
     } 
     return foxList;
-  }
-  
-    
-    
-    
-  @Override
-  public ArrayList<Story> getStoryList(){
-    return storyList;
-  }
-  
-  @Override
-  public SimpleAttributeSet getBigFont(){
-    return Font.bigFOX();
-  };
-  
-  @Override
-  public SimpleAttributeSet getSmallFont(){
-    return smallFont;
-  };
-  
-  @Override
-  public void setSuccessor(RSShandler rss){
-    successor = rss;
   }
 }

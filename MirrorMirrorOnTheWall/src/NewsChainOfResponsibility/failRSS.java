@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
@@ -11,43 +7,46 @@ import javax.swing.text.SimpleAttributeSet;
 
 /**
  * failRSS is the end of the RSS Chain of Responsibility.
- * A fail indicator is returned.
+ * A fail indicator is provided.
  * @author Jeff Blankenship
  */
 class failRSS extends RSShandler{
   
   public failRSS(){
-    successor = null;
-    storyList = makeStoryList();
-    bigFont = Font.bigFAIL();
-    smallFont = Font.smallFAIL();
-  };
+    rssObject = new RSSobject();
+    rssObject.setSuccessor(null);
+    rssObject.setStoryList(makeStoryList());
+    rssObject.setBigFont(Font.bigFail());
+    rssObject.setSmallFont(Font.smallFail());
+  }
 
   @Override
-  ArrayList<Story> makeStoryList() {
+  protected ArrayList<Story> makeStoryList() {
     
     ArrayList<Story> failList = new ArrayList<>();
     failList.add(new Story("Failed to load any RSS feeds."));
-    System.out.println("in failRSS make list" + failList.toString());
     return failList;
   }
   
   @Override
-  ArrayList<Story> getStoryList() {
-    return storyList;
+  public ArrayList<Story> getStoryList() {
+    return rssObject.getStoryList();
   }
 
   @Override
   public SimpleAttributeSet getBigFont(){
-    return bigFont;
+    return rssObject.getBigFont();
   };
   
   @Override
   public SimpleAttributeSet getSmallFont(){
-    return smallFont;
+    return rssObject.getSmallFont();
   };
 
   @Override
-  void setSuccessor(RSShandler rss) {}
+  protected void setSuccessor(RSShandler rss) {
+    //fail can have no successor
+    rssObject.setSuccessor(null);
+  }
   
 }
