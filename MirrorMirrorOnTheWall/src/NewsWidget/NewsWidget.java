@@ -5,7 +5,6 @@ package NewsWidget;
 
 // merge with WidgetController at some point and extend the WidgetState
 
-import NewsChainOfResponsibility.Font;
 import java.awt.Color;
 import javax.swing.*;
 import javax.swing.text.*;
@@ -23,6 +22,7 @@ public class NewsWidget {
   public static void main(String[] args) {
 
       SwingUtilities.invokeLater(new Runnable() {
+          @Override
           public void run() {
               createNewsFrame();
           }
@@ -74,8 +74,4 @@ public class NewsWidget {
         }
       });   
   }
-
-
-
-
 }

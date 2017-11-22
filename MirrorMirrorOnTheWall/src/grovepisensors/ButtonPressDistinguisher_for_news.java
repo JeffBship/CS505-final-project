@@ -1,4 +1,15 @@
+/**
+ * ButtonPressDistinguisher_for_news.
+ * 
+ * This is a copy of ButtonPressDistinguisher which is altered to send button presses
+ * direct to NewsWidget.  This is for operational testing of NewsWidget and not for use 
+ * in the final release.
+ */ 
+
 package grovepisensors;
+
+import NewsWidget.NewsState;
+import cs505.group1.state.*;
 
 /**
  * This class implements the interface Runnable so that instances of this class can be handled by a Thread.
@@ -11,7 +22,7 @@ package grovepisensors;
  * @see Runnable
  * @see GroveDigitalInputSensorListener
  */
-public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runnable{
+public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserver, Runnable{
     /**
      * Holds the current state of the button sensor.
      */
@@ -53,6 +64,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      * @See GroveDigitalInputSensorListener
      * @Override update in GroveInputSensorObserver
      */
+    @Override
     public void update(byte[] b){  //parameter value of no use here
         long timeOfAction = System.currentTimeMillis();
         
@@ -83,6 +95,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      * the predetermined period of time.  The run method determines that a Single Press has occurred and notifies the appropriate objec
      * @Override run in interface Runnable
      */
+    @Override
     public void run(){
         try{
             Thread.sleep(DOUBLE_PRESS_TIME_INTERVAL);  //after "enough" time has elapsed,
@@ -92,18 +105,28 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
                 waitingForSecondPress = false;
             }                
         }catch (InterruptedException e){
-            e.printStackTrace();
         }
     }
     
     /**
      * Responsible for notifying active widget of press type that has just occurred.
      */
+    
+    //class instance object for a newsState.  NewsState is public so other methods
+    //can reconstruct it when needed.
+    public static NewsState newsState = new NewsState();
+    public static MirrorContext mirrorContext = new MirrorContext(newsState);
+    
+    @Override
     public void notifyWidgets(){
       
-      
-      
-      
+    switch (pressType){
+      case SINGLE:  mirrorContext.singlePress();  break;
+      case DOUBLE:  mirrorContext.doublePress();  break;
+      case LONG:    mirrorContext.longPress();    break;
+      default:
+        System.out.println("notifyWidges case reached the default.");
+    }
         System.out.println(pressType + " press");
     }
 }
