@@ -24,7 +24,7 @@ import NewsWidget.Story;
  */
 abstract class RSShandler {
   
-  protected final int FAILRATE = 50;  //simulated fail percentage
+  protected final int FAILRATE = 30;  //simulated fail percentage
   
   protected int position;  //the position of the handler in the chain
   
