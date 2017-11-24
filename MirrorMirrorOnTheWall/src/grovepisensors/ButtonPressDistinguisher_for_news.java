@@ -9,6 +9,7 @@
 package grovepisensors;
 
 import NewsWidget.NewsState;
+import NewsWidget.NewsWidget;
 import cs505.group1.state.*;
 
 /**
@@ -115,15 +116,15 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
     //class instance object for a newsState.  NewsState is public so other methods
     //can reconstruct it when needed.
     public static NewsState newsState = new NewsState();
-    public static MirrorContext mirrorContext = new MirrorContext(newsState);
+    public static NewsWidget newsWidget = new NewsWidget(newsState);
     
     @Override
     public void notifyWidgets(){
       
     switch (pressType){
-      case SINGLE:  mirrorContext.singlePress();  break;
-      case DOUBLE:  mirrorContext.doublePress();  break;
-      case LONG:    mirrorContext.longPress();    break;
+      case SINGLE:  newsWidget.singlePress();  break;
+      case DOUBLE:  newsWidget.doublePress();  break;
+      case LONG:    newsWidget.longPress();    break;
       default:
         System.out.println("notifyWidges case reached the default.");
     }
