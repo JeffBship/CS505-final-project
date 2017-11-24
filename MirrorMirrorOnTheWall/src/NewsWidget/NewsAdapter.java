@@ -56,7 +56,7 @@ class NewsAdapter extends ButtonToRobotAdapter{
     System.out.println("\t\t\t\t%%%%%%%%  long newsAdapter  %%%%%%%%  %%%%%%%%  %%%%%%%%  %%%%%%%%  ");
     }
     
-    NewsWidget.main(null);
+    NewsFrame.main(null);
     
     
   };
