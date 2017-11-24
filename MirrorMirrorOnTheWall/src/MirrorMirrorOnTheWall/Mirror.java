@@ -2,6 +2,8 @@ package MirrorMirrorOnTheWall;
 
 
 import WeatherWidget.Widget;
+import cs505.group1.state.ButtonState;
+import java.util.Observable;
 
 
 /**
@@ -14,28 +16,23 @@ public class Mirror
 {
     private Widget[] Widgets = new Widget[4];
     private Widget activeWidget;
-    public static Mirror mirror = new Mirror();
-    public Quadrant quadrant;
+    private static Mirror mirror;
+    private Quadrant quadrant;
 
-    /**
-     * Constructor for objects of class Mirror
-     */
-    private Mirror(){}
+  
 
     /**
      * Adds Widget to mirror
      * @param[in] widget: widget to add
-     * 
-     * @return void
      */
     public void AddWidget(Widget widget)
     {
         int i = 0;
-            while (Widgets[i]!=null)
-            {
-                i++;
-            }
-            Widgets[i] = widget;
+        while (Widgets[i]!=null)
+        {
+            i++;
+        }
+        Widgets[i] = widget;
             
     }
     /**
@@ -70,15 +67,13 @@ public class Mirror
      * @return widget
      */
     public Widget GetWidget(int index)
-    {
-	
+    {	
         return Widgets[index];
     }
+    
     /**
      * Sets active Widget
-     * @param[in] degree: angle of knob
-     * 
-     * @return widget
+     * @return the active widget
      */
     public Widget SetActive()
     {
@@ -93,16 +88,58 @@ public class Mirror
     }
     
     /**
+     * Sets active widget based on quadrant parameter
+     * @param quadrant the new quadrant identified by RotaryStateDeterminer class
+     */
+    public void setActiveWidget(Quadrant quadrant){
+        this.quadrant = quadrant;
+        switch (quadrant){
+            case ONE:
+                activeWidget = Widgets[0];
+            case TWO:
+                activeWidget = Widgets[1];
+            case THREE:
+                activeWidget = Widgets[2];
+            case FOUR:
+                activeWidget = Widgets[3];
+        }
+    }
+    
+    /**
      * Gets instance of Mirror object
      * 
      * @return mirror
      */
     public static Mirror GetInstance()
     {
+        if (mirror != null)
+            mirror = new Mirror();
         return mirror;
     }
+    
     public static void ResetSingleton()
     {
         mirror = new Mirror();
     }
+    
+    /**
+     * Invokes singlePress method on active widget
+     */
+    public void singlePress(){
+        activeWidget.singlePress();
+    }
+    /**
+     * Invokes doublePress method on active widget
+     */
+    public void doublePress(){
+        activeWidget.doublePress();
+    }
+    /**
+     * Invokes longPress method on active widget
+     */
+    public void longPress(){
+        activeWidget.longPress();
+    }
+
+    
 }

@@ -75,12 +75,12 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
             lastRelease = timeOfAction;           
             if (lastRelease - lastPress > LONG_PRESS_TIME_INTERVAL){
                 pressType = ButtonPress.LONG;
-                notifyWidgets();
+                notifyMirror();
             }
             else{
                 if (thread.isAlive()){ //if thread still waiting, it's a double press        
                     pressType = ButtonPress.DOUBLE;
-                    notifyWidgets();
+                    notifyMirror();
                     waitingForSecondPress = false;
                 }else{ //this press is not second press of a double press, must wait
                     waitingForSecondPress = true;
@@ -101,7 +101,7 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
             Thread.sleep(DOUBLE_PRESS_TIME_INTERVAL);  //after "enough" time has elapsed,
             if(waitingForSecondPress){              //and still waiting for second press, then it's a single press
                 pressType = ButtonPress.SINGLE;
-                notifyWidgets();
+                notifyMirror();
                 waitingForSecondPress = false;
             }                
         }catch (InterruptedException e){
@@ -118,7 +118,7 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
     public static MirrorContext mirrorContext = new MirrorContext(newsState);
     
     @Override
-    public void notifyWidgets(){
+    public void notifyMirror(){
       
     switch (pressType){
       case SINGLE:  mirrorContext.singlePress();  break;

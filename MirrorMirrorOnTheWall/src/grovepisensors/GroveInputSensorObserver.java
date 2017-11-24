@@ -18,5 +18,5 @@ public interface GroveInputSensorObserver{
     /**
      * Responsible for notifying widgets of whatever event subclasses have detected.
      */
-    public void notifyWidgets();
+    public void notifyMirror();
 }

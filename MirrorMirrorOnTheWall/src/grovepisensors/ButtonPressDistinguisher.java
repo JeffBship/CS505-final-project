@@ -1,5 +1,7 @@
 package grovepisensors;
 
+import MirrorMirrorOnTheWall.Mirror;
+
 /**
  * This class implements the interface Runnable so that instances of this class can be handled by a Thread.
  * The ButtonPressDistinguisher class receives updates from a GroveDigitalInputSensorListener 
@@ -63,12 +65,12 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
             lastRelease = timeOfAction;           
             if (lastRelease - lastPress > LONG_PRESS_TIME_INTERVAL){
                 pressType = ButtonPress.LONG;
-                notifyWidgets();
+                notifyMirror();
             }
             else{
                 if (thread.isAlive()){ //if thread still waiting, it's a double press        
                     pressType = ButtonPress.DOUBLE;
-                    notifyWidgets();
+                    notifyMirror();
                     waitingForSecondPress = false;
                 }else{ //this press is not second press of a double press, must wait
                     waitingForSecondPress = true;
@@ -88,8 +90,8 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
             Thread.sleep(DOUBLE_PRESS_TIME_INTERVAL);  //after "enough" time has elapsed,
             if(waitingForSecondPress){              //and still waiting for second press, then it's a single press
                 pressType = ButtonPress.SINGLE;
-                notifyWidgets();
                 waitingForSecondPress = false;
+                notifyMirror();
             }                
         }catch (InterruptedException e){
             e.printStackTrace();
@@ -97,13 +99,18 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
     }
     
     /**
-     * Responsible for notifying active widget of press type that has just occurred.
+     * Notifies Mirror that button press has occurred
+     * @Override in GroveInputSensorObserver
      */
-    public void notifyWidgets(){
-      
-      
-      
-      
-        System.out.println(pressType + " press");
+    public void notifyMirror(){
+        Mirror m = Mirror.GetInstance();
+        switch (pressType){
+            case SINGLE:
+                m.singlePress();
+            case DOUBLE:
+                m.doublePress();
+            case LONG:
+                m.longPress();
+        }
     }
 }

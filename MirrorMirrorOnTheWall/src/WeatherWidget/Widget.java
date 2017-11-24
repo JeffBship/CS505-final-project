@@ -31,13 +31,11 @@ public abstract class Widget extends ButtonContext implements NetObserver {
     
     @Override
     public void update(boolean isConnected) {
-        
         //TODO: Implement States
         if(!isConnected)
         {
             showNoNetworkState();
-        }
-        
+        }        
     }
 
     @Override
