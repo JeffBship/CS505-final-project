@@ -1,6 +1,7 @@
 package TrafficWidget;
  
  
+import static TrafficWidget.TrafficWidget.current;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -19,8 +20,9 @@ public class Traffic extends Region {
         //apply the styles
         getStyleClass().add("browser");
         // load the web page
-        String url ="https://www.google.com/maps/dir/205+Main+Street,+Wallingford,+CT/1615+Stanley+St,+New+Britain,+CT+06053/@41.5778858,-72.9034373,11z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x89e7cec9f049a787:0xd4504476e463e401!2m2!1d-72.828807!2d41.480756!1m5!1m1!1s0x89e7b25caebfa5eb:0x86fd24736c8c3d0!2m2!1d-72.7678883!2d41.6855721";
-        webEngine.load(url);
+         TrafficWidget.current = TrafficWidget.url.get(TrafficWidget.x);
+         System.out.println("url is : "+ TrafficWidget.current);
+        webEngine.load(TrafficWidget.current);
         //add the web view to the scene
         getChildren().add(browser);
   
