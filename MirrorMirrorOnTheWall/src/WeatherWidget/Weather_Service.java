@@ -157,8 +157,11 @@ public class Weather_Service
          dailyForcast.put("Text", jsonHeadline.getString("Text"));
          
          dailyForcast.put("Category", jsonHeadline.getString("Category"));
+         dailyForcast.put("Icon", jsonDailyForecast.getJSONObject(0).get("Icon").toString());
+         dailyForcast.put("IconPhrase", jsonDailyForecast.getJSONObject(0).getString("IconPhrase"));
          dailyForcast.put("TempMax", jsonMaximum.get("Value") + jsonMaximum.getString("Unit"));
          dailyForcast.put("TempMin", jsonMinimum.get("Value") + jsonMinimum.getString("Unit"));
+         
          
          return dailyForcast;
         
@@ -206,11 +209,13 @@ public class Weather_Service
 
             HashMap<String,String> dailyForcast = new HashMap();
 
-            dailyForcast.put("Text", jsonHeadline.getString("Text"));
+            dailyForcast.put("Text"+i, jsonHeadline.getString("Text"));
 
-            dailyForcast.put("Category", jsonHeadline.getString("Category"));
-            dailyForcast.put("TempMax", jsonMaximum.get("Value") + jsonMaximum.getString("Unit"));
-            dailyForcast.put("TempMin", jsonMinimum.get("Value") + jsonMinimum.getString("Unit"));
+            dailyForcast.put("Category"+i, jsonHeadline.getString("Category"));
+            dailyForcast.put("Icon"+i, jsonWeeklyForecast.getJSONObject(i).get("Icon").toString());
+            dailyForcast.put("IconPhrase"+i, jsonWeeklyForecast.getJSONObject(i).getString("IconPhrase"));
+            dailyForcast.put("TempMax"+i, jsonMaximum.get("Value") + jsonMaximum.getString("Unit"));
+            dailyForcast.put("TempMin"+i, jsonMinimum.get("Value") + jsonMinimum.getString("Unit"));
             
             listHM.add((dailyForcast));
             
@@ -264,6 +269,7 @@ public class Weather_Service
             HashMap<String,String> hourlyForecast = new HashMap();
 
             hourlyForecast.put("IconPhrase", jsonHour.getString("IconPhrase"));
+            hourlyForecast.put("Icon", jsonHour.get("Icon").toString());
             hourlyForecast.put("Temperature", jsonTemperature.get("Value") +  jsonTemperature.getString("Unit"));
             
             listHM.add((hourlyForecast));
@@ -279,4 +285,23 @@ public class Weather_Service
             return new ArrayList<HashMap>();
         }
     }
+    
+    public String GetIconImage(int icon)
+    {
+        
+        if(icon == WeatherPattern.SUNNY.ordinal())
+        {
+            return "1.png";
+        }
+        else if(icon == WeatherPattern.PARTLY_SUNNY.ordinal())
+        {
+            
+            return "3.png";
+        }
+        else
+        {
+            return "error.png";
+        }
+    }
+    
 }
