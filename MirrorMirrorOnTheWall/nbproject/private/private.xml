@@ -3,23 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsChainOfResponsibility/RSShandler.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsChainOfResponsibility/RSS.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/GrovePiSensors.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsStandAlone.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsChainOfResponsibility/FoxRSS.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsAdapter.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsChainOfResponsibility/failRSS.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsButtonPressDistinguisher.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsWidget.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/NewsState.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/cs505/group1/state/ButtonContext.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/cs505/group1/state/ButtonState.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/ButtonContext.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsChainOfResponsibility/CnnRSS.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/ButtonPress.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/NewsWidget/ButtonPress.java</file>
-            <file>file:/C:/Users/Jeff/Desktop/cs417-505f17finalproject-mirrormirroronthewall/MirrorMirrorOnTheWall/src/grovepisensors/ButtonPressDistinguisher.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/WeatherPattern.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/Weather_Service.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/MirrorMirrorOnTheWall/Quadrant.java</file>
         </group>
     </open-files>
 </project-private>
