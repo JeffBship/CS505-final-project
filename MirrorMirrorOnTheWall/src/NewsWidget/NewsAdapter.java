@@ -2,6 +2,7 @@
 package NewsWidget;
 
 import cs505.group1.adapter.*;
+import grovepisensors.ButtonPressDistinguisher_for_news;
 import java.awt.event.KeyEvent;
 
 /**
@@ -22,8 +23,12 @@ class NewsAdapter extends ButtonToRobotAdapter{
      */
   @Override
   public void singlePress(){
-    // Scroll down
-    marvin.mouseWheel(-5);
+    for(int i=0;i<10;i++){
+    System.out.println("\t\t\t\t============== SinglePress in NewsAdapter reached ====================");
+    }
+    // move the mouse over the frame, then scroll down
+    marvin.mouseMove(100,100);
+    marvin.mouseWheel(2);
   };
     
   /**
@@ -32,7 +37,12 @@ class NewsAdapter extends ButtonToRobotAdapter{
   @Override
   public void doublePress(){
     //scroll up
-    marvin.mouseWheel(5);
+    for(int i=0;i<10;i++){
+    System.out.println("\t\t\t\t@@@   @@@@   @@@@@   @@@@@@   @@@@@@   @@@@@@   @@@@  newsAdapter double");
+    }
+    
+    marvin.mouseMove(100,100);
+    marvin.mouseWheel(-2);
   };
     
   /**
@@ -40,10 +50,14 @@ class NewsAdapter extends ButtonToRobotAdapter{
    */
   @Override
   public void longPress(){
-    // insert a refresh and return to home (HOME key)
-    marvin.keyPress(KeyEvent.VK_F5 );
-    marvin.keyRelease(KeyEvent.VK_F5 );
-    marvin.keyPress(KeyEvent.VK_HOME );
-    marvin.keyRelease(KeyEvent.VK_HOME );
+    //construct a new newsState.  This refreshes the RSS call, randomizes the news outlet,
+    //and sets the scroll to the top
+    for(int i=0;i<10;i++){
+    System.out.println("\t\t\t\t%%%%%%%%  long newsAdapter  %%%%%%%%  %%%%%%%%  %%%%%%%%  %%%%%%%%  ");
+    }
+    
+    NewsFrame.main(null);
+    
+    
   };
 }

@@ -1,7 +1,10 @@
 package cs505.group1.adapter;
 
 import cs505.group1.state.ButtonState;
+import java.awt.AWTException;
 import java.awt.Robot;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Jeff Blankenship
@@ -29,6 +32,11 @@ public abstract class ButtonToRobotAdapter {
   ButtonState buttonState;
   public ButtonToRobotAdapter(ButtonState buttonState){
     this.buttonState = buttonState;
+      try {
+          marvin = new Robot();
+      } catch (AWTException ex) {
+          System.out.println("Marvin doesn't want to play today.");
+      }
   };
   
   public abstract void singlePress();

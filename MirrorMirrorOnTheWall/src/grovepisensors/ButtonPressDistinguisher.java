@@ -100,6 +100,10 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      * Responsible for notifying active widget of press type that has just occurred.
      */
     public void notifyWidgets(){
+      
+      
+      
+      
         System.out.println(pressType + " press");
     }
 }
