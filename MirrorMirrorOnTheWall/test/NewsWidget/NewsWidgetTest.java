@@ -39,7 +39,7 @@ public class NewsWidgetTest {
   public void testMain() {
     System.out.println("main");
     String[] args = null;
-    NewsWidget.main(args);
+    NewsFrame.main(args);
   }
   
 }
