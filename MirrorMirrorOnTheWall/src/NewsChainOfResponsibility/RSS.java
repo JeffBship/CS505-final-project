@@ -3,50 +3,42 @@ package NewsChainOfResponsibility;
 import java.util.ArrayList;
 import javax.swing.text.SimpleAttributeSet;
 import NewsWidget.Story;
+import java.util.Collections;
 
 /**
  * RSS is the first handler in the Chain of Responsibility.
- * The constructor makes the requests that are passed down the chain.
- * To allow this functionality, RSS is concrete as well as the superclass
- * of the rest of the handlers.
+ * The constructor builds the chain and makes the requests that are 
+ * passed down the chain, providing familiar and transparent functionality
+ * to the user.
  * @author Jeff Blankenship 
  */
 public class RSS extends RSShandler{
   
   public RSS() {
-    setSuccessor(new CnnRSS());
-    storyList = successor.getStoryList();
-    bigFont = successor.getBigFont();
-    smallFont = successor.getSmallFont();
+    
+    rssObject = new RSSobject();
+    
+    //build the chain, an ArrayList<RSShandler>
+    ArrayList<RSShandler> rssChain = new ArrayList<>();
+    rssChain.add(new CnnRSS());
+    rssChain.add(new FoxRSS());
+    
+    //shuffle the list...no biased reporting here!!
+    Collections.shuffle(rssChain);
+    
+    //add the failRSS on the end of the shuffled list
+    rssChain.add(new failRSS());
+    
+    //assign the successors
+    this.rssObject.setSuccessor(rssChain.get(0));
+    for( int i=0; i<rssChain.size()-1; i++ ){
+      rssChain.get(i).rssObject.setSuccessor(rssChain.get(i+1));
+    }
   }
-  
+    
   @Override
-  public ArrayList<Story>  makeStoryList(){
+  protected ArrayList<Story>  makeStoryList(){
     return new ArrayList<>();
   };
-  
-  @Override
-  public ArrayList<Story> getStoryList(){
-    return storyList;
-  };
-  
-  @Override
-  public SimpleAttributeSet getBigFont(){
-    return bigFont;
-  };
-  
-  @Override
-  public SimpleAttributeSet getSmallFont(){
-    return smallFont;
-  };
-  
-  public void setSuccessor(RSS rss){
-    successor = rss;
-  }
-
-  @Override
-  void setSuccessor(RSShandler rss){
-    successor = rss;
-  }
   
 }

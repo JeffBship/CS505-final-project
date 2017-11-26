@@ -4,38 +4,39 @@ import NewsWidget.Story;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.text.SimpleAttributeSet;
 
 /**
- * CnnRSS is a concrete handler in the RSS Chain of Responsibility
+ * CnnRSS is a concrete handler in the RSS Chain of Responsibility.
+ * It provides news from http://rss.cnn.com/rss/edition.rss
+ * licensed for non-commercial use by TERMS OF USE at 
+ * http://www.cnn.com/services/rss/#terms
+ * 
  * @author Jeff Blankenship 
  */
 class CnnRSS extends RSShandler {
     
   public CnnRSS(){
-    successor = null;
-    //try to get storyList
-    storyList = makeStoryList();
-    bigFont = Font.bigCNN();
-    smallFont = Font.smallCNN();
-    //if no storyList, go to successor
-    if (storyList.isEmpty() || storyList.get(0).getTitle().equals("IOException") ) {
-      successor = new FoxRSS();
-      storyList = successor.getStoryList();
-      bigFont = successor.getBigFont();
-      smallFont = successor.getSmallFont();
-    }
-  };
+    rssObject = new RSSobject();
+    rssObject.setSuccessor(null);
+    rssObject.setStoryList(makeStoryList());
+    rssObject.setBigFont(Font.bigCnn());
+    rssObject.setSmallFont(Font.smallCnn());
+  }
   
   @Override
   public ArrayList<Story>  makeStoryList(){
     ArrayList<Story> cnnList = new ArrayList<>();
     String source = ""; 
       try{
-        //designate and open the rss feed
-        URL url = new URL ("http://rss.cnn.com/rss/edition.rss");
-        url = new URL ("jeffbship.com"); //for testing, force a fail from this RSShandler
-        
+        //designate and open the rss feed, ramdom bad url to exercise the chain
+        URL url;
+        if (new Random().nextInt(100)<FAILRATE){
+          url = new URL("http://JeffBlankenship.com");
+        }else{
+          url = new URL ("http://rss.cnn.com/rss/edition.rss");
+        }
         InputStreamReader streamReader = new InputStreamReader(url.openStream());
         BufferedReader reader = new BufferedReader(streamReader);
         //obtain all data from the rss feed, load it into source
@@ -72,27 +73,5 @@ class CnnRSS extends RSShandler {
       cnnList.add(newStory);
     }
     return cnnList;
-  };
-  
-  
-  @Override
-  public ArrayList<Story> getStoryList(){
-    return storyList;
   }
-  
-  @Override
-  public SimpleAttributeSet getBigFont(){
-    return bigFont;
-  };
-  
-  @Override
-  public SimpleAttributeSet getSmallFont(){
-    return smallFont;
-  };
-  
-  @Override
-  void setSuccessor(RSShandler rss){
-    successor = rss;
-  }
-
 }

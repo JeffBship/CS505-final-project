@@ -19,7 +19,7 @@ public class Font {
   public SimpleAttributeSet big;
   public SimpleAttributeSet small;
 
-  public static SimpleAttributeSet bigCNN() {
+  public static SimpleAttributeSet bigCnn() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"Helvetica Bold");
     StyleConstants.setFontSize(result, 40);
@@ -27,7 +27,7 @@ public class Font {
     return result;
   }
   
-  public static SimpleAttributeSet smallCNN() {
+  public static SimpleAttributeSet smallCnn() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"Helvetica ");
     StyleConstants.setFontSize(result, 30);
@@ -35,7 +35,7 @@ public class Font {
     return result;
   }
   
-  public static SimpleAttributeSet bigFOX() {
+  public static SimpleAttributeSet bigFox() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"FF Good OT Black");
     StyleConstants.setFontSize(result, 40);
@@ -43,7 +43,7 @@ public class Font {
     return result;
   }
   
-  public static SimpleAttributeSet smallFOX() {
+  public static SimpleAttributeSet smallFox() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"ITC Avant Garde Gothic");
     StyleConstants.setFontSize(result, 30);
@@ -51,7 +51,7 @@ public class Font {
     return result;
   }
   
-  public static SimpleAttributeSet bigFAIL() {
+  public static SimpleAttributeSet bigFail() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"Helvetica Bold");
     StyleConstants.setFontSize(result, 40);
@@ -59,7 +59,7 @@ public class Font {
     return result;
   }
   
-  public static SimpleAttributeSet smallFAIL() {
+  public static SimpleAttributeSet smallFail() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"Helvetica ");
     StyleConstants.setFontSize(result, 30);
