@@ -39,7 +39,7 @@ public class FontTest {
   @Test
   public void testBigCNN() {
     System.out.println("bigCNN");
-    SimpleAttributeSet result = Font.bigCNN();
+    SimpleAttributeSet result = Font.bigCnn();
     assertNotNull(result);
   }
 
@@ -49,7 +49,7 @@ public class FontTest {
   @Test
   public void testSmallCNN() {
     System.out.println("smallCNN");
-    SimpleAttributeSet result = Font.smallCNN();
+    SimpleAttributeSet result = Font.smallCnn();
     assertNotNull(result);
   }
 
@@ -59,7 +59,7 @@ public class FontTest {
   @Test
   public void testBigFOX() {
     System.out.println("bigFOX");
-    SimpleAttributeSet result = Font.bigFOX();
+    SimpleAttributeSet result = Font.bigFox();
     assertNotNull(result);
   }
 
@@ -69,7 +69,7 @@ public class FontTest {
   @Test
   public void testSmallFOX() {
     System.out.println("smallFOX");
-    SimpleAttributeSet result = Font.smallFOX();
+    SimpleAttributeSet result = Font.smallFox();
     assertNotNull(result);
   }
 
@@ -79,7 +79,7 @@ public class FontTest {
   @Test
   public void testBigFAIL() {
     System.out.println("bigFAIL");
-    SimpleAttributeSet result = Font.bigFAIL();
+    SimpleAttributeSet result = Font.bigFail();
     assertNotNull(result);
   }
 
@@ -89,7 +89,7 @@ public class FontTest {
   @Test
   public void testSmallFAIL() {
     System.out.println("smallFAIL");
-    SimpleAttributeSet result = Font.smallFAIL();
+    SimpleAttributeSet result = Font.smallFail();
     assertNotNull(result);
   }
   
