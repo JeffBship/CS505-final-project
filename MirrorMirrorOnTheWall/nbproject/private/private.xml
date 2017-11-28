@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/WeatherPattern.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/Weather_Service.java</file>
-            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/MirrorMirrorOnTheWall/Quadrant.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/test/WeatherWidgetTest.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/States/SingleDayForecastState.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/WeatherWidget/WeatherWidget.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/States/WeeklyForecastState.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/States/HourlyForecastState.java</file>
         </group>
     </open-files>
 </project-private>

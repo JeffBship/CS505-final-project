@@ -48,7 +48,7 @@ public class Weather_Service
     /**
      * API Key used to access the API.
      */
-    protected final String API_KEY = "zQlJv1zjNyfLKNQDH87LEhE6icbvVFGJ";
+    protected final String API_KEY = "uRepHxpqZg8bPIXxVfuFlrT4omTjGNO4";//"zQlJv1zjNyfLKNQDH87LEhE6icbvVFGJ";
 
     /**
      * URL for the API.
@@ -146,9 +146,9 @@ public class Weather_Service
          JSONObject jsonDaily = new JSONObject(jsonString);
          
          JSONObject jsonHeadline = jsonDaily.getJSONObject("Headline");
-         JSONArray jsonDailyForecast = jsonDaily.getJSONArray("DailyForecasts");
+         JSONObject jsonDailyForecast = jsonDaily.getJSONArray("DailyForecasts").getJSONObject(0); //since this is the daily forecast, there's only one object
          
-         JSONObject jsonTemperature = jsonDailyForecast.getJSONObject(0).getJSONObject("Temperature");
+         JSONObject jsonTemperature = jsonDailyForecast.getJSONObject("Temperature");
          JSONObject jsonMaximum = jsonTemperature.getJSONObject("Maximum");
          JSONObject jsonMinimum = jsonTemperature.getJSONObject("Minimum");
          
@@ -156,12 +156,16 @@ public class Weather_Service
          
          dailyForcast.put("Text", jsonHeadline.getString("Text"));
          
-         dailyForcast.put("Category", jsonHeadline.getString("Category"));
-         dailyForcast.put("Icon", jsonDailyForecast.getJSONObject(0).get("Icon").toString());
-         dailyForcast.put("IconPhrase", jsonDailyForecast.getJSONObject(0).getString("IconPhrase"));
-         dailyForcast.put("TempMax", jsonMaximum.get("Value") + jsonMaximum.getString("Unit"));
-         dailyForcast.put("TempMin", jsonMinimum.get("Value") + jsonMinimum.getString("Unit"));
+         JSONObject jsonDay = jsonDailyForecast.getJSONObject("Day");
          
+         dailyForcast.put("Icon", jsonDay.get("Icon").toString());
+         dailyForcast.put("IconPhrase", jsonDay.getString("IconPhrase"));
+         
+         dailyForcast.put("TempMax", jsonMaximum.get("Value").toString());
+         dailyForcast.put("TempMin", jsonMinimum.get("Value").toString());
+         
+         
+         dailyForcast.put("TemperatureUnit",jsonMinimum.getString("Unit"));
          
          return dailyForcast;
         
@@ -203,19 +207,22 @@ public class Weather_Service
          
          for(int i = 0; i < jsonWeeklyForecast.length(); i++)
          {
-            JSONObject jsonTemperature = jsonWeeklyForecast.getJSONObject(i).getJSONObject("Temperature");
+             JSONObject jsonDaily = jsonWeeklyForecast.getJSONObject(i);
+             
+            JSONObject jsonTemperature = jsonDaily.getJSONObject("Temperature");
             JSONObject jsonMaximum = jsonTemperature.getJSONObject("Maximum");
             JSONObject jsonMinimum = jsonTemperature.getJSONObject("Minimum");
 
             HashMap<String,String> dailyForcast = new HashMap();
 
-            dailyForcast.put("Text"+i, jsonHeadline.getString("Text"));
+            dailyForcast.put("Text", jsonHeadline.getString("Text"));
 
-            dailyForcast.put("Category"+i, jsonHeadline.getString("Category"));
-            dailyForcast.put("Icon"+i, jsonWeeklyForecast.getJSONObject(i).get("Icon").toString());
-            dailyForcast.put("IconPhrase"+i, jsonWeeklyForecast.getJSONObject(i).getString("IconPhrase"));
-            dailyForcast.put("TempMax"+i, jsonMaximum.get("Value") + jsonMaximum.getString("Unit"));
-            dailyForcast.put("TempMin"+i, jsonMinimum.get("Value") + jsonMinimum.getString("Unit"));
+            dailyForcast.put("Icon", jsonDaily.get("Icon").toString());
+            dailyForcast.put("IconPhrase", jsonDaily.getString("IconPhrase"));
+            dailyForcast.put("TempMax", jsonMaximum.get("Value").toString());
+            dailyForcast.put("TempMin", jsonMinimum.get("Value").toString());
+            
+            dailyForcast.put("TemperatureUnit",jsonMinimum.getString("Unit"));
             
             listHM.add((dailyForcast));
             
@@ -270,7 +277,8 @@ public class Weather_Service
 
             hourlyForecast.put("IconPhrase", jsonHour.getString("IconPhrase"));
             hourlyForecast.put("Icon", jsonHour.get("Icon").toString());
-            hourlyForecast.put("Temperature", jsonTemperature.get("Value") +  jsonTemperature.getString("Unit"));
+            hourlyForecast.put("Temperature", jsonTemperature.get("Value").toString());
+            hourlyForecast.put("TemperatureUnit",jsonTemperature.getString("Unit"));
             
             listHM.add((hourlyForecast));
             
@@ -286,6 +294,22 @@ public class Weather_Service
         }
     }
     
+    /**
+     * Returns the average temperature given a temperature range
+     * @param tempA
+     * @param tempB
+     * @return average temperature
+     */
+    public double GetTemperatureAverage(double tempA, double tempB)
+    {
+        return ((tempA + tempB) / 2.0);
+    }
+    
+    /**
+     * Gets the associated image related the the icon number.
+     * @param icon number related the the current weather pattern
+     * @return the image name (and extension) that corresponds to the icon number.
+     */
     public String GetIconImage(int icon)
     {
         
@@ -293,10 +317,116 @@ public class Weather_Service
         {
             return "1.png";
         }
-        else if(icon == WeatherPattern.PARTLY_SUNNY.ordinal())
+        else if(icon == WeatherPattern.PARTLY_SUNNY.ordinal() 
+                || icon == WeatherPattern.MOSTLY_CLEAR.ordinal()
+                || icon == WeatherPattern.MOSTLY_SUNNY.ordinal()
+                || icon == WeatherPattern.INTERMITTENT_CLOUDS.ordinal()
+                || icon == WeatherPattern.HAZY_SUNSHINE.ordinal())
         {
             
             return "3.png";
+        }
+        else if(icon == WeatherPattern.CLOUDY.ordinal() 
+                || icon == WeatherPattern.DREARY.ordinal()
+                || icon == WeatherPattern.FOG.ordinal())
+        {
+            
+            return "7.png";
+        }
+        else if(icon == WeatherPattern.SHOWERS.ordinal() 
+                || icon == WeatherPattern.PARTLY_SUNNY_SHOWERS.ordinal()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS.ordinal())
+        {
+            
+            return "14.png";
+        }
+        else if(icon == WeatherPattern.T_STORMS.ordinal())
+        {
+            
+            return "15.png";
+        }
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS.ordinal() 
+                || icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS.ordinal())
+        {
+            
+            return "17.png";
+        }
+        else if(icon == WeatherPattern.RAIN.ordinal() )
+        {
+            
+            return "18.png";
+        }
+        else if(icon == WeatherPattern.FLURRIES.ordinal() )
+        {
+            
+            return "22.png";
+        }
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES.ordinal() 
+                || icon == WeatherPattern.PARTLY_SUNNY_FLURRIES.ordinal())
+        {
+            
+            return "21.png";
+        }
+        else if(icon == WeatherPattern.SNOW.ordinal()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW.ordinal()
+                || icon == WeatherPattern.SLEET.ordinal()
+                || icon == WeatherPattern.ICE.ordinal())
+        {
+            
+            return "20.png";
+        }
+        else if(icon == WeatherPattern.FREEZING_RAIN.ordinal() 
+                || icon == WeatherPattern.RAIN_AND_SNOW.ordinal())
+        {
+            
+            return "29.png";
+        }
+        else if(icon == WeatherPattern.HOT.ordinal() )
+        {
+            
+            return "30.png";
+        }
+        else if(icon == WeatherPattern.COLD.ordinal() )
+        {
+            
+            return "31.png";
+        }
+        else if(icon == WeatherPattern.WINDY.ordinal() )
+        {
+            
+            return "32.png";
+        }
+        else if(icon == WeatherPattern.CLEAR.ordinal() )
+        {
+            
+            return "33.png";
+        }
+        else if(icon == WeatherPattern.MOSTLY_CLEAR.ordinal() 
+                || icon == WeatherPattern.PARTLY_CLEAR.ordinal()
+                || icon == WeatherPattern.INTERMITTMENT_CLOUDS_NIGHT.ordinal()
+                || icon == WeatherPattern.HAZY_MOONLIGHT.ordinal()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_NIGHT.ordinal())
+        {
+            
+            return "38.png";
+        }
+        else if(icon == WeatherPattern.PARTLY_CLOUDY_SHOWERS_NIGHT.ordinal() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS_NIGHT.ordinal())
+        {
+            
+            return "40.png";
+        }
+        else if(icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS_NIGHT.ordinal() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS_NIGHT.ordinal())
+        {
+            
+            return "44.png";
+        }
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES_NIGHT.ordinal() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW_NIGHT.ordinal())
+        {
+            
+            return "45.png";
         }
         else
         {
