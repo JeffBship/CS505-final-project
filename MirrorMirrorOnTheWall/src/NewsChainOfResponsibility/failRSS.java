@@ -2,6 +2,7 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
+import cs505.group1.font.Font;
 import java.util.ArrayList;
 import javax.swing.text.SimpleAttributeSet;
 

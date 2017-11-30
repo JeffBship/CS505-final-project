@@ -1,6 +1,5 @@
 package TrafficWidget;
  
- 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -9,6 +8,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+
+
  
 public class Traffic extends Region {
   

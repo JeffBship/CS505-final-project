@@ -1,6 +1,7 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
+import cs505.group1.font.Font;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
