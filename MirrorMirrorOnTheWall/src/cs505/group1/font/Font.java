@@ -1,4 +1,4 @@
-package NewsChainOfResponsibility;
+package cs505.group1.font;
 
 import java.awt.Color;
 import javax.swing.text.SimpleAttributeSet;
@@ -64,6 +64,14 @@ public class Font {
     StyleConstants.setFontFamily(result,"Helvetica ");
     StyleConstants.setFontSize(result, 30);
     StyleConstants.setForeground(result, Color.GREEN);
+    return result;
+  }
+  
+  public static SimpleAttributeSet clockFont() {
+    SimpleAttributeSet result = new SimpleAttributeSet();
+    StyleConstants.setFontFamily(result,"Times New Roman");
+    StyleConstants.setFontSize(result, 30);
+    StyleConstants.setForeground(result, Color.YELLOW);
     return result;
   }
 

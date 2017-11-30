@@ -1,27 +1,29 @@
 
 package NewsWidget;
 
-import cs505.group1.adapter.*;
-import grovepisensors.ButtonPressDistinguisher_for_news;
-import java.awt.event.KeyEvent;
+
+import edu.ccsu.cs505.compob.OBComponentDemo;
+import java.awt.Robot;
 
 /**
  *
  * @author Jeff Blankenship
  */
 
-class NewsAdapter extends ButtonToRobotAdapter{
+class NewsAdapter{
 
+  //Robot provides interaction with system.IO
+  private static Robot marvin;
+  
   //constructor
   NewsState newsState;
   public NewsAdapter(NewsState newsState){
-    super(newsState);
+    this.newsState = newsState;
   };
   
   /**
      * Scrolls the webpage down one increment.
      */
-  @Override
   public void singlePress(){
     for(int i=0;i<10;i++){
     System.out.println("\t\t\t\t============== SinglePress in NewsAdapter reached ====================");
@@ -34,7 +36,6 @@ class NewsAdapter extends ButtonToRobotAdapter{
   /**
    * Scrolls the webpage down one increment.
    */
-  @Override
   public void doublePress(){
     //scroll up
     for(int i=0;i<10;i++){
@@ -48,16 +49,15 @@ class NewsAdapter extends ButtonToRobotAdapter{
   /**
    * Refresh and return to home
    */
-  @Override
   public void longPress(){
     //construct a new newsState.  This refreshes the RSS call, randomizes the news outlet,
     //and sets the scroll to the top
-    for(int i=0;i<10;i++){
-    System.out.println("\t\t\t\t%%%%%%%%  long newsAdapter  %%%%%%%%  %%%%%%%%  %%%%%%%%  %%%%%%%%  ");
-    }
-    
     NewsFrame.main(null);
-    
-    
+    //start temperature monitor when things are instantiated.
+    try {
+      OBComponentDemo.main(null);
+    } catch (InterruptedException ex) {
+    } catch (Exception ex) {
+    }
   };
 }

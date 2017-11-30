@@ -1,5 +1,6 @@
 package NewsChainOfResponsibility;
 
+import cs505.group1.font.Font;
 import javax.swing.text.SimpleAttributeSet;
 import org.junit.After;
 import org.junit.AfterClass;

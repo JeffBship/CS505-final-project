@@ -1,12 +1,11 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
+import cs505.group1.font.Font;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.text.SimpleAttributeSet;
-
 /**
  * CnnRSS is a concrete handler in the RSS Chain of Responsibility.
  * It provides news from http://rss.cnn.com/rss/edition.rss
