@@ -23,7 +23,7 @@ public class ClockWidget extends Widget{
         //GridLayout g = new GridLayout(2,2);
         frame.setLayout(null);
         
-        ClockPanel p = new ClockPanel(0, 0, 800, 800);
+        ClockPanel p = new ClockPanel(0, 0, 200, 200);
         //ClockPanel q = new ClockPanel(350, 0, 300, 300);
         
         //ClockLabel r = new ClockLabel();
@@ -52,16 +52,9 @@ public class ClockWidget extends Widget{
     
     
     
-    
-    
-    
-    
-    
-    
-    
     public ClockWidget(ButtonState buttonState){
         super(buttonState);
-        panel = new ClockPanel();
+        panel = new ClockPanel(0,0,200,200);
         panel.addClockLabel(new ClockLabel());
     }
     

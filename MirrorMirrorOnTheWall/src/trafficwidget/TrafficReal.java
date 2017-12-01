@@ -15,7 +15,7 @@ import java.net.URL;
  *
  * @author ao0729
  */
-class TrafficReal  {
+class TrafficReal extends TrafficProxyAbstract {
   
   private static final String[] urlArray = {
     "https://www.google.com/maps/dir/205+Main+St,+Wallingford,+CT+06492/CCSU,+Stanley+Street,+New+Britain,+CT/@41.5803555,-72.9037839,11z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x89e7cec9f049a787:0xd4504476e463e401!2m2!1d-72.828807!2d41.480756!1m5!1m1!1s0x89e7b266eb15e0a5:0xa92a64e8673c71fb!2m2!1d-72.764167!2d41.693255",
@@ -33,7 +33,7 @@ class TrafficReal  {
     "mall"
     };
   
-  private static int destination=2;
+  private static int destination=3;
   
   public static void nextDestination(){
     destination++;
