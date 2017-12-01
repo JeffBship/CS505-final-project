@@ -1,7 +1,6 @@
 package NewsChainOfResponsibility;
 
 import java.util.ArrayList;
-import javax.swing.text.SimpleAttributeSet;
 import NewsWidget.Story;
 import java.util.Collections;
 
@@ -27,7 +26,7 @@ public class RSS extends RSShandler{
     Collections.shuffle(rssChain);
     
     //add the failRSS on the end of the shuffled list
-    rssChain.add(new failRSS());
+    rssChain.add(new FailRSS());
     
     //assign the successors
     this.rssObject.setSuccessor(rssChain.get(0));

@@ -1,17 +1,12 @@
+
+
 package TrafficWidget;
  
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+
  
 // merge with WidgetController at some point and extend the WidgetState
-public class TrafficWidget extends Application {
-   
+public class TrafficWidget { //extends Application {
+ /*  
     static Robot marvin;
     Scanner scan = new Scanner(System.in);
     char input;
@@ -50,6 +45,6 @@ public class TrafficWidget extends Application {
  
     public static void main(String[] args){
       //Should never reach this
-      launch(args);
+      //launch(args);
     }
 }

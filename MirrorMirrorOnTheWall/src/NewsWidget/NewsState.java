@@ -7,7 +7,7 @@ import cs505.group1.state.ButtonState;
  */
 public class NewsState implements ButtonState {
   
-    NewsAdapter newsAdapter = new NewsAdapter(this);
+    private final NewsAdapter newsAdapter = new NewsAdapter(this);
   
     @Override
     public ButtonState singlePress() {

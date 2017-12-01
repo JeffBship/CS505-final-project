@@ -1,5 +1,7 @@
 package edu.ccsu.cs505.compob;
 
+import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor;
+
 /**
  * In Observer pattern, this is an abstract class of observer. Also, this class
  * designed by Template pattern, the abstract method warn is the hook method.

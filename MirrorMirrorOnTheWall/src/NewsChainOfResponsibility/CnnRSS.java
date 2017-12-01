@@ -1,7 +1,6 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
-import cs505.group1.font.Font;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
@@ -20,8 +19,8 @@ class CnnRSS extends RSShandler {
     rssObject = new RSSobject();
     rssObject.setSuccessor(null);
     rssObject.setStoryList(makeStoryList());
-    rssObject.setBigFont(Font.bigCnn());
-    rssObject.setSmallFont(Font.smallCnn());
+    rssObject.setBigFont("CNN");
+    rssObject.setSmallFont("CNN");
   }
   
   @Override

@@ -1,9 +1,11 @@
 package edu.ccsu.cs505.compob;
 
+import grovepisensors.GrovePiSensors;
+import grovepisensors.GrovePiSensors_for_News;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import com.dexterind.grovepi.sensors.Led;
+import org.iot.raspberry.grovepi.GrovePi;
+import org.iot.raspberry.grovepi.devices.GroveLed;
+import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumidityValue;
 
 /**
  * This class implements the interface ObserverSensor and it is sub-class of
@@ -32,7 +34,7 @@ public class LEDObserverWarner extends TempObserverWarner {
     /**
      * Represents LED sensor class from GrovePi.
      */
-    private Led ledWarner;
+    private GroveLed ledWarner;
 
     /**
      * Constructor.
@@ -42,26 +44,22 @@ public class LEDObserverWarner extends TempObserverWarner {
      * @param ledNum, Led pin number.
      *
      */
-    public LEDObserverWarner(SubjectDHTSensor sub, double temp, int ledNum) {
+    public LEDObserverWarner(SubjectDHTSensor sub, 
+                              double temp, int ledNum) {
         super();
         this.subject = sub;
         this.warnTemp = temp;
         this.warnState = false;
 
         try {
-            this.ledWarner = new Led(ledNum);
-            ledWarner.turnOff();
+            //altered for org library
+            GrovePi grovePi = GrovePiSensors_for_News.getGrovePi4J();
+            this.ledWarner = new GroveLed(grovePi,ledNum);
+            ledWarner.set(0);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
         }
     }
+
 
     /**
      * Implementation of Hook method
@@ -69,12 +67,19 @@ public class LEDObserverWarner extends TempObserverWarner {
      */
     @Override
     public void hookOb() {
+        //altered for org library
+        GroveTemperatureAndHumidityValue  tempHum = null;
+        try {
+          tempHum = this.subject.dhtSensor.get();
+        } catch (IOException ex) {}
+        
+      
         //If the temperature over warntemp, and LED is turned on, keep it.
-        if (this.subject.getTemperature() > this.warnTemp && this.warnState) {
+        if (tempHum.getTemperature() > this.warnTemp && this.warnState) {
             return;
         }
         //If the temeprature equal or below the warntemp, and LED is turned off, keep it.
-        if (this.subject.getTemperature() <= this.warnTemp && !this.warnState) {
+        if (tempHum.getTemperature() <= this.warnTemp && !this.warnState) {
             return;
         }
         //Otherwise, change the LED status, off -> on, or on ->off
@@ -90,16 +95,14 @@ public class LEDObserverWarner extends TempObserverWarner {
     private void warn(boolean warningStatus) {
         if (warningStatus) {
             try {
-                this.ledWarner.turnOff();
+                this.ledWarner.set(0);
             } catch (IOException ex) {
-                Logger.getLogger(LEDObserverWarner.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("no warning");
         } else {
             try {
-                this.ledWarner.turnOn();
+                this.ledWarner.set(255);
             } catch (IOException ex) {
-                Logger.getLogger(LEDObserverWarner.class.getName()).log(Level.SEVERE, null, ex);
             }
             System.out.println("start warning");
         }

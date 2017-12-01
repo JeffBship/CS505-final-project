@@ -2,7 +2,6 @@
 package NewsWidget;
 
 
-import edu.ccsu.cs505.compob.OBComponentDemo;
 import java.awt.Robot;
 
 /**
@@ -54,10 +53,6 @@ class NewsAdapter{
     //and sets the scroll to the top
     NewsFrame.main(null);
     //start temperature monitor when things are instantiated.
-    try {
-      OBComponentDemo.main(null);
-    } catch (InterruptedException ex) {
-    } catch (Exception ex) {
-    }
+    
   };
 }
