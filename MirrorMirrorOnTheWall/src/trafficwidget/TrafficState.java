@@ -10,9 +10,8 @@ public class TrafficState implements ButtonState {
     
   public static void main(String[] args){
     try {
-      //increment destination and reload the frame
-      TrafficProxyAbstract.nextDestination();
-      TrafficProxyAbstract.loadInfo();
+      String[] info = TrafficProxyAbstract.loadInfo();
+      TrafficFrame.main(info);
     } catch (IOException ex) {
     }
     }
@@ -22,7 +21,8 @@ public class TrafficState implements ButtonState {
     try {
       //increment destination and reload the frame
       TrafficProxyAbstract.nextDestination();
-      TrafficProxyAbstract.loadInfo();
+      String[] info = TrafficProxyAbstract.loadInfo();
+      TrafficFrame.main(info);
       
     } catch (IOException ex) {
     }
@@ -33,8 +33,9 @@ public class TrafficState implements ButtonState {
     public ButtonState doublePress() {
     try {
       //increment destination and reload the frame
-      TrafficProxyAbstract.nextDestination();
-      TrafficProxyAbstract.loadInfo();
+      TrafficProxyAbstract.previousDestination();
+      String[] info = TrafficProxyAbstract.loadInfo();
+      TrafficFrame.main(info);
     } catch (IOException ex) {
     }
     return this;

@@ -11,7 +11,8 @@ public class TrafficWidget extends Widget {
 
   public TrafficWidget(ButtonState buttonState) {
     super(buttonState);
-    TrafficFrame.main(null);
+    
+    
   }
 
   @Override

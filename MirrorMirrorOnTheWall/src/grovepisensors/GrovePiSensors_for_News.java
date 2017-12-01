@@ -39,11 +39,7 @@ public class GrovePiSensors_for_News {
         GroveAnalogInputSensorListener rotaryListener = 
                 new GroveAnalogInputSensorListener(gp, rotaryPin, bufferLength);
         
-        //create dhtSensor and start it listening
-        int dhtPin = 3;
-        GroveTemperatureAndHumiditySensor.Type dhtType = DHT11;
-        dhtSensor = new GroveTemperatureAndHumiditySensor(gp, dhtPin, dhtType);
-        OBComponent.main(null);
+        
         
         buttonListener.addObserver(new ButtonPressDistinguisher_for_news());
         rotaryListener.addObserver(new RotaryStateDeterminer(nStates));   

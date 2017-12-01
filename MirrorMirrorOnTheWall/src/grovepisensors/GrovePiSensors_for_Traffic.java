@@ -44,8 +44,7 @@ public class GrovePiSensors_for_Traffic {
         buttonListener.addObserver(new ButtonPressDistinguisher_for_Traffic());
         rotaryListener.addObserver(new RotaryStateDeterminer(nStates));   
         
-        //Start the NewsFrame
-        TrafficFrame.main(null);
+      
         
         buttonListener.startListening();
         rotaryListener.startListening();

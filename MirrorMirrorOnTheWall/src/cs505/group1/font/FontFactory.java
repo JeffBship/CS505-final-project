@@ -35,6 +35,8 @@ public class FontFactory extends SimpleAttributeSet{
       case "CNN":  result = smallCnn();     break;
       case "FOX":  result = smallFox();     break;
       case "FAIL": result = smallFail();    break;
+      case "TRAFFIC": result = smallTraffic();    break;
+      
       default:     result = defaultFont();  break;
     }
     return result;
@@ -85,6 +87,14 @@ public class FontFactory extends SimpleAttributeSet{
     StyleConstants.setFontFamily(result,"Helvetica ");
     StyleConstants.setFontSize(result, 20);
     StyleConstants.setForeground(result, Color.GREEN);
+    return result;
+  }
+  
+  private static SimpleAttributeSet smallTraffic() {
+    SimpleAttributeSet result = new SimpleAttributeSet();
+    StyleConstants.setFontFamily(result,"Helvetica ");
+    StyleConstants.setFontSize(result, 20);
+    StyleConstants.setForeground(result, Color.CYAN);
     return result;
   }
   
