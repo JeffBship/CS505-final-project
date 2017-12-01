@@ -1,7 +1,7 @@
 package grovepisensors;
 
 
-import NewsWidget.NewsFrame;
+import newswidget.NewsFrame;
 import com.pi4j.io.i2c.I2CFactory;
 import edu.ccsu.cs505.compob.OBComponent;
 import org.iot.raspberry.grovepi.pi4j.GrovePi4J;
