@@ -5,6 +5,7 @@ import WeatherWidget.Weather_Service;
 import cs505.group1.state.ButtonState;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,10 +21,10 @@ public class WeeklyForecastState implements ButtonState {
 
     @Override
     public ButtonState singlePress() {
-        ArrayList<HashMap> data = getData();
+        List data = getData();
             
         if(data != null){
-        data.forEach((hm) -> 
+        ((ArrayList<HashMap>)data).forEach((hm) -> 
         {
             int icon = Integer.parseInt(hm.get("Icon").toString());
             double tempMin = Double.parseDouble(hm.get("TempMax").toString());
@@ -44,9 +45,9 @@ public class WeeklyForecastState implements ButtonState {
 
     @Override
     public ButtonState doublePress() {
-        ArrayList<HashMap> data = getData();
+        List data = getData();
             
-        data.forEach((hm) -> 
+        ((ArrayList<HashMap>)data).forEach((hm) -> 
         {
             int icon = Integer.parseInt(hm.get("Icon").toString());
             String phrase = hm.get("IconPhrase").toString();
@@ -68,7 +69,7 @@ public class WeeklyForecastState implements ButtonState {
         return Weather_Service.getInstance().GetIconImage(icon);
     }
     
-    private ArrayList<HashMap> getData()
+    private List getData()
     {
         return Weather_Service.getInstance().GetWeeklyForecast();
     }

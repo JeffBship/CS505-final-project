@@ -4,6 +4,7 @@ package States;
 import WeatherWidget.Weather_Service;
 import cs505.group1.state.ButtonState;
 import java.util.HashMap;
+import java.util.Map;
 
 /*
  * This handles what information is displayed when the Single Day state is activate. On a single press, the current weather pattern icon and the average temperature will be displayed. On a double press, the description of the forecast will be display. On a long press, the hourly forecast state will be displayed.
@@ -17,7 +18,7 @@ public class SingleDayForecastState implements ButtonState {
 
     @Override
     public ButtonState singlePress() {
-        HashMap data = getData();
+        Map data = getData();
         
         System.out.println(data);
         if(!data.isEmpty())
@@ -39,7 +40,7 @@ public class SingleDayForecastState implements ButtonState {
     @Override
     public ButtonState doublePress() 
     {
-        HashMap data = getData();
+        Map data = getData();
         
         String desc = data.get("Text").toString();
         
@@ -57,7 +58,7 @@ public class SingleDayForecastState implements ButtonState {
         return Weather_Service.getInstance().GetIconImage(icon);
     }
     
-    private HashMap getData()
+    private Map getData()
     {
         return Weather_Service.getInstance().GetDailyForecast();
     }
