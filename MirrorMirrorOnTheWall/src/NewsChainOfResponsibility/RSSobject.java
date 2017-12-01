@@ -1,6 +1,7 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
+import cs505.group1.font.FontFactory;
 import java.util.ArrayList;
 import javax.swing.text.SimpleAttributeSet;
 
@@ -35,16 +36,16 @@ class RSSobject {
     return bigFont;
   }
 
-  public void setBigFont(SimpleAttributeSet bigFont) {
-    this.bigFont = bigFont;
+  public void setBigFont(String type) {
+    this.bigFont = FontFactory.createBig(type);
   }
 
   public SimpleAttributeSet getSmallFont() {
     return smallFont;
   }
 
-  public void setSmallFont(SimpleAttributeSet smallFont) {
-    this.smallFont = smallFont;
+  public void setSmallFont(String type) {
+    this.smallFont = FontFactory.createSmall(type);
   }
   
 }

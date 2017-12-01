@@ -1,12 +1,10 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
-import cs505.group1.font.Font;
 import java.net.URL;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.text.SimpleAttributeSet;
 
 /**
  * FoxRSS is a concrete handler in the RSS Chain of Responsibility
@@ -18,8 +16,8 @@ class FoxRSS extends RSShandler {
     rssObject = new RSSobject();
     rssObject.setSuccessor(null);
     rssObject.setStoryList(makeStoryList());
-    rssObject.setBigFont(Font.bigFox());
-    rssObject.setSmallFont(Font.smallFox());
+    rssObject.setBigFont("Fox");
+    rssObject.setSmallFont("Fox");
   }
   
   @Override

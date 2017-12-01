@@ -6,6 +6,7 @@ import NewsWidget.Story;
 
 /**
  * RSShandler is the abstract for the RSS Chain of Responsibility.
+ * !! Note:  It is critical that clients access the Chain via RSS Constructor !!
  * This CoR obtains a ArrayList of Story objects from a group of handlers
  * which each parse an assigned RSS feed from a news organization.  Each handler
  * uses a customized parsing algorithm to build the story list, since each news 

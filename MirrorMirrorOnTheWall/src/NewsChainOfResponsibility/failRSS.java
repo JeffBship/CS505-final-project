@@ -2,7 +2,6 @@
 package NewsChainOfResponsibility;
 
 import NewsWidget.Story;
-import cs505.group1.font.Font;
 import java.util.ArrayList;
 import javax.swing.text.SimpleAttributeSet;
 
@@ -11,14 +10,14 @@ import javax.swing.text.SimpleAttributeSet;
  * A fail indicator is provided.
  * @author Jeff Blankenship
  */
-class failRSS extends RSShandler{
+class FailRSS extends RSShandler{
   
-  public failRSS(){
+  public FailRSS(){
     rssObject = new RSSobject();
     rssObject.setSuccessor(null);
     rssObject.setStoryList(makeStoryList());
-    rssObject.setBigFont(Font.bigFail());
-    rssObject.setSmallFont(Font.smallFail());
+    rssObject.setBigFont("Fail");
+    rssObject.setSmallFont("Fail");
   }
 
   @Override

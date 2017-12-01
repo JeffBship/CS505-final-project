@@ -2,6 +2,7 @@ package NewsWidget;
 
 import WeatherWidget.Widget;
 import cs505.group1.state.ButtonState;
+import edu.ccsu.cs505.compob.OBComponent;
 import java.util.Observable;
 
 /**
@@ -12,6 +13,13 @@ public class NewsWidget extends Widget {
 
   public NewsWidget(ButtonState buttonState) {
     super(buttonState);
+    //Start temperature monitor when widget is constructed
+    try {
+      OBComponent.main(null);
+    } catch (InterruptedException ex) {
+    } catch (Exception ex) {
+    }
+    
   }
 
   @Override
