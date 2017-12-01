@@ -8,8 +8,8 @@
 
 package grovepisensors;
 
-import NewsWidget.NewsState;
-import NewsWidget.NewsWidget;
+import newswidget.NewsState;
+import newswidget.NewsWidget;
 import cs505.group1.state.*;
 
 /**
