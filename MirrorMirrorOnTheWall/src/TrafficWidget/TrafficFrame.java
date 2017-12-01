@@ -16,12 +16,12 @@ import javax.swing.text.*;
  * @web http://helloraspberrypi.blogspot.com/
  * @author Andr.oid Eric  https://plus.google.com/+AndroidEric
  */
-class TrafficFrame {
+public class TrafficFrame {
  
   
   
 
-  static void main(String[] info) {
+  public static void main(String[] info) {
 
       SwingUtilities.invokeLater(new Runnable() {
           @Override

@@ -2,29 +2,42 @@
 package trafficwidget;
 
 import cs505.group1.state.ButtonState;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TrafficState implements ButtonState {
     
   public static void main(String[] args){
+    try {
       //increment destination and reload the frame
-      TrafficInterface.nextDestination();
-      TrafficInterface.loadInfo();
+      TrafficProxyAbstract.nextDestination();
+      TrafficProxyAbstract.loadInfo();
+    } catch (IOException ex) {
+    }
     }
   
     @Override
     public ButtonState singlePress() {
+    try {
       //increment destination and reload the frame
-      TrafficInterface.nextDestination();
-      TrafficInterface.loadInfo();
-      return this;
+      TrafficProxyAbstract.nextDestination();
+      TrafficProxyAbstract.loadInfo();
+      
+    } catch (IOException ex) {
+    }
+    return this;
     }
 
     @Override
     public ButtonState doublePress() {
+    try {
       //increment destination and reload the frame
-      TrafficInterface.nextDestination();
-      TrafficInterface.loadInfo();
-      return this;
+      TrafficProxyAbstract.nextDestination();
+      TrafficProxyAbstract.loadInfo();
+    } catch (IOException ex) {
+    }
+    return this;
     }
 
     @Override
