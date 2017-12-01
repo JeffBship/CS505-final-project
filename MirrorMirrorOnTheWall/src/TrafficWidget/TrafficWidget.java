@@ -1,50 +1,42 @@
 
 
-package TrafficWidget;
+package trafficwidget;
+ 
+import WeatherWidget.Widget;
+import cs505.group1.state.ButtonState;
+import java.util.Observable;
  
 
- 
-// merge with WidgetController at some point and extend the WidgetState
-public class TrafficWidget { //extends Application {
- /*  
-    static Robot marvin;
-    Scanner scan = new Scanner(System.in);
-    char input;
-   
-    private Scene webWidget;
-     
-    @Override public void start(Stage stage) { 
-       
-      //Open the webpage
-        stage.setTitle("Web View");
-        webWidget = new Scene(new Traffic(),720,450, Color.web("#666970"));
-        stage.setScene(webWidget);      
-        stage.show();
-         
-      System.out.println("Webpage should be open");
-       
+public class TrafficWidget extends Widget {
+
+  public TrafficWidget(ButtonState buttonState) {
+    super(buttonState);
+    TrafficFrame.main(null);
+  }
+
+  @Override
+  public void singlePress() {
+    this.buttonState.singlePress();
     }
-    /**
-     * Scrolls the webpage down one increment.
-     */
-    public static void singlePress(){
-    };
-     
-    /**
-     * Scrolls the webpage down one increment.
-     */
-    public static void doublePress(){
-    };
-     
-    /**
-     * Refresh and return to home
-     */
-    public static void longPress(){  
-    };
-     
- 
-    public static void main(String[] args){
-      //Should never reach this
-      //launch(args);
+
+  @Override
+  public void doublePress() {
+    this.buttonState.doublePress();
     }
+
+  @Override
+  public void longPress() {
+    this.buttonState.longPress();
+    }
+
+  @Override
+  public void showInactiveState(){}
+  @Override
+  public void showNoNetworkState(){}
+  @Override
+  public String toString(){return null;}
+  @Override
+  public void update(Observable o, Object arg) {}
+  
+
 }
