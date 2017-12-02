@@ -5,7 +5,9 @@
         <group>
             <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/HourlyForecastState.java</file>
             <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/WeeklyForecastState.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/WeatherInactiveState.java</file>
             <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/WeatherState.java</file>
+            <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/NoNetworkConnectionState.java</file>
             <file>file:/Users/melmulcahy/Desktop/Graduate%20School/CS%20505%20Homework/MirrorMirrorOnTheWall/MirrorMirrorOnTheWall/src/cs505/group1/weatherstates/SingleDayForecastState.java</file>
         </group>
     </open-files>

@@ -51,22 +51,39 @@ import javax.swing.JPanel;
 public abstract class WeatherState {
     public JPanel statePanel;
     
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
     protected List getData()
     {
         return Weather_Service.getInstance().GetHourlyForecast();
     }
     
+    /**
+     * returns the icon path given an ID
+     * @param icon
+     * @return 
+     */
     protected String getIconImage(int icon)
     {
         System.out.println(icon);
         return Weather_Service.getInstance().GetIconImage(icon);
     }
     
+    /**
+     * creates an ImageIcon object given an image path
+     * @param imageLocation
+     * @return 
+     */
     protected ImageIcon AddImage(String imageLocation)
     {
         return new ImageIcon(imageLocation);
     }
     
+    /**
+     * removes all objects from the JPanel
+     */
     protected void ResetStatePanel(){
         statePanel.removeAll();
     }
