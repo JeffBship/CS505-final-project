@@ -1,9 +1,7 @@
 package WeatherWidget;
 
 
-import States.NoNetworkConnectionState;
-import States.HourlyDayForcastState;
-import States.WeatherInactiveState;
+import cs505.group1.weatherstates.*;
 import cs505.group1.state.ButtonState;
 import java.util.Observable;
 
@@ -21,10 +19,11 @@ public class WeatherWidget extends Widget {
     private String currentWeather = "";
     private int currentTemperature = 0;
     private String location;
-    private static WeatherWidget weatherWidget = new WeatherWidget(new HourlyDayForcastState());
+    private static WeatherWidget weatherWidget = new WeatherWidget(new SingleDayForecastState());
     
     /**
      * Default constructor. Sets location to New Britain, CT.
+     * @param buttonState
      */
     protected WeatherWidget(ButtonState buttonState)
     {
@@ -114,7 +113,7 @@ public class WeatherWidget extends Widget {
      */
     public static void resetSingleton()
     {
-        weatherWidget = new WeatherWidget(new HourlyDayForcastState());
+        weatherWidget = new WeatherWidget(new SingleDayForecastState());
     }
     
     /**
@@ -130,7 +129,8 @@ public class WeatherWidget extends Widget {
     }
 
     @Override
-    public void singlePress() {
+    public void singlePress() 
+    {
         ButtonState currentState = getState();
         currentState.singlePress();
     }
@@ -144,7 +144,7 @@ public class WeatherWidget extends Widget {
     @Override
     public void longPress() {
         ButtonState currentState = getState();
-        currentState.longPress();
+        setState(currentState.longPress());
     }
 
     @Override

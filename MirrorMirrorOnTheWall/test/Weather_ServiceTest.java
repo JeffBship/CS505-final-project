@@ -7,6 +7,7 @@
 import WeatherWidget.Weather_Service;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,8 +27,8 @@ public class Weather_ServiceTest {
     public void testGetDailyForecast() {
         System.out.println("GetDailyForecast");
         Weather_Service instance = Weather_Service.getInstance();
-        HashMap<String,String> result = instance.GetDailyForecast();
-        assertThat(result, not(new HashMap()));
+        ArrayList<HashMap> result = instance.GetDailyForecast();
+        assertThat(result, not(new ArrayList<HashMap>()));
     }
 
     /**
@@ -37,8 +38,7 @@ public class Weather_ServiceTest {
     public void testGetWeeklyForecast() {
         System.out.println("GetWeeklyForecast");
         Weather_Service instance = Weather_Service.getInstance();
-        String expResult = "";
-        ArrayList result = instance.GetWeeklyForecast();
+        ArrayList<HashMap> result = instance.GetWeeklyForecast();
         assertThat(result, not(new ArrayList<HashMap>()));
     }
 
@@ -48,8 +48,7 @@ public class Weather_ServiceTest {
     @Test
     public void testGetHourlyForecast() {
         System.out.println("GetHourlyForecast");
-        Weather_Service instance = Weather_Service.getInstance();
-        String expResult = "";
+       Weather_Service instance = Weather_Service.getInstance();
         ArrayList<HashMap> result = instance.GetHourlyForecast();
         assertThat(result, not(new ArrayList<HashMap>()));
     }
