@@ -49,7 +49,7 @@ import javax.swing.JPanel;
  * @author melmulcahy
  */
 public abstract class WeatherState {
-    public JPanel statePanel;
+    protected JPanel statePanel;
     
     /**
      * Gets data from the weather API
@@ -86,6 +86,10 @@ public abstract class WeatherState {
      */
     protected void ResetStatePanel(){
         statePanel.removeAll();
+    }
+    
+    public JPanel GetStatePanel(){
+        return statePanel;
     }
     
 }
