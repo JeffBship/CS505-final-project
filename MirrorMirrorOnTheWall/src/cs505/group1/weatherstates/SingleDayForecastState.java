@@ -32,7 +32,6 @@ public class SingleDayForecastState extends WeatherState {
         
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         { 
-            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
             Double tempMax = Double.parseDouble(hm.get("TempMax").toString());
             Double tempMin = Double.parseDouble(hm.get("TempMin").toString());
@@ -47,6 +46,7 @@ public class SingleDayForecastState extends WeatherState {
             JLabel lblTemp = new JLabel(tempAvg.toString()+tempUnit);
             
             lblTemp.setForeground((Color.white));
+            statePanel.add(imgLabel);
             statePanel.add(imgLabel);
             statePanel.add(lblTemp);
 

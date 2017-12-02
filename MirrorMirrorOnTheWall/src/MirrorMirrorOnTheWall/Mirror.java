@@ -3,11 +3,15 @@ package MirrorMirrorOnTheWall;
 
 import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
+import clockwidget.ClockWidget;
 import com.pi4j.io.i2c.I2CFactory;
+import cs505.group1.state.ButtonState;
 import grovepisensors.GrovePiSensors;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import newswidget.NewsWidget;
+import trafficwidget.TrafficWidget;
 
 
 /**
@@ -140,51 +144,34 @@ public class Mirror
         //does stuff
         Mirror lmirror = Mirror.GetInstance();
         WeatherWidget weather = WeatherWidget.getInstance();
+        NewsWidget news = NewsWidget.GetInstance();
+        TrafficWidget traf = TrafficWidget.getInstance();
         
         Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
         weather.singlePress();
+        //news.singlePress();
         
         lmirror.AddWidget(weather);
-        lmirror.AddWidget(weather);
-        lmirror.AddWidget(weather);
+        lmirror.AddWidget(news);
+        lmirror.AddWidget(traf);
         lmirror.AddWidget(weather);
         
         mirrorFrame = new JFrame();
+        
         JPanel mirrorPanel = new JPanel();
         mirrorPanel.setLayout(new GridLayout(2,2,50,50));
         mirrorPanel.setBackground(Color.BLACK);
         Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
         mirrorPanel.setPreferredSize(screen);
         
-        widgetPanels[0] = mirror.GetWidget(0).getState().GetStatePanel();
-        widgetPanels[0].setBackground(Color.BLACK);
-        mirrorPanel.add(widgetPanels[0]);
-        
-        widgetPanels[1] = new JPanel();
-        widgetPanels[1] .setBackground(Color.RED);
-        
-        widgetPanels[2]  = new JPanel();
-        widgetPanels[2] .setBackground(Color.BLUE);
-        
-        widgetPanels[3]  = new JPanel();
-        widgetPanels[3] .setBackground(Color.GREEN);
-        
-        mirrorPanel.add(widgetPanels[1] );
-        mirrorPanel.add(widgetPanels[2] );
-        mirrorPanel.add(widgetPanels[3] );
-        
-        //TO BE UESD LATER WHEN ALL WIDGERS COMPLY
-        
-//        for(Widget w : mirror.Widgets)
-//        {
-//            ButtonState state = w.getState();
-//            JPanel sPanel = state.GetStatePanel();
-//            sPanel.setPreferredSize(new Dimension((screen.width/4),(screen.height/4)));
-//            sPanel.setMaximumSize(sPanel.getPreferredSize());
-//            sPanel.setMinimumSize(sPanel.getPreferredSize());
-//            mirrorPanel.add(sPanel);
-//        }
+        for(int i = 0; i < mirror.Widgets.length; i++){
+            widgetPanels[i] = new JPanel();
+            widgetPanels[i].add(mirror.GetWidget(0).getState().GetStatePanel());
+            widgetPanels[i].setBackground(Color.BLACK);
+            mirrorPanel.add(widgetPanels[i]);
+        }
+
         mirrorFrame.add(mirrorPanel);
         mirrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mirrorFrame.setPreferredSize(screen);
@@ -197,11 +184,13 @@ public class Mirror
        //GrovePiSensors.StartSensors();
        Thread.sleep(10000);
        Mirror.GetInstance().InvokeDoublePress();
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeLongPress();
     }
     
     public void InvokeSinglePress()
     {
-        Mirror.GetInstance().GetActive().singlePress();
+        GetActive().singlePress();
         UpdateUI();
     }
     
@@ -209,8 +198,9 @@ public class Mirror
     {
         if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            
-            widgetPanels[0] = WeatherWidget.getInstance().getState().GetStatePanel();
+            ButtonState bs = GetActive().getState();
+            widgetPanels[0].removeAll();
+            widgetPanels[0].add(bs.GetStatePanel());
             mirrorFrame.revalidate();
             mirrorFrame.repaint();
         }
@@ -236,13 +226,13 @@ public class Mirror
     
     public void InvokeDoublePress()
     {
-        Mirror.GetInstance().GetActive().doublePress();
+        GetActive().doublePress();
         UpdateUI();
     }
     
     public void InvokeLongPress()
     {
-        Mirror.GetInstance().GetActive().longPress();
+        GetActive().longPress();
         UpdateUI();
     }
 
