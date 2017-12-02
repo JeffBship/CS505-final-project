@@ -55,10 +55,7 @@ public abstract class WeatherState extends ButtonState {
      * Gets data from the weather API
      * @return List of information
      */
-    protected List getData()
-    {
-        return Weather_Service.getInstance().GetHourlyForecast();
-    }
+    protected abstract List getData();
     
     /**
      * returns the icon path given an ID

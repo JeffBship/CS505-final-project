@@ -1,8 +1,10 @@
 package cs505.group1.weatherstates;
 
 
+import WeatherWidget.Weather_Service;
 import cs505.group1.state.ButtonState;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -53,5 +55,15 @@ public class WeatherInactiveState extends WeatherState{
     @Override
     public String toString() {
         return "INACTIVE";
+    }
+    
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
+    @Override
+    protected List getData()
+    {
+        return null;
     }
 }

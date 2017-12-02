@@ -32,15 +32,19 @@ public class SingleDayForecastState extends WeatherState {
         
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         { 
+            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
-            String temp = hm.get("Temperature").toString();
+            Double tempMax = Double.parseDouble(hm.get("TempMax").toString());
+            Double tempMin = Double.parseDouble(hm.get("TempMin").toString());
             String tempUnit = hm.get("TemperatureUnit").toString();
 
             String iconImageName = getIconImage(icon);
+            
+            Double tempAvg = getAvgTemp(tempMin,tempMax);
            
             ImageIcon iconIMG = AddImage(iconImageName);
             JLabel imgLabel = new JLabel(iconIMG);
-            JLabel lblTemp = new JLabel(temp+tempUnit);
+            JLabel lblTemp = new JLabel(tempAvg.toString()+tempUnit);
             
             lblTemp.setForeground((Color.white));
             statePanel.add(imgLabel);
@@ -90,4 +94,13 @@ public class SingleDayForecastState extends WeatherState {
         return "SINGLEDAY";
     }
     
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
+    @Override
+    protected List getData()
+    {
+        return Weather_Service.getInstance().GetDailyForecast();
+    }
 }

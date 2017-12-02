@@ -9,7 +9,7 @@ import java.util.Observable;
 
 public class TrafficWidget extends Widget {
 
-  private static TrafficWidget traffic = new TrafficWidget(new singlePress());
+  private static TrafficWidget traffic = new TrafficWidget(new TrafficState());
   public TrafficWidget(ButtonState buttonState) {
     super(buttonState);
     this.buttonState = buttonState; 
@@ -45,7 +45,7 @@ public class TrafficWidget extends Widget {
     return traffic;
   }
   public static void resetSingleton(){
-    traffic = new TrafficWidget();
+    traffic = new TrafficWidget(new TrafficState());
   }
   
   

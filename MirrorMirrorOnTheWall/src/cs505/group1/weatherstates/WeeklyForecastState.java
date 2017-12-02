@@ -91,5 +91,15 @@ public class WeeklyForecastState extends WeatherState{
     public String toString() {
         return "WEEKLY";
     }
+    
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
+    @Override
+    protected List getData()
+    {
+        return Weather_Service.getInstance().GetDailyForecast();
+    }
 }
 

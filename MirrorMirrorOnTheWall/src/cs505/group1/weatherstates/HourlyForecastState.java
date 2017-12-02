@@ -2,6 +2,7 @@ package cs505.group1.weatherstates;
 
 
 
+import WeatherWidget.Weather_Service;
 import cs505.group1.state.ButtonState;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -86,4 +87,13 @@ public class HourlyForecastState extends WeatherState {
         return "HOURLYFORECAST";
     }
     
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
+    @Override
+    protected List getData()
+    {
+        return Weather_Service.getInstance().GetHourlyForecast();
+    }
 }
