@@ -6,7 +6,7 @@ import cs505.group1.state.ButtonState;
 /**
  * @author Jeff Blankenship
  */
-public class NewsState implements ButtonState {
+public class NewsState extends ButtonState {
   
     private final NewsAdapter newsAdapter = new NewsAdapter(this);
   
@@ -30,6 +30,11 @@ public class NewsState implements ButtonState {
         newsAdapter.longPress();
         
         return this;
+    }
+    
+    @Override
+    public String toString() {
+        return "NEWSTATE";
     }
     
 }

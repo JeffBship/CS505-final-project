@@ -115,8 +115,8 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
     
     //class instance object for a newsState.  NewsState is public so other methods
     //can reconstruct it when needed.
-    public static NewsState newsState = new NewsState();
-    public static NewsWidget newsWidget = new NewsWidget(newsState);
+    //public static NewsState newsState = new NewsState();
+    public static NewsWidget newsWidget = NewsWidget.GetInstance();
     
     @Override
     public void notifyWidgets(){
