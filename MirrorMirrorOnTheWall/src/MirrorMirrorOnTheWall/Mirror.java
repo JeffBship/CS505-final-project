@@ -3,9 +3,11 @@ package MirrorMirrorOnTheWall;
 
 import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
-import cs505.group1.state.ButtonState;
+import com.pi4j.io.i2c.I2CFactory;
+import grovepisensors.GrovePiSensors;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 
 /**
@@ -21,6 +23,7 @@ public class Mirror
     public static Mirror mirror = new Mirror();
     private Quadrant quadrant;
     private static JFrame mirrorFrame = new JFrame();
+    private static JPanel[] widgetPanels = new JPanel[4];
 
     /**
      * Constructor for objects of class Mirror
@@ -104,9 +107,9 @@ public class Mirror
      */
     public void SetActive(Quadrant quad)
     {
-        if (null == quadrant)
+        if (null == quad)
             activeWidget = GetWidget(3);
-        else switch (quadrant) {
+        else switch (quad) {
             case ONE:
                 activeWidget = GetWidget(0);
             case TWO:
@@ -132,18 +135,20 @@ public class Mirror
         mirror = new Mirror();
     }
     
-    public static void main(String args[])
+    public static void main(String args[]) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException
     {
         //does stuff
-        Mirror mirror = Mirror.GetInstance();
+        Mirror lmirror = Mirror.GetInstance();
         WeatherWidget weather = WeatherWidget.getInstance();
+        
+        Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
         weather.singlePress();
         
-        mirror.AddWidget(weather);
-        mirror.AddWidget(weather);
-        mirror.AddWidget(weather);
-        mirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
         
         mirrorFrame = new JFrame();
         JPanel mirrorPanel = new JPanel();
@@ -152,21 +157,22 @@ public class Mirror
         Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
         mirrorPanel.setPreferredSize(screen);
         
-        JPanel spanel = mirror.GetWidget(0).getState().GetStatePanel();
-        spanel.setBackground(Color.BLACK);
-        mirrorPanel.add(spanel);
+        widgetPanels[0] = mirror.GetWidget(0).getState().GetStatePanel();
+        widgetPanels[0].setBackground(Color.BLACK);
+        mirrorPanel.add(widgetPanels[0]);
         
-        JPanel test1 = new JPanel();
-        test1.setBackground(Color.RED);
+        widgetPanels[1] = new JPanel();
+        widgetPanels[1] .setBackground(Color.RED);
         
-        JPanel test2 = new JPanel();
-        test2.setBackground(Color.BLUE);
-        JPanel test3 = new JPanel();
-        test3.setBackground(Color.GREEN);
+        widgetPanels[2]  = new JPanel();
+        widgetPanels[2] .setBackground(Color.BLUE);
         
-        mirrorPanel.add(test1);
-        mirrorPanel.add(test2);
-        mirrorPanel.add(test3);
+        widgetPanels[3]  = new JPanel();
+        widgetPanels[3] .setBackground(Color.GREEN);
+        
+        mirrorPanel.add(widgetPanels[1] );
+        mirrorPanel.add(widgetPanels[2] );
+        mirrorPanel.add(widgetPanels[3] );
         
         //TO BE UESD LATER WHEN ALL WIDGERS COMPLY
         
@@ -187,7 +193,57 @@ public class Mirror
         //Display the window.
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
+        
+       //GrovePiSensors.StartSensors();
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeDoublePress();
     }
     
+    public void InvokeSinglePress()
+    {
+        Mirror.GetInstance().GetActive().singlePress();
+        UpdateUI();
+    }
+    
+    private void UpdateUI()
+    {
+        if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            
+            widgetPanels[0] = WeatherWidget.getInstance().getState().GetStatePanel();
+            mirrorFrame.revalidate();
+            mirrorFrame.repaint();
+        }
+        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+        else
+        {
+            mirrorFrame.remove(widgetPanels[3]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+    } 
+    
+    public void InvokeDoublePress()
+    {
+        Mirror.GetInstance().GetActive().doublePress();
+        UpdateUI();
+    }
+    
+    public void InvokeLongPress()
+    {
+        Mirror.GetInstance().GetActive().longPress();
+        UpdateUI();
+    }
 
 }

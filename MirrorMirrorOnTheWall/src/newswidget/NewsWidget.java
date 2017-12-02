@@ -3,7 +3,6 @@ package newswidget;
 
 import WeatherWidget.Widget;
 import cs505.group1.state.ButtonState;
-import edu.ccsu.cs505.compob.OBComponent;
 import java.util.Observable;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Observable;
  */
 public class NewsWidget extends Widget {
 
-  public static NewsWidget news = new NewsWidget(new longPress());
+  public static NewsWidget news = new NewsWidget(new NewsState());
   private NewsWidget(ButtonState buttonState) {
     super(buttonState);
     this.buttonState = buttonState;
@@ -51,6 +50,6 @@ public class NewsWidget extends Widget {
   }
   public static void ResetSingleton()
   {
-	news = new NewsWidget();
+	news = new NewsWidget(new NewsState());
   }
 }
