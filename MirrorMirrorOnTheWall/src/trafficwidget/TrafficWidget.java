@@ -9,7 +9,7 @@ import java.util.Observable;
 
 public class TrafficWidget extends Widget {
 
-  private static TrafficWidget traffic = new TrafficWidget();
+  private static TrafficWidget traffic = new TrafficWidget(new singlePress());
   public TrafficWidget(ButtonState buttonState) {
     super(buttonState);
     this.buttonState = buttonState; 
