@@ -3,6 +3,7 @@ package cs505.group1.weatherstates;
 
 import WeatherWidget.Weather_Service;
 import cs505.group1.state.ButtonState;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ import javax.swing.*;
  *
  * @author melmulcahy
  */
-public class SingleDayForecastState extends WeatherState implements ButtonState {
+public class SingleDayForecastState extends WeatherState {
 
     @Override
     public ButtonState singlePress() {
@@ -31,7 +32,6 @@ public class SingleDayForecastState extends WeatherState implements ButtonState 
         
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         { 
-            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
             String temp = hm.get("Temperature").toString();
             String tempUnit = hm.get("TemperatureUnit").toString();
@@ -41,6 +41,8 @@ public class SingleDayForecastState extends WeatherState implements ButtonState 
             ImageIcon iconIMG = AddImage(iconImageName);
             JLabel imgLabel = new JLabel(iconIMG);
             JLabel lblTemp = new JLabel(temp+tempUnit);
+            
+            lblTemp.setForeground((Color.white));
             statePanel.add(imgLabel);
             statePanel.add(lblTemp);
 
@@ -64,6 +66,7 @@ public class SingleDayForecastState extends WeatherState implements ButtonState 
             
             JLabel lblDesc = new JLabel(desc);
             
+            lblDesc.setForeground((Color.white));
             statePanel.add(lblDesc);
         });
         
@@ -82,5 +85,9 @@ public class SingleDayForecastState extends WeatherState implements ButtonState 
         return Weather_Service.getInstance().GetTemperatureAverage(tempA, tempB);
     }
 
+    @Override
+    public String toString() {
+        return "SINGLEDAY";
+    }
     
 }

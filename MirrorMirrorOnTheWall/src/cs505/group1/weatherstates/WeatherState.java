@@ -40,16 +40,16 @@
 package cs505.group1.weatherstates;
 
 import WeatherWidget.Weather_Service;
+import cs505.group1.state.ButtonState;
 import java.util.List;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
 /**
  *
  * @author melmulcahy
  */
-public abstract class WeatherState {
-    protected JPanel statePanel;
+public abstract class WeatherState extends ButtonState {
+    
     
     /**
      * Gets data from the weather API
@@ -67,7 +67,6 @@ public abstract class WeatherState {
      */
     protected String getIconImage(int icon)
     {
-        System.out.println(icon);
         return Weather_Service.getInstance().GetIconImage(icon);
     }
     
@@ -78,18 +77,9 @@ public abstract class WeatherState {
      */
     protected ImageIcon AddImage(String imageLocation)
     {
-        return new ImageIcon(imageLocation);
+        return new ImageIcon("Images/"+imageLocation);
     }
     
-    /**
-     * removes all objects from the JPanel
-     */
-    protected void ResetStatePanel(){
-        statePanel.removeAll();
-    }
     
-    public JPanel GetStatePanel(){
-        return statePanel;
-    }
     
 }

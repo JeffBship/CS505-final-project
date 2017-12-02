@@ -3,6 +3,7 @@ package cs505.group1.weatherstates;
 
 
 import cs505.group1.state.ButtonState;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import javax.swing.JLabel;
  *
  * @author melmulcahy
  */
-public class HourlyForecastState extends WeatherState implements ButtonState {
+public class HourlyForecastState extends WeatherState {
 
     @Override
     public ButtonState singlePress() 
@@ -42,6 +43,7 @@ public class HourlyForecastState extends WeatherState implements ButtonState {
             ImageIcon iconIMG = AddImage(iconImageName);
             JLabel imgLabel = new JLabel(iconIMG);
             JLabel lblTemp = new JLabel(temp);
+            lblTemp.setForeground((Color.white));
             statePanel.add(imgLabel);
             statePanel.add(lblTemp);
         });
@@ -65,6 +67,8 @@ public class HourlyForecastState extends WeatherState implements ButtonState {
             ImageIcon iconIMG = AddImage(iconImageName);
             JLabel imgLabel = new JLabel(iconIMG);
             JLabel lblphrase = new JLabel(phrase);
+            
+            lblphrase.setForeground((Color.white));
             statePanel.add(imgLabel);
             statePanel.add(lblphrase);
         });
@@ -75,6 +79,11 @@ public class HourlyForecastState extends WeatherState implements ButtonState {
     public ButtonState longPress() 
     {
         return new WeeklyForecastState();
+    }
+
+    @Override
+    public String toString() {
+        return "HOURLYFORECAST";
     }
     
 }
