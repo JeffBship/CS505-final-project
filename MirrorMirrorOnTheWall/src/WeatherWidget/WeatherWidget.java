@@ -1,9 +1,7 @@
 package WeatherWidget;
 
 
-import States.NoNetworkConnectionState;
-import States.SingleDayForecastState;
-import States.WeatherInactiveState;
+import cs505.group1.weatherstates.*;
 import cs505.group1.state.ButtonState;
 import java.util.Observable;
 

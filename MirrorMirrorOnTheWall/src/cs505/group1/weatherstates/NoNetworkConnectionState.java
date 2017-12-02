@@ -1,4 +1,4 @@
-package States;
+package cs505.group1.weatherstates;
 
 
 import cs505.group1.state.ButtonState;

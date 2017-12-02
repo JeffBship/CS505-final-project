@@ -1,7 +1,6 @@
 package WeatherWidget;
 
 
-import WeatherWidget.WeatherWidget;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +47,7 @@ public class Weather_Service
     /**
      * API Key used to access the API.
      */
-    protected final String API_KEY = "uRepHxpqZg8bPIXxVfuFlrT4omTjGNO4";//"zQlJv1zjNyfLKNQDH87LEhE6icbvVFGJ";
+    protected final String API_KEY = "uRepHxpqZg8bPIXxVfuFlrT4omTjGNO4";//"uRepHxpqZg8bPIXxVfuFlrT4omTjGNO4";//
 
     /**
      * URL for the API.
@@ -126,7 +125,7 @@ public class Weather_Service
      * Gets the JSON response from Accuweather for the today's forecast for the Weather Widget's current location
      * @return the string representation of the current forecast. 
      */
-    public HashMap GetDailyForecast(){
+    public ArrayList<HashMap> GetDailyForecast(){
         try
         {
             String locationKey = GetLocationKey(WeatherWidget.getInstance().getLocation());
@@ -167,13 +166,16 @@ public class Weather_Service
          
          dailyForcast.put("TemperatureUnit",jsonMinimum.getString("Unit"));
          
-         return dailyForcast;
+         ArrayList<HashMap> hm = new ArrayList<HashMap>();
+         hm.add(dailyForcast);
+         
+         return hm;
         
         }
         catch(IOException | JSONException ex)
         {
             System.out.println("EXCEPTION: "+ ex);
-            return new HashMap();
+            return new ArrayList<HashMap>();
         }
     }
     
@@ -217,8 +219,10 @@ public class Weather_Service
 
             dailyForcast.put("Text", jsonHeadline.getString("Text"));
 
-            dailyForcast.put("Icon", jsonDaily.get("Icon").toString());
-            dailyForcast.put("IconPhrase", jsonDaily.getString("IconPhrase"));
+            JSONObject jsonDay = jsonDaily.getJSONObject("Day");
+            
+            dailyForcast.put("Icon", jsonDay.get("Icon").toString());
+            dailyForcast.put("IconPhrase", jsonDay.getString("IconPhrase"));
             dailyForcast.put("TempMax", jsonMaximum.get("Value").toString());
             dailyForcast.put("TempMin", jsonMinimum.get("Value").toString());
             
@@ -276,7 +280,7 @@ public class Weather_Service
             HashMap<String,String> hourlyForecast = new HashMap();
 
             hourlyForecast.put("IconPhrase", jsonHour.getString("IconPhrase"));
-            hourlyForecast.put("Icon", jsonHour.get("Icon").toString());
+            hourlyForecast.put("Icon", jsonHour.get("WeatherIcon").toString());
             hourlyForecast.put("Temperature", jsonTemperature.get("Value").toString());
             hourlyForecast.put("TemperatureUnit",jsonTemperature.getString("Unit"));
             

@@ -4,10 +4,8 @@
  * and open the template in the editor.
  */
 
-import MirrorMirrorOnTheWall.NetConnector;
 import WeatherWidget.WeatherWidget;
 import cs505.group1.state.ButtonState;
-import java.util.Observable;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.io.ByteArrayOutputStream;
@@ -115,7 +113,7 @@ public class WeatherWidgetTest {
         
         ButtonState newState = instance.getState();
         
-        assertTrue(newState.getClass().getName().equals("States.WeatherInactiveState"));
+        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.WeatherInactiveState"));
     }
 
     /**
@@ -130,7 +128,7 @@ public class WeatherWidgetTest {
         
         ButtonState newState = instance.getState();
         
-        assertTrue(newState.getClass().getName().equals("States.NoNetworkConnectionState"));
+        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.NoNetworkConnectionState"));
     }
 
     /**
@@ -146,7 +144,7 @@ public class WeatherWidgetTest {
         
         ButtonState newState = instance.getState();
         System.out.println(newState.getClass().getName());
-        assertTrue(newState.getClass().getName().equals("States.NoNetworkConnectionState"));
+        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.NoNetworkConnectionState"));
     }
     
       /**
@@ -180,7 +178,7 @@ public class WeatherWidgetTest {
         
         instance.singlePress();
         
-        assertTrue(outContent.toString().contains(".png") && outContent.toString().contains("F"));
+       assertTrue(outContent.toString().contains(".png") && outContent.toString().contains("F"));
         
     }
     
