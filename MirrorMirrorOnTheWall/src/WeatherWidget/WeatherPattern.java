@@ -89,4 +89,14 @@ public enum WeatherPattern{
 	private WeatherPattern(int patternID){
 		this.patternID = patternID;
 	}
+        
+        public int getPatternID(){
+            return this.patternID;
+        }
+        
+        @Override
+        public String toString()
+        {
+            return ((Integer)this.patternID).toString();
+        }
 }

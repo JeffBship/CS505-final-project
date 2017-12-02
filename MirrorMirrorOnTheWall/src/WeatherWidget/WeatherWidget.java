@@ -166,6 +166,16 @@ public class WeatherWidget extends Widget {
     public void update(Observable o, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public void setState(ButtonState  buttonState){
+        ButtonState oldState = getState();
+      this.buttonState = buttonState;
+      if(this.buttonState != oldState)
+      {
+          WeatherWidget.getInstance().singlePress();
+      }
+    };
 
     
 }

@@ -1,7 +1,17 @@
 package MirrorMirrorOnTheWall;
 
 
+import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
+import clockwidget.ClockWidget;
+import com.pi4j.io.i2c.I2CFactory;
+import cs505.group1.state.ButtonState;
+import grovepisensors.GrovePiSensors;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import newswidget.NewsWidget;
+import trafficwidget.TrafficWidget;
 
 
 /**
@@ -12,10 +22,12 @@ import WeatherWidget.Widget;
  */
 public class Mirror
 {
-    private Widget[] Widgets = new Widget[4];
+    private final Widget[] Widgets = new Widget[4];
     private Widget activeWidget;
     public static Mirror mirror = new Mirror();
-    public Quadrant quadrant;
+    private Quadrant quadrant;
+    private static JFrame mirrorFrame = new JFrame();
+    private static JPanel[] widgetPanels = new JPanel[4];
 
     /**
      * Constructor for objects of class Mirror
@@ -24,9 +36,7 @@ public class Mirror
 
     /**
      * Adds Widget to mirror
-     * @param[in] widget: widget to add
-     * 
-     * @return void
+     * @param widget: widget to add
      */
     public void AddWidget(Widget widget)
     {
@@ -40,7 +50,7 @@ public class Mirror
     }
     /**
      * Removes Widget from mirror
-     * @param[in] widget: widget to remove
+     * @param widget widget to remove
      * 
      * @return void
      */
@@ -65,7 +75,7 @@ public class Mirror
     }
     /**
      * Gets Widget at specified index
-     * @param[in] index: index of widget
+     * @param index index of widget
      * 
      * @return widget
      */
@@ -75,21 +85,44 @@ public class Mirror
         return Widgets[index];
     }
     /**
-     * Sets active Widget
-     * @param[in] degree: angle of knob
+     * gets the active Widget
      * 
      * @return widget
      */
-    public Widget SetActive()
+    public Widget GetActive()
     {
-        if (quadrant == Quadrant.ONE)
-            return GetWidget(0);
-        else if (quadrant == Quadrant.TWO)
-            return GetWidget(1);
-        else if (quadrant == Quadrant.THREE)
-            return GetWidget(2);
-        else
+        if (null == quadrant)
             return GetWidget(3);
+        else switch (quadrant) {
+            case ONE:
+                return GetWidget(0);
+            case TWO:
+                return GetWidget(1);
+            case THREE:
+                return GetWidget(2);
+            default:
+                return GetWidget(3);
+        }
+    }
+    
+    /**
+     * Sets the active widget to the given quadrant (from rotary)
+     * @param quad : current quadrant (aka. Widget) selected
+     */
+    public void SetActive(Quadrant quad)
+    {
+        if (null == quad)
+            activeWidget = GetWidget(3);
+        else switch (quad) {
+            case ONE:
+                activeWidget = GetWidget(0);
+            case TWO:
+                activeWidget = GetWidget(1);
+            case THREE:
+                activeWidget = GetWidget(2);
+            default:
+                activeWidget = GetWidget(3);
+        }
     }
     
     /**
@@ -105,4 +138,102 @@ public class Mirror
     {
         mirror = new Mirror();
     }
+    
+    public static void main(String args[]) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException
+    {
+        //does stuff
+        Mirror lmirror = Mirror.GetInstance();
+        WeatherWidget weather = WeatherWidget.getInstance();
+        NewsWidget news = NewsWidget.GetInstance();
+        TrafficWidget traf = TrafficWidget.getInstance();
+        
+        Mirror.GetInstance().SetActive(Quadrant.ONE);
+        //for testing 
+        weather.singlePress();
+        //news.singlePress();
+        
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(news);
+        lmirror.AddWidget(traf);
+        lmirror.AddWidget(weather);
+        
+        mirrorFrame = new JFrame();
+        
+        JPanel mirrorPanel = new JPanel();
+        mirrorPanel.setLayout(new GridLayout(2,2,50,50));
+        mirrorPanel.setBackground(Color.BLACK);
+        Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
+        mirrorPanel.setPreferredSize(screen);
+        
+        for(int i = 0; i < mirror.Widgets.length; i++){
+            widgetPanels[i] = new JPanel();
+            widgetPanels[i].add(mirror.GetWidget(0).getState().GetStatePanel());
+            widgetPanels[i].setBackground(Color.BLACK);
+            mirrorPanel.add(widgetPanels[i]);
+        }
+
+        mirrorFrame.add(mirrorPanel);
+        mirrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mirrorFrame.setPreferredSize(screen);
+        mirrorFrame.setUndecorated(true);
+        mirrorFrame.getContentPane().setBackground(Color.BLACK);
+        //Display the window.
+        mirrorFrame.pack();
+        mirrorFrame.setVisible(true);
+        
+       //GrovePiSensors.StartSensors();
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeDoublePress();
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeLongPress();
+    }
+    
+    public void InvokeSinglePress()
+    {
+        GetActive().singlePress();
+        UpdateUI();
+    }
+    
+    private void UpdateUI()
+    {
+        if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            ButtonState bs = GetActive().getState();
+            widgetPanels[0].removeAll();
+            widgetPanels[0].add(bs.GetStatePanel());
+            mirrorFrame.revalidate();
+            mirrorFrame.repaint();
+        }
+        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        {
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+        else
+        {
+            mirrorFrame.remove(widgetPanels[3]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
+        }
+    } 
+    
+    public void InvokeDoublePress()
+    {
+        GetActive().doublePress();
+        UpdateUI();
+    }
+    
+    public void InvokeLongPress()
+    {
+        GetActive().longPress();
+        UpdateUI();
+    }
+
 }

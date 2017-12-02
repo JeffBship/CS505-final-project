@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TrafficState implements ButtonState {
+public class TrafficState extends ButtonState {
     
   public static void main(String[] args){
     try {
@@ -45,6 +45,11 @@ public class TrafficState implements ButtonState {
     public ButtonState longPress() {
       //Not used in this widget
       return this;
+    }
+    
+    @Override
+    public String toString() {
+        return "TRAFFICSTATE";
     }
     
 }

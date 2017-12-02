@@ -10,7 +10,13 @@ import java.io.IOException;
  */
 public class GrovePiSensors {
 
-    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException {
+//    public static void main(String[] args) throws IOException, I2CFactory.UnsupportedBusNumberException {
+//        
+//    }    
+    
+    
+    public static void StartSensors() throws IOException, I2CFactory.UnsupportedBusNumberException 
+    {
         int buttonPin = 6;
         int rotaryPin = 2;
         int bufferLength = 4;
@@ -27,5 +33,5 @@ public class GrovePiSensors {
         
         buttonListener.startListening();
         rotaryListener.startListening();
-    }    
+    }
 }

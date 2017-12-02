@@ -1,5 +1,6 @@
 package grovepisensors;
 
+import MirrorMirrorOnTheWall.Mirror;
 import MirrorMirrorOnTheWall.Quadrant;
 import org.iot.raspberry.grovepi.GroveUtil;
 /**
@@ -75,15 +76,15 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
     }
     /**
     * Sets quadrant
-    * @param[in] num: quadrant state
+    * @param num: quadrant state
     */
     public void setQuadrant(Quadrant num)
     {
 	oldState = currentState;
 	currentState = num;
-	if (oldState != currentState){
-		System.out.println(currentState);
-	}
+//	if (oldState != currentState){
+//		System.out.println(currentState);
+//	}
     }
      /**
      * Computes the current angle in degrees of the Grove rotary sensor based on the byte array read from the sensor
@@ -98,8 +99,9 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
         return degrees;
     }
 
+
     @Override
     public void notifyWidgets() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Mirror.GetInstance().SetActive(currentState);
     }
 }

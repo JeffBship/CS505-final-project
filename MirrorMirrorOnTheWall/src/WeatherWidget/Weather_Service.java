@@ -317,117 +317,117 @@ public class Weather_Service
     public String GetIconImage(int icon)
     {
         
-        if(icon == WeatherPattern.SUNNY.ordinal())
+        if(icon == WeatherPattern.SUNNY.getPatternID())
         {
             return "1.png";
         }
-        else if(icon == WeatherPattern.PARTLY_SUNNY.ordinal() 
-                || icon == WeatherPattern.MOSTLY_CLEAR.ordinal()
-                || icon == WeatherPattern.MOSTLY_SUNNY.ordinal()
-                || icon == WeatherPattern.INTERMITTENT_CLOUDS.ordinal()
-                || icon == WeatherPattern.HAZY_SUNSHINE.ordinal())
+        else if(icon == WeatherPattern.PARTLY_SUNNY.getPatternID() 
+                || icon == WeatherPattern.MOSTLY_CLEAR.getPatternID()
+                || icon == WeatherPattern.MOSTLY_SUNNY.getPatternID()
+                || icon == WeatherPattern.INTERMITTENT_CLOUDS.getPatternID()
+                || icon == WeatherPattern.HAZY_SUNSHINE.getPatternID())
         {
             
             return "3.png";
         }
-        else if(icon == WeatherPattern.CLOUDY.ordinal() 
-                || icon == WeatherPattern.DREARY.ordinal()
-                || icon == WeatherPattern.FOG.ordinal())
+        else if(icon == WeatherPattern.CLOUDY.getPatternID() 
+                || icon == WeatherPattern.DREARY.getPatternID()
+                || icon == WeatherPattern.FOG.getPatternID())
         {
             
             return "7.png";
         }
-        else if(icon == WeatherPattern.SHOWERS.ordinal() 
-                || icon == WeatherPattern.PARTLY_SUNNY_SHOWERS.ordinal()
-                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS.ordinal())
+        else if(icon == WeatherPattern.SHOWERS.getPatternID() 
+                || icon == WeatherPattern.PARTLY_SUNNY_SHOWERS.getPatternID()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS.getPatternID())
         {
             
             return "14.png";
         }
-        else if(icon == WeatherPattern.T_STORMS.ordinal())
+        else if(icon == WeatherPattern.T_STORMS.getPatternID())
         {
             
             return "15.png";
         }
-        else if(icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS.ordinal() 
-                || icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS.ordinal())
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS.getPatternID() 
+                || icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS.getPatternID())
         {
             
             return "17.png";
         }
-        else if(icon == WeatherPattern.RAIN.ordinal() )
+        else if(icon == WeatherPattern.RAIN.getPatternID() )
         {
             
             return "18.png";
         }
-        else if(icon == WeatherPattern.FLURRIES.ordinal() )
+        else if(icon == WeatherPattern.FLURRIES.getPatternID() )
         {
             
             return "22.png";
         }
-        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES.ordinal() 
-                || icon == WeatherPattern.PARTLY_SUNNY_FLURRIES.ordinal())
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES.getPatternID() 
+                || icon == WeatherPattern.PARTLY_SUNNY_FLURRIES.getPatternID())
         {
             
             return "21.png";
         }
-        else if(icon == WeatherPattern.SNOW.ordinal()
-                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW.ordinal()
-                || icon == WeatherPattern.SLEET.ordinal()
-                || icon == WeatherPattern.ICE.ordinal())
+        else if(icon == WeatherPattern.SNOW.getPatternID()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW.getPatternID()
+                || icon == WeatherPattern.SLEET.getPatternID()
+                || icon == WeatherPattern.ICE.getPatternID())
         {
             
             return "20.png";
         }
-        else if(icon == WeatherPattern.FREEZING_RAIN.ordinal() 
-                || icon == WeatherPattern.RAIN_AND_SNOW.ordinal())
+        else if(icon == WeatherPattern.FREEZING_RAIN.getPatternID() 
+                || icon == WeatherPattern.RAIN_AND_SNOW.getPatternID())
         {
             
             return "29.png";
         }
-        else if(icon == WeatherPattern.HOT.ordinal() )
+        else if(icon == WeatherPattern.HOT.getPatternID() )
         {
             
             return "30.png";
         }
-        else if(icon == WeatherPattern.COLD.ordinal() )
+        else if(icon == WeatherPattern.COLD.getPatternID() )
         {
             
             return "31.png";
         }
-        else if(icon == WeatherPattern.WINDY.ordinal() )
+        else if(icon == WeatherPattern.WINDY.getPatternID() )
         {
             
             return "32.png";
         }
-        else if(icon == WeatherPattern.CLEAR.ordinal() )
+        else if(icon == WeatherPattern.CLEAR.getPatternID() )
         {
             
             return "33.png";
         }
-        else if(icon == WeatherPattern.MOSTLY_CLEAR.ordinal() 
-                || icon == WeatherPattern.PARTLY_CLEAR.ordinal()
-                || icon == WeatherPattern.INTERMITTMENT_CLOUDS_NIGHT.ordinal()
-                || icon == WeatherPattern.HAZY_MOONLIGHT.ordinal()
-                || icon == WeatherPattern.MOSTLY_CLOUDY_NIGHT.ordinal())
+        else if(icon == WeatherPattern.MOSTLY_CLEAR.getPatternID() 
+                || icon == WeatherPattern.PARTLY_CLEAR.getPatternID()
+                || icon == WeatherPattern.INTERMITTMENT_CLOUDS_NIGHT.getPatternID()
+                || icon == WeatherPattern.HAZY_MOONLIGHT.getPatternID()
+                || icon == WeatherPattern.MOSTLY_CLOUDY_NIGHT.getPatternID())
         {
             
             return "38.png";
         }
-        else if(icon == WeatherPattern.PARTLY_CLOUDY_SHOWERS_NIGHT.ordinal() 
-                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS_NIGHT.ordinal())
+        else if(icon == WeatherPattern.PARTLY_CLOUDY_SHOWERS_NIGHT.getPatternID() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SHOWERS_NIGHT.getPatternID())
         {
             
             return "40.png";
         }
-        else if(icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS_NIGHT.ordinal() 
-                || icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS_NIGHT.ordinal())
+        else if(icon == WeatherPattern.PARTLY_CLOUDY_T_STORMS_NIGHT.getPatternID() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_T_STORMS_NIGHT.getPatternID())
         {
             
             return "44.png";
         }
-        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES_NIGHT.ordinal() 
-                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW_NIGHT.ordinal())
+        else if(icon == WeatherPattern.MOSTLY_CLOUDY_FLURRIES_NIGHT.getPatternID() 
+                || icon == WeatherPattern.MOSTLY_CLOUDY_SNOW_NIGHT.getPatternID())
         {
             
             return "45.png";
