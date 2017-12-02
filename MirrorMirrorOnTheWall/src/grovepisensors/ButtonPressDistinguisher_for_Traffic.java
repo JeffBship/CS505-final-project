@@ -10,7 +10,8 @@ package grovepisensors;
 
 import newswidget.NewsState;
 import newswidget.NewsWidget;
-import cs505.group1.state.*;
+import trafficwidget.TrafficState;
+import trafficwidget.TrafficWidget;
 
 /**
  * This class implements the interface Runnable so that instances of this class can be handled by a Thread.
@@ -23,7 +24,7 @@ import cs505.group1.state.*;
  * @see Runnable
  * @see GroveDigitalInputSensorListener
  */
-public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserver, Runnable{
+public class ButtonPressDistinguisher_for_Traffic implements GroveInputSensorObserver, Runnable{
     /**
      * Holds the current state of the button sensor.
      */
@@ -115,16 +116,16 @@ public class ButtonPressDistinguisher_for_news implements GroveInputSensorObserv
     
     //class instance object for a newsState.  NewsState is public so other methods
     //can reconstruct it when needed.
-    public static NewsState newsState = new NewsState();
-    public static NewsWidget newsWidget = new NewsWidget(newsState);
+    public static TrafficState trafficState = new TrafficState();
+    public static TrafficWidget trafficWidget = new TrafficWidget(trafficState);
     
     @Override
     public void notifyWidgets(){
       
     switch (pressType){
-      case SINGLE:  newsWidget.singlePress();  break;
-      case DOUBLE:  newsWidget.doublePress();  break;
-      case LONG:    newsWidget.longPress();    break;
+      case SINGLE:  trafficWidget.singlePress();  break;
+      case DOUBLE:  trafficWidget.doublePress();  break;
+      case LONG:    trafficWidget.longPress();    break;
       default:
         System.out.println("notifyWidges case reached the default.");
     }

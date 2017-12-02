@@ -8,12 +8,13 @@ import org.iot.raspberry.grovepi.pi4j.GrovePi4J;
 import java.io.IOException;
 import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor;
 import static org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor.Type.DHT11;
+import trafficwidget.TrafficFrame;
 
 /**
  * Short program to show that the sensors are working properly.
  * @author James Luczynski
  */
-public class GrovePiSensors_for_News {
+public class GrovePiSensors_for_Traffic {
   
   private static GroveTemperatureAndHumiditySensor dhtSensor;  
   private static GrovePi4J gp;
@@ -40,12 +41,10 @@ public class GrovePiSensors_for_News {
                 new GroveAnalogInputSensorListener(gp, rotaryPin, bufferLength);
         
         
-        
-        buttonListener.addObserver(new ButtonPressDistinguisher_for_news());
+        buttonListener.addObserver(new ButtonPressDistinguisher_for_Traffic());
         rotaryListener.addObserver(new RotaryStateDeterminer(nStates));   
         
-        //Start the NewsFrame
-        NewsFrame.main(null);
+      
         
         buttonListener.startListening();
         rotaryListener.startListening();
