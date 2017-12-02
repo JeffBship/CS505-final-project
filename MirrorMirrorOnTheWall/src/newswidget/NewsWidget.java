@@ -13,7 +13,10 @@ import java.util.Observable;
 public class NewsWidget extends Widget {
 
   public static NewsWidget news = new NewsWidget();
-  private NewsWidget() {}
+  private NewsWidget(ButtonState buttonState) {
+    super(buttonState);
+    this.buttonState = buttonState;
+  }
 
   @Override
   public void singlePress() {
