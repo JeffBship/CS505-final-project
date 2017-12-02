@@ -12,25 +12,25 @@ import java.util.Observable;
  */
 public class NewsWidget extends Widget {
 
-  public NewsWidget(ButtonState buttonState) {
-    super(buttonState);
-    
-    
-  }
+  public static NewsWidget news = new NewsWidget();
+  private NewsWidget() {}
 
   @Override
   public void singlePress() {
-    this.buttonState.singlePress();
+    ButtonState currentState = getState();
+    currentState.singlePress();
     }
 
   @Override
   public void doublePress() {
-    this.buttonState.doublePress();
+    ButtonState currentState = getState();
+    currentState.doublePress();
     }
 
   @Override
   public void longPress() {
-    this.buttonState.longPress();
+    ButtonState currentState = getState();
+    currentState.longPress();
     }
 
   @Override
@@ -38,9 +38,16 @@ public class NewsWidget extends Widget {
   @Override
   public void showNoNetworkState(){}
   @Override
-  public String toString(){return null;}
+  public String toString(){return "NEWS";}
   @Override
   public void update(Observable o, Object arg) {}
   
-
+  public static NewsWidget GetInstance()
+  {
+	return news;
+  }
+  public static void ResetSingleton()
+  {
+	news = new NewsWidget();
+  }
 }
