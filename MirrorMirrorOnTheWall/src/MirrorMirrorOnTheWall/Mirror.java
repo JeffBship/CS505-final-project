@@ -157,8 +157,8 @@ public class Mirror
         
         
         lmirror.AddWidget(traffic);
-        lmirror.AddWidget(traffic);
-        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(news);
         lmirror.AddWidget(traffic);
         
         
@@ -172,7 +172,7 @@ public class Mirror
         
         for(int i = 0; i < mirror.Widgets.length; i++){
             widgetPanels[i] = new JPanel();
-            widgetPanels[i].add(mirror.GetWidget(0).getState().GetStatePanel());
+            widgetPanels[i].add(mirror.GetWidget(i).getState().GetStatePanel());
             widgetPanels[i].setBackground(Color.BLACK);
             mirrorPanel.add(widgetPanels[i]);
         }
