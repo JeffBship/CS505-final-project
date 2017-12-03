@@ -158,15 +158,15 @@ public class Mirror
         
         Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
-        weather.singlePress();
+        //weather.singlePress();
         //news.singlePress();
         
         
-        lmirror.AddWidget(traffic);
         lmirror.AddWidget(weather);
-        lmirror.AddWidget(news);
-        lmirror.AddWidget(clock);
         
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
         
         mirrorFrame = new JFrame();
         
@@ -195,7 +195,7 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-       //GrovePiSensors.StartSensors();
+       GrovePiSensors.StartSensors();
        //Thread.sleep(10000);
        //Mirror.GetInstance().InvokeDoublePress();
        //Thread.sleep(10000);

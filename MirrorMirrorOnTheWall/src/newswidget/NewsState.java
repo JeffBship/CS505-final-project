@@ -2,7 +2,6 @@
 package newswidget;
 
 import cs505.group1.state.ButtonState;
-import javax.swing.JPanel;
 
 /**
  * @author Jeff Blankenship
@@ -32,8 +31,7 @@ public class NewsState extends ButtonState {
     @Override
     public ButtonState longPress() {
         //refresh using Chain of Responsibility
-        newsAdapter.longPress();
-        
+        statePanel = NewsPanel.createNewsPanel();
         return this;
     }
     

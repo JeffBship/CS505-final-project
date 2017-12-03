@@ -5,18 +5,13 @@ package newswidget;
 
 // merge with WidgetController at some point and extend the WidgetState
 
-import MirrorMirrorOnTheWall.Mirror;
+import static MirrorMirrorOnTheWall.Mirror.widgetDim;
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.text.*;
 import newschainofresponsibility.RSS;
 
-/* Adapted from example provided at
- * @web http://helloraspberrypi.blogspot.com/
- * @author Andr.oid Eric  https://plus.google.com/+AndroidEric
- */
 class NewsPanel {
 
   public static void main(String[] args) {
@@ -30,26 +25,19 @@ class NewsPanel {
   }
 
   public static JPanel createNewsPanel() {
-      JPanel thisPanel = new JPanel();
-      
-      Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-      
-      thisPanel.setSize(new Dimension(screen.width/2, screen.height/2));
+      for(int i=0;i<10;i++){
+    //System.out.println("\t ********************** createNewsPanel ********************");
+    }
       RSS rss = new RSS();
-      //JFrame newsFrame = new JFrame();
-      //newsFrame.setUndecorated(true);
-      //newsFrame.setSize(720,450);
-      //newsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      
-      
        
       //The news text will go in a pane using a styled document
       JTextPane textPane = new JTextPane();      
       textPane.setBackground(Color.black);
-      textPane.setSize(Mirror.widgetDim);
+      textPane.setSize(widgetDim);
       StyledDocument doc = textPane.getStyledDocument();
       
       //add the titles and descriptions, in appropriate fonts
+      
       try {
         for(Story story:rss.getStoryList()) { 
           doc.insertString(doc.getLength(), "\n"+story.title+"\n",rss.getBigFont() );
@@ -60,32 +48,17 @@ class NewsPanel {
       } catch (BadLocationException ex) {
         System.out.println("BadLocationException");
       }
-
       
-      //the pane needs to be scrollable 
-      JScrollPane scrollPane = new JScrollPane();
-      
+      JPanel newsPanel = new JPanel(new BorderLayout());
+      newsPanel.setSize(widgetDim);
+      newsPanel.add(textPane);
+      JScrollPane scrollPane = new JScrollPane(newsPanel);
       scrollPane.setViewportView(textPane);
-      //newsFrame.add(scrollPane);
       
-      //pack, place, size, show
-      //newsFrame.pack();
-      //newsFrame.setSize(700,430);
-      //newsFrame.setLocation(10,10);
-      //newsFrame.setVisible(true);
-      thisPanel.add(scrollPane);
+      newsPanel.add(scrollPane);
       scrollPane.getVerticalScrollBar().setValue(0);    // scroll bar to top
       scrollPane.getHorizontalScrollBar().setValue(0);
-      scrollPane.repaint();
-      scrollPane.getVisibleRect().y = 0;
-      
-      //scroll to the top
-      javax.swing.SwingUtilities.invokeLater(new Runnable() {
-        public void run(){ 
-          scrollPane.getVerticalScrollBar().setValue(0);
-        }
-      });   
-      
-      return thisPanel;
+
+      return newsPanel;
   }
 }
