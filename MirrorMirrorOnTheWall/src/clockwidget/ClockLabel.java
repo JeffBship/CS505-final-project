@@ -24,7 +24,7 @@ public class ClockLabel {
         clockTime = new ClockTimeMinutes();
         label = new JLabel(clockTime.get());
         label.setForeground(ClockFont.nextColor());
-        label.setBounds(200, 200, width, height);
+        label.setBounds(0, 0, width, height);
         label.setFont(ClockFont.nextFont());
     }
     
@@ -61,11 +61,11 @@ public class ClockLabel {
     }
     
     public int getWidth(){
-        return label.getWidth();
+        return width;
     }
     
     public int getHeight(){
-        return label.getHeight();
+        return height;
     }
     
     private static class ClockFont{
@@ -75,7 +75,7 @@ public class ClockLabel {
         static int fontSize = 50;
         
         static String[] fontName = {"Wingdings", "Comic Sans", "Times New Roman", "Algerian"};
-        static int fontInd = 2;
+        static int fontInd = 0;
         
         static Color currentColor;
         static Color[] color = {Color.RED, Color.LIGHT_GRAY, Color.ORANGE, Color.BLUE, Color.YELLOW};
