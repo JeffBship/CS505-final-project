@@ -156,9 +156,7 @@ public class Mirror
         WeatherWidget weather = WeatherWidget.getInstance();
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
-        
-        ClockState clockState = new ClockState();
-        ClockWidget clock = new ClockWidget(clockState);
+        ClockWidget clock = ClockWidget.getInstance();
         
         //for testing 
         weather.singlePress();
