@@ -3,6 +3,7 @@ package MirrorMirrorOnTheWall;
 
 import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
+import clockwidget.ClockState;
 import clockwidget.ClockWidget;
 import com.pi4j.io.i2c.I2CFactory;
 import cs505.group1.state.ButtonState;
@@ -32,8 +33,8 @@ public class Mirror
     public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
     public static final Dimension widgetDim = new Dimension(screenDim.width/2-25, screenDim.height/2-25);
 
-    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
+    //public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+    //public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
     /**
      * Constructor for objects of class Mirror
      */
@@ -152,6 +153,9 @@ public class Mirror
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
         
+        ClockState clockState = new ClockState();
+        ClockWidget clock = new ClockWidget(clockState);
+        
         Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
         weather.singlePress();
@@ -161,7 +165,7 @@ public class Mirror
         lmirror.AddWidget(traffic);
         lmirror.AddWidget(weather);
         lmirror.AddWidget(news);
-        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(clock);
         
         
         mirrorFrame = new JFrame();
