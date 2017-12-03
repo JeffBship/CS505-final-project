@@ -61,21 +61,34 @@ public class TrafficState extends ButtonState {
     /**
      * removes all objects from the JPanel
      */
+  @Override
     protected void ResetStatePanel(){
         statePanel.removeAll();
     }
     
+  @Override
     public JPanel GetStatePanel(){
         statePanel.setBackground(Color.BLACK);
         statePanel.setPreferredSize(widgetDim);
         
-        String[] info = {"",""};
+        String[] info; 
         try {
           info = TrafficProxy.loadInfo();
+          //info = TrafficReal.loadInfo();
+          
           statePanel = TrafficPanel.createTrafficPanel(info);
         } catch (IOException | BadLocationException ex) {
         }
         
+        //get real data in a separate thread, it should update mirror
+        //(new Thread(new TrafficRunnable())).start();
+        
         return statePanel;
     }
+    
+    
+    public void setStatePanel(JPanel trafficPanel){        
+      this.statePanel = trafficPanel;
+    }
+    
 }

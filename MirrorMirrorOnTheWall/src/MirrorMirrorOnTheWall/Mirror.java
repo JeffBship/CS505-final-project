@@ -95,7 +95,7 @@ public class Mirror
      * 
      * @return widget
      */
-    public Widget GetActive()
+    public  Widget GetActive()
     {
         if (null == quadrant)
             return GetWidget(3);
@@ -161,12 +161,17 @@ public class Mirror
         //weather.singlePress();
         //news.singlePress();
         
-        
         lmirror.AddWidget(traffic);
-        
-        lmirror.AddWidget(traffic);
-        lmirror.AddWidget(clock);
         lmirror.AddWidget(news);
+        
+        //using traffic in quad3 during testing to save weather calls
+        //lmirror.AddWidget(traffic);
+        lmirror.AddWidget(weather);
+        
+        
+        lmirror.AddWidget(clock);
+        
+        
         
         mirrorFrame = new JFrame();
         
@@ -208,7 +213,8 @@ public class Mirror
         UpdateUI();
     }
     
-    private void UpdateUI()
+    //needs to be public for trafficProxy to work
+    public  void UpdateUI()
     {
         if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
