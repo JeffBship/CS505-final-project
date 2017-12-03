@@ -37,66 +37,46 @@
  *
  * Contributor(s):
  */
-package WeatherWidget;
+package cs505.group1.weatherstates;
+
+import WeatherWidget.Weather_Service;
+import cs505.group1.state.ButtonState;
+import java.util.List;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author melmulcahy
  */
-public enum WeatherPattern{
-	SUNNY(1), 
-        MOSTLY_SUNNY(2), 
-        PARTLY_SUNNY(3), 
-        INTERMITTENT_CLOUDS(4),
-	HAZY_SUNSHINE(5), 
-        MOSTLY_CLOUDY(6), 
-        CLOUDY(7), 
-        DREARY(8),
-	FOG(11), 
-        SHOWERS(12), 
-        MOSTLY_CLOUDY_SHOWERS(13), 
-        PARTLY_SUNNY_SHOWERS(14),
-	T_STORMS(15), 
-        MOSTLY_CLOUDY_T_STORMS(16), 
-        PARTLY_CLOUDY_T_STORMS(17), 
-        RAIN(18),
-	FLURRIES(19), 
-        MOSTLY_CLOUDY_FLURRIES(20), 
-        PARTLY_SUNNY_FLURRIES(21), 
-        SNOW(22),
-	MOSTLY_CLOUDY_SNOW(23), 
-        ICE(24), 
-        SLEET(25), 
-        FREEZING_RAIN(26),
-	RAIN_AND_SNOW(29), 
-        HOT(30), 
-        COLD(31), 
-        WINDY(32),
-        CLEAR(33), 
-        MOSTLY_CLEAR(34), 
-        PARTLY_CLEAR(35), 
-        INTERMITTMENT_CLOUDS_NIGHT(36),
-        HAZY_MOONLIGHT(37), 
-        MOSTLY_CLOUDY_NIGHT(38), 
-        PARTLY_CLOUDY_SHOWERS_NIGHT(39),
-        MOSTLY_CLOUDY_SHOWERS_NIGHT(40), 
-        PARTLY_CLOUDY_T_STORMS_NIGHT(41), 
-        MOSTLY_CLOUDY_T_STORMS_NIGHT(42), 
-        MOSTLY_CLOUDY_FLURRIES_NIGHT(43),
-        MOSTLY_CLOUDY_SNOW_NIGHT(44);
-        
-	private final int patternID;
-	private WeatherPattern(int patternID){
-		this.patternID = patternID;
-	}
-        
-        public int getPatternID(){
-            return this.patternID;
-        }
-        
-        @Override
-        public String toString()
-        {
-            return ((Integer)this.patternID).toString();
-        }
+public abstract class WeatherState extends ButtonState {
+    
+    
+    /**
+     * Gets data from the weather API
+     * @return List of information
+     */
+    protected abstract List getData();
+    
+    /**
+     * returns the icon path given an ID
+     * @param icon
+     * @return 
+     */
+    protected String getIconImage(int icon)
+    {
+        return Weather_Service.getInstance().GetIconImage(icon);
+    }
+    
+    /**
+     * creates an ImageIcon object given an image path
+     * @param imageLocation
+     * @return 
+     */
+    protected ImageIcon AddImage(String imageLocation)
+    {
+        return new ImageIcon("Images/"+imageLocation);
+    }
+    
+    
+    
 }

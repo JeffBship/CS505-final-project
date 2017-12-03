@@ -1,9 +1,14 @@
 package edu.ccsu.cs505.compob;
 
+import grovepisensors.GrovePiSensors;
+import grovepisensors.GrovePiSensors_for_News;
 import java.util.*;
 import java.util.TimerTask;
 import java.io.IOException;
-import com.dexterind.grovepi.sensors.*;
+import org.iot.raspberry.grovepi.GrovePi;
+import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor;
+import static org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor.Type.DHT11;
+import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumidityValue;
 
 /**
  * This is subject class in the observer pattern. This class has an attribute
@@ -41,7 +46,7 @@ public class SubjectDHTSensor extends SubjectSensor {
     /**
      * Represents the DHT Sensor class.
      */
-    private final DHTDigitalSensor dhtSensor;
+    final GroveTemperatureAndHumiditySensor dhtSensor;
 
     /**
      * Represents the pin number of DHT sensor on the Grove Pi, default value is 3.
@@ -58,7 +63,8 @@ public class SubjectDHTSensor extends SubjectSensor {
      */
     public SubjectDHTSensor() throws IOException, InterruptedException, Exception {
         super();
-        this.dhtSensor = new DHTDigitalSensor(this.pinNum, 0, this.scale);
+        //altered for org library
+        this.dhtSensor = GrovePiSensors_for_News.getDhtSensor();
         startTimer();
     }
 
@@ -73,7 +79,9 @@ public class SubjectDHTSensor extends SubjectSensor {
     public SubjectDHTSensor(double interval) throws IOException, InterruptedException, Exception {
         super();
         this.interval = interval;
-        this.dhtSensor = new DHTDigitalSensor(this.pinNum, 0, this.scale);
+        
+        //altered for org library
+        this.dhtSensor = GrovePiSensors_for_News.getDhtSensor();
         startTimer();
     }
 
@@ -90,7 +98,9 @@ public class SubjectDHTSensor extends SubjectSensor {
         super();
         this.scale = scale;
         this.interval = interval;
-        this.dhtSensor = new DHTDigitalSensor(this.pinNum, 0, this.scale);
+        
+        //altered for org library
+        this.dhtSensor = GrovePiSensors_for_News.getDhtSensor();
         startTimer();
     }
 
@@ -109,7 +119,10 @@ public class SubjectDHTSensor extends SubjectSensor {
         this.scale = scale;
         this.interval = interval;
         this.pinNum = pinNum;
-        this.dhtSensor = new DHTDigitalSensor(this.pinNum, 0, this.scale);
+        
+        //altered for org library
+        this.dhtSensor = GrovePiSensors_for_News.getDhtSensor();
+        
         startTimer();
     }
 
@@ -124,7 +137,9 @@ public class SubjectDHTSensor extends SubjectSensor {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+              try {
                 read();
+              } catch (IOException ex) { }
                 notifyObservers();
             }
         }, (long) interval * 1000, (long) interval * 1000);
@@ -133,10 +148,12 @@ public class SubjectDHTSensor extends SubjectSensor {
     /**
      * Read temperature and humidity from DHTDigitalSensor's read function
      */
-    private void read() {
-        float data[] = this.dhtSensor.read();
-        this.temperature = data[0];
-        this.humidity = data[1];
+    private void read() throws IOException {
+        //float data[] = this.dhtSensor.read();
+        //altered for org library
+        GroveTemperatureAndHumidityValue  tempHum = this.dhtSensor.get();
+        this.temperature = tempHum.getTemperature();
+        this.humidity = tempHum.getHumidity();
         System.out.println("temperature:"+temperature+"  humidity:"+humidity);
     }
 
