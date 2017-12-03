@@ -106,6 +106,7 @@ public class Mirror
      */
     public void SetActive(Quadrant quad)
     {
+      AddBlackBorderToWidgets();
         if (null == quad)
             activeWidget = GetWidget(3);
         else switch (quad) {
@@ -196,13 +197,35 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-       GrovePiSensors.StartSensors();
+       //GrovePiSensors.StartSensors();
        
        //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
        //Thread.sleep(10000);
        //Mirror.GetInstance().InvokeDoublePress();
        //Thread.sleep(10000);
        //Mirror.GetInstance().InvokeSinglePress();
+       
+        //testing, temporary code
+      Mirror.GetInstance().SetActive(Quadrant.FOUR);
+      Thread.sleep(2000);
+      news.singlePress();
+      Mirror.GetInstance().InvokeSinglePress();
+      Thread.sleep(2000);
+      news.singlePress();
+      Mirror.GetInstance().InvokeSinglePress();
+      Thread.sleep(2000);
+      news.singlePress();
+      Mirror.GetInstance().InvokeSinglePress();
+      Thread.sleep(2000);
+      news.singlePress();
+      Mirror.GetInstance().InvokeSinglePress();
+      
+      
+      Thread.sleep(2000);news.doublePress();
+      Mirror.GetInstance().InvokeDoublePress();
+       
+       
+       
     }
     
     /**
@@ -216,6 +239,21 @@ public class Mirror
         if(mirrorFrame.isVisible()){
             RepaintMirrorFrame();
         }
+    }
+    
+    /**
+     * Adds a black border to alls panel. (Used for InActive WidgetPanels)
+     * 
+     */
+    private void AddBlackBorderToWidgets()
+    {
+      for (int i=0;i<4;i++){
+        widgetPanels[i].setBorder(BorderFactory.createMatteBorder(
+                                    5, 5, 5, 5, Color.BLACK));
+        if(mirrorFrame.isVisible()){
+            RepaintMirrorFrame();
+        }
+      }
     }
     
     /**
