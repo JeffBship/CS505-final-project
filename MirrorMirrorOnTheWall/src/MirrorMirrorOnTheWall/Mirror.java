@@ -95,20 +95,9 @@ public class Mirror
      * 
      * @return widget
      */
-    public  Widget GetActive()
+    public Widget GetActive()
     {
-        if (null == quadrant)
-            return GetWidget(3);
-        else switch (quadrant) {
-            case ONE:
-                return GetWidget(0);
-            case TWO:
-                return GetWidget(1);
-            case THREE:
-                return GetWidget(2);
-            default:
-                return GetWidget(3);
-        }
+        return activeWidget;
     }
     
     /**
@@ -122,12 +111,16 @@ public class Mirror
         else switch (quad) {
             case ONE:
                 activeWidget = GetWidget(0);
+                break;
             case TWO:
                 activeWidget = GetWidget(1);
+                break;
             case THREE:
                 activeWidget = GetWidget(2);
+                break;
             default:
                 activeWidget = GetWidget(3);
+                break;
         }
     }
     
@@ -145,6 +138,13 @@ public class Mirror
         mirror = new Mirror();
     }
     
+    /**
+     * Main method for the mirror
+     * @param args
+     * @throws IOException
+     * @throws com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException
+     * @throws InterruptedException 
+     */
     public static void main(String args[]) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException
     {
         //does stuff
@@ -156,23 +156,20 @@ public class Mirror
         ClockState clockState = new ClockState();
         ClockWidget clock = new ClockWidget(clockState);
         
-        Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
-        //weather.singlePress();
+        weather.singlePress();
         //news.singlePress();
         
+        lmirror.AddWidget(weather);
         lmirror.AddWidget(traffic);
         lmirror.AddWidget(news);
-        
-        //using traffic in quad3 during testing to save weather calls
-        //lmirror.AddWidget(traffic);
-        lmirror.AddWidget(weather);
-        
-        
         lmirror.AddWidget(clock);
         
+        //Make sure that we set the active widget after the widgets are added to the array
+        Mirror.GetInstance().SetActive(Quadrant.ONE);
         
-        
+        //For testing, feel free to update this from Q1 to any of the quads.
+
         mirrorFrame = new JFrame();
         
         JPanel mirrorPanel = new JPanel();
@@ -200,60 +197,86 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-       GrovePiSensors.StartSensors();
-       //Thread.sleep(10000);
-       //Mirror.GetInstance().InvokeDoublePress();
-       //Thread.sleep(10000);
-       //Mirror.GetInstance().InvokeLongPress();
+       //GrovePiSensors.StartSensors();
+       
+       //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeDoublePress();
+       Thread.sleep(10000);
+       Mirror.GetInstance().InvokeSinglePress();
     }
     
+    /**
+     * Invokes the single press method on the active widget
+     */
     public void InvokeSinglePress()
     {
-        GetActive().singlePress();
+        Mirror.GetInstance().GetActive().singlePress();
         UpdateUI();
+    }
+    
+    /**
+     * Updates the widget's panel with the new display
+     * @param index
+     * @param updatedPanel 
+     */
+    
+    private void UpdateWidgetPanel(int index, JPanel updatedPanel)
+    {
+        widgetPanels[index].removeAll();
+        widgetPanels[index].add(updatedPanel);
+    }
+    
+    /**
+     * Repaints the mirror frame
+     */
+    private void RepaintMirrorFrame()
+    {
+        mirrorFrame.revalidate();
+        mirrorFrame.repaint();
     }
     
     //needs to be public for trafficProxy to work
     public  void UpdateUI()
     {
-        if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        ButtonState bs = Mirror.GetInstance().GetActive().getState();
+        if(Mirror.GetInstance().GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            ButtonState bs = GetActive().getState();
-            widgetPanels[0].removeAll();
-            widgetPanels[0].add(bs.GetStatePanel());
-            mirrorFrame.revalidate();
-            mirrorFrame.repaint();
+            UpdateWidgetPanel(0, bs.GetStatePanel());
+            
         }
-        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        else if(Mirror.GetInstance().GetActive() == Mirror.GetInstance().GetWidget(1))
         {
-            mirrorFrame.remove(widgetPanels[2]);
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+            
+            UpdateWidgetPanel(1, bs.GetStatePanel());
         }
-        else if(GetActive() == Mirror.GetInstance().GetWidget(0))
+        else if(Mirror.GetInstance().GetActive() == Mirror.GetInstance().GetWidget(2))
         {
-            mirrorFrame.remove(widgetPanels[2]);
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+            
+            UpdateWidgetPanel(2, bs.GetStatePanel());
         }
         else
         {
-            mirrorFrame.remove(widgetPanels[3]);
-            
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+            UpdateWidgetPanel(3, bs.GetStatePanel());
         }
+        RepaintMirrorFrame();
     } 
     
+    /**
+     * Invokes double press method on active widget
+     */
     public void InvokeDoublePress()
     {
-        GetActive().doublePress();
+        Mirror.GetInstance().GetActive().doublePress();
         UpdateUI();
     }
     
+    /**
+     * Invokes long press on active widget
+     */
     public void InvokeLongPress()
     {
-        GetActive().longPress();
+        Mirror.GetInstance().GetActive().longPress();
         UpdateUI();
     }
 
