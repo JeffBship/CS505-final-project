@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * @version 2017.10.29
  */
 public abstract class ButtonState {
-    protected JPanel statePanel = new JPanel();
+    protected static JPanel statePanel = new JPanel();
   
     /**
      * removes all objects from the JPanel
@@ -25,11 +25,7 @@ public abstract class ButtonState {
     
     public JPanel GetStatePanel(){
         statePanel.setBackground(Color.BLACK);
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-
         statePanel.setPreferredSize(widgetDim);
-        
-
         return statePanel;
     }
   

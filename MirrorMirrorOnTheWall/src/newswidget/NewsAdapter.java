@@ -1,6 +1,8 @@
 package newswidget;
 
 
+import static MirrorMirrorOnTheWall.Mirror.screenDim;
+import java.awt.AWTException;
 import java.awt.Robot;
 
 /**
@@ -17,6 +19,11 @@ class NewsAdapter{
   NewsState newsState;
   public NewsAdapter(NewsState newsState){
     this.newsState = newsState;
+    try {
+      marvin = new Robot();
+    } catch (AWTException ex) {
+      System.out.println("This will all end in tears.");
+    }
   };
   
   /**
@@ -24,10 +31,10 @@ class NewsAdapter{
      */
   public void singlePress(){
     for(int i=0;i<10;i++){
-    System.out.println("\t\t\t\t============== SinglePress in NewsAdapter reached ====================");
+    //System.out.println("\t\t\t\t============== SinglePress in NewsAdapter reached ====================");
     }
     // move the mouse over the frame, then scroll down
-    marvin.mouseMove(100,100);
+    marvin.mouseMove(screenDim.width-50, screenDim.height-50);
     marvin.mouseWheel(2);
   };
     
@@ -37,10 +44,9 @@ class NewsAdapter{
   public void doublePress(){
     //scroll up
     for(int i=0;i<10;i++){
-    System.out.println("\t\t\t\t@@@   @@@@   @@@@@   @@@@@@   @@@@@@   @@@@@@   @@@@  newsAdapter double");
+    //System.out.println("\t\t\t\t@@@   @@@@   @@@@@   @@@@@@   @@@@@@   @@@@@@   @@@@  newsAdapter double");
     }
-    
-    marvin.mouseMove(100,100);
+    marvin.mouseMove(screenDim.width-50, screenDim.height-50);
     marvin.mouseWheel(-2);
   };
     
@@ -50,7 +56,9 @@ class NewsAdapter{
   public void longPress(){
     //construct a new newsState.  This refreshes the RSS call, randomizes the news outlet,
     //and sets the scroll to the top
-    //NewsFrame.main(null);
+    for(int i=0;i<10;i++){
+    //System.out.println("\t\t\t\t============== LongPress in NewsAdapter reached ====================");
+    }
     //start temperature monitor when things are instantiated.
     
   };

@@ -154,17 +154,13 @@ public class Mirror
         
         Mirror.GetInstance().SetActive(Quadrant.TWO);
         //for testing 
-        weather.singlePress();
+        //weather.singlePress();
         //news.singlePress();
         
-        //I find that it does not like have multiples of newswidget...
-        //lmirror.AddWidget(traffic);
-        lmirror.AddWidget(weather);
-        lmirror.AddWidget(news);
         lmirror.AddWidget(weather);
         lmirror.AddWidget(weather);
-        //lmirror.AddWidget(traffic);
-        
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(weather);
         
         mirrorFrame = new JFrame();
         
@@ -193,11 +189,13 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-       //GrovePiSensors.StartSensors();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeDoublePress();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeLongPress();
+
+       GrovePiSensors.StartSensors();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeDoublePress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeLongPress();
+
     }
     
     public void InvokeSinglePress()

@@ -13,6 +13,7 @@ import java.util.Collections;
  */
 public class RSS extends RSShandler{
   
+  //This is the access point for the Chain and thus must be public.
   public RSS() {
     
     rssObject = new RSSobject();
