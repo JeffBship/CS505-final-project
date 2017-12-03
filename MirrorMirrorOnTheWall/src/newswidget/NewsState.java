@@ -2,11 +2,16 @@
 package newswidget;
 
 import cs505.group1.state.ButtonState;
+import javax.swing.JPanel;
 
 /**
  * @author Jeff Blankenship
  */
 public class NewsState extends ButtonState {
+  
+  public NewsState(){
+    statePanel = NewsPanel.createNewsPanel();
+  }
   
     private final NewsAdapter newsAdapter = new NewsAdapter(this);
   

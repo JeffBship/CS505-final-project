@@ -5,7 +5,10 @@ package newswidget;
 
 // merge with WidgetController at some point and extend the WidgetState
 
+import MirrorMirrorOnTheWall.Mirror;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.text.*;
 import newschainofresponsibility.RSS;
@@ -14,31 +17,36 @@ import newschainofresponsibility.RSS;
  * @web http://helloraspberrypi.blogspot.com/
  * @author Andr.oid Eric  https://plus.google.com/+AndroidEric
  */
-public class NewsFrame {
- 
-  JTextArea textArea;
-  JButton jbutton;
+class NewsPanel {
 
   public static void main(String[] args) {
 
       SwingUtilities.invokeLater(new Runnable() {
           @Override
           public void run() {
-              createNewsFrame();
+              createNewsPanel();
           }
       });
   }
 
-  private static void createNewsFrame() {
-      RSS rss = new RSS();
-      JFrame newsFrame = new JFrame();
-      newsFrame.setUndecorated(true);
-      newsFrame.setSize(720,450);
-      newsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  public static JPanel createNewsPanel() {
+      JPanel thisPanel = new JPanel();
       
+      Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+      
+      thisPanel.setSize(new Dimension(screen.width/2, screen.height/2));
+      RSS rss = new RSS();
+      //JFrame newsFrame = new JFrame();
+      //newsFrame.setUndecorated(true);
+      //newsFrame.setSize(720,450);
+      //newsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      
+      
+       
       //The news text will go in a pane using a styled document
-      JTextPane textPane = new JTextPane();
+      JTextPane textPane = new JTextPane();      
       textPane.setBackground(Color.black);
+      textPane.setSize(Mirror.widgetDim);
       StyledDocument doc = textPane.getStyledDocument();
       
       //add the titles and descriptions, in appropriate fonts
@@ -53,17 +61,21 @@ public class NewsFrame {
         System.out.println("BadLocationException");
       }
 
+      
       //the pane needs to be scrollable 
-      JScrollPane scrollPane = new JScrollPane( textPane );
-      newsFrame.add(scrollPane);
+      JScrollPane scrollPane = new JScrollPane();
+      
+      scrollPane.setViewportView(textPane);
+      //newsFrame.add(scrollPane);
       
       //pack, place, size, show
-      newsFrame.pack();
-      newsFrame.setSize(700,430);
-      newsFrame.setLocation(10,10);
-      newsFrame.setVisible(true);
-      
+      //newsFrame.pack();
+      //newsFrame.setSize(700,430);
+      //newsFrame.setLocation(10,10);
+      //newsFrame.setVisible(true);
+      thisPanel.add(scrollPane);
       scrollPane.getVerticalScrollBar().setValue(0);    // scroll bar to top
+      scrollPane.getHorizontalScrollBar().setValue(0);
       scrollPane.repaint();
       scrollPane.getVisibleRect().y = 0;
       
@@ -73,5 +85,7 @@ public class NewsFrame {
           scrollPane.getVerticalScrollBar().setValue(0);
         }
       });   
+      
+      return thisPanel;
   }
 }

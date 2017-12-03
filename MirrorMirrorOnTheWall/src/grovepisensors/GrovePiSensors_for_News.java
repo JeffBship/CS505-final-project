@@ -1,7 +1,6 @@
 package grovepisensors;
 
 
-import newswidget.NewsFrame;
 import com.pi4j.io.i2c.I2CFactory;
 import edu.ccsu.cs505.compob.OBComponent;
 import org.iot.raspberry.grovepi.pi4j.GrovePi4J;
@@ -45,7 +44,7 @@ public class GrovePiSensors_for_News {
         rotaryListener.addObserver(new RotaryStateDeterminer(nStates));   
         
         //Start the NewsFrame
-        NewsFrame.main(null);
+        //NewsFrame.main(null);
         
         buttonListener.startListening();
         rotaryListener.startListening();
