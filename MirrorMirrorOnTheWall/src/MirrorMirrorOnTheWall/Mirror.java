@@ -32,8 +32,8 @@ public class Mirror
     public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
     public static final Dimension widgetDim = new Dimension(screenDim.width/2-25, screenDim.height/2-25);
 
-    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-    public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
+//    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+//    public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
     /**
      * Constructor for objects of class Mirror
      */
@@ -152,7 +152,7 @@ public class Mirror
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
         
-        Mirror.GetInstance().SetActive(Quadrant.ONE);
+        Mirror.GetInstance().SetActive(Quadrant.TWO);
         //for testing 
         weather.singlePress();
         //news.singlePress();
@@ -192,10 +192,10 @@ public class Mirror
         mirrorFrame.setVisible(true);
         
        //GrovePiSensors.StartSensors();
-       //Thread.sleep(10000);
-       //Mirror.GetInstance().InvokeDoublePress();
-       //Thread.sleep(10000);
-       //Mirror.GetInstance().InvokeLongPress();
+       Thread.sleep(200);
+       Mirror.GetInstance().InvokeDoublePress();
+       Thread.sleep(200);
+       Mirror.GetInstance().InvokeLongPress();
     }
     
     public void InvokeSinglePress()
@@ -204,35 +204,51 @@ public class Mirror
         UpdateUI();
     }
     
+    /**
+     * Replaces the current panel content with new content
+     * @param index
+     * @param updatePanel 
+     */
+    private void UpdateWidgetPanel(int index, JPanel updatePanel)
+    {
+            widgetPanels[index].removeAll();
+            widgetPanels[index].add(updatePanel);
+    }
+    
+    /**
+     * Repaints the frame after updates
+     */
+    private void RepaintFrame()
+    {
+        mirrorFrame.revalidate();
+        mirrorFrame.repaint();
+    }
+    
+    /**
+     * Updates the UI
+     */
     private void UpdateUI()
     {
+        ButtonState bs = GetActive().getState();
         if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            ButtonState bs = GetActive().getState();
-            widgetPanels[0].removeAll();
-            widgetPanels[0].add(bs.GetStatePanel());
-            mirrorFrame.revalidate();
-            mirrorFrame.repaint();
+            UpdateWidgetPanel(0,bs.GetStatePanel());
         }
         else if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            mirrorFrame.remove(widgetPanels[2]);
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+            
+            UpdateWidgetPanel(0,bs.GetStatePanel());
         }
         else if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            mirrorFrame.remove(widgetPanels[2]);
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+           
+            UpdateWidgetPanel(0,bs.GetStatePanel());
         }
         else
         {
-            mirrorFrame.remove(widgetPanels[3]);
-            
-            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
-            mirrorFrame.revalidate();
+            UpdateWidgetPanel(0,bs.GetStatePanel());
         }
+        RepaintFrame();
     } 
     
     public void InvokeDoublePress()
