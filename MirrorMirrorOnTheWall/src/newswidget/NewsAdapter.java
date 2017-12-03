@@ -50,7 +50,7 @@ class NewsAdapter{
   public void longPress(){
     //construct a new newsState.  This refreshes the RSS call, randomizes the news outlet,
     //and sets the scroll to the top
-    NewsFrame.main(null);
+    //NewsFrame.main(null);
     //start temperature monitor when things are instantiated.
     
   };

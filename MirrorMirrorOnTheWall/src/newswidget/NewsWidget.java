@@ -11,7 +11,8 @@ import java.util.Observable;
  */
 public class NewsWidget extends Widget {
 
-  public static NewsWidget news = new NewsWidget(new NewsState());
+
+  private static NewsWidget news = null; 
   
   private NewsWidget(ButtonState buttonState) {
     super(buttonState);
@@ -47,6 +48,7 @@ public class NewsWidget extends Widget {
   
   public static NewsWidget GetInstance()
   {
+  if (news==null) news = new NewsWidget(new NewsState());
 	return news;
   }
   public static void ResetSingleton()

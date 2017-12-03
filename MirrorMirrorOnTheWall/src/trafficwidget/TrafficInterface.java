@@ -25,8 +25,8 @@ abstract class TrafficInterface  {
   public static String[] loadInfo() {
     
     try {
-      TrafficFrame.main(TrafficProxy.loadInfo());
-      TrafficFrame.main(TrafficReal.loadInfo());
+      TrafficPanel.main(TrafficProxy.loadInfo());
+      TrafficPanel.main(TrafficReal.loadInfo());
     } catch (IOException ex) {
       System.out.println("IOException in loadInfo");
     }
