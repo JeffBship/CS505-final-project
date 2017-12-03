@@ -159,8 +159,8 @@ public class Mirror
         
         
         lmirror.AddWidget(traffic);
-        lmirror.AddWidget(traffic);
-        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(weather);
+        lmirror.AddWidget(news);
         lmirror.AddWidget(traffic);
         
         
@@ -174,7 +174,7 @@ public class Mirror
         
         for(int i = 0; i < mirror.Widgets.length; i++){
             widgetPanels[i] = new JPanel();
-            widgetPanels[i].add(mirror.GetWidget(0).getState().GetStatePanel());
+            widgetPanels[i].add(mirror.GetWidget(i).getState().GetStatePanel());
             widgetPanels[i].setBackground(Color.BLACK);
             mirrorPanel.add(widgetPanels[i]);
         }
@@ -192,10 +192,10 @@ public class Mirror
         mirrorFrame.setVisible(true);
         
        //GrovePiSensors.StartSensors();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeDoublePress();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeLongPress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeDoublePress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeLongPress();
     }
     
     public void InvokeSinglePress()

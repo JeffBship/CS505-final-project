@@ -37,23 +37,22 @@ public class TrafficPanel {
   public static JPanel createTrafficPanel(String[] info) 
     throws BadLocationException, MalformedURLException, IOException 
   {
-      JFrame trafficFrame = new JFrame();
-      trafficFrame.setUndecorated(true);
-      trafficFrame.setSize(200,200);
-      trafficFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     
+      
       JTextPane textPane = new JTextPane();
       textPane.setBackground(Color.black);
       StyledDocument doc = textPane.getStyledDocument();
       
       SimpleAttributeSet trafficFont = FontFactory.createSmall("traffic");
       
+      System.out.println("info is..... " + info[0] + " " + info[1]);
+      
       String traffic = "\n\n\n    Current drive time to " + info[0] + " is " + info[1] + ".";
       
       doc.insertString(0,traffic, trafficFont);
       
       JScrollPane scrollPane = new JScrollPane( textPane );
-      trafficFrame.add(scrollPane);
+      JPanel trafficPanel = new JPanel();
+      trafficPanel.add(scrollPane);
       
       JPanel result = new JPanel();
       result.add(scrollPane);
