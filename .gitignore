@@ -1,3 +1,4 @@
+*.class
 /MirrorMirrorOnTheWall/dist/**
 /MirrorMirrorOnTheWall/nbproject/private/**
 /MirrorMirrorOnTheWall/build/**
