@@ -1,17 +1,21 @@
 
 package trafficwidget;
 
+import static MirrorMirrorOnTheWall.Mirror.widgetDim;
 import cs505.group1.state.ButtonState;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JPanel;
+import javax.swing.text.BadLocationException;
 
 public class TrafficState extends ButtonState {
     
   public static void main(String[] args){
     try {
       String[] info = TrafficProxyAbstract.loadInfo();
-      TrafficFrame.main(info);
+      TrafficPanel.main(info);
     } catch (IOException ex) {
     }
     }
@@ -22,7 +26,7 @@ public class TrafficState extends ButtonState {
       //increment destination and reload the frame
       TrafficProxyAbstract.nextDestination();
       String[] info = TrafficProxyAbstract.loadInfo();
-      TrafficFrame.main(info);
+      TrafficPanel.main(info);
       
     } catch (IOException ex) {
     }
@@ -35,7 +39,10 @@ public class TrafficState extends ButtonState {
       //increment destination and reload the frame
       TrafficProxyAbstract.previousDestination();
       String[] info = TrafficProxyAbstract.loadInfo();
-      TrafficFrame.main(info);
+      TrafficPanel.main(info);
+      
+      //mirror.widgetPanels[i].add(mirror.GetWidget(0).getState().GetStatePanel());
+      
     } catch (IOException ex) {
     }
     return this;
@@ -52,4 +59,27 @@ public class TrafficState extends ButtonState {
         return "TRAFFICSTATE";
     }
     
+    
+    /**
+     * removes all objects from the JPanel
+     */
+    protected void ResetStatePanel(){
+        statePanel.removeAll();
+    }
+    
+    public JPanel GetStatePanel(){
+        statePanel.setBackground(Color.BLACK);
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        statePanel.setPreferredSize(widgetDim);
+        
+        String[] info = {"",""};
+        try {
+          info = TrafficProxyAbstract.loadInfo();
+          statePanel = TrafficPanel.createTrafficPanel(info);
+        } catch (IOException ex) {
+        } catch (BadLocationException ex) {
+        }
+        
+        return statePanel;
+    }
 }

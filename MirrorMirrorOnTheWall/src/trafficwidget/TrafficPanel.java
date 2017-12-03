@@ -16,7 +16,7 @@ import javax.swing.text.*;
  * @web http://helloraspberrypi.blogspot.com/
  * @author Andr.oid Eric  https://plus.google.com/+AndroidEric
  */
-public class TrafficFrame {
+public class TrafficPanel {
  
   
   
@@ -27,14 +27,16 @@ public class TrafficFrame {
           @Override
           public void run() {
             try {
-              createTrafficFrame(info);
+              createTrafficPanel(info);
             } catch (BadLocationException | IOException ex) {
             }
           }
       });
   }
 
-  static void createTrafficFrame(String[] info) throws BadLocationException, MalformedURLException, IOException {
+  public static JPanel createTrafficPanel(String[] info) 
+    throws BadLocationException, MalformedURLException, IOException 
+  {
       JFrame trafficFrame = new JFrame();
       trafficFrame.setUndecorated(true);
       trafficFrame.setSize(200,200);
@@ -53,16 +55,8 @@ public class TrafficFrame {
       JScrollPane scrollPane = new JScrollPane( textPane );
       trafficFrame.add(scrollPane);
       
-      //pack, place, size, show
-      trafficFrame.pack();
-      trafficFrame.setSize(200,200);
-      trafficFrame.setLocation(200,10);
-      trafficFrame.setVisible(true);
-
-      javax.swing.SwingUtilities.invokeLater(new Runnable() {
-        public void run(){ 
-          scrollPane.getVerticalScrollBar().setValue(0);
-        }
-      });   
+      JPanel result = new JPanel();
+      result.add(scrollPane);
+      return result;
+      } 
   }
-}

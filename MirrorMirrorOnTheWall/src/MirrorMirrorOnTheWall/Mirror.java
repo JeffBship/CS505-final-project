@@ -28,6 +28,9 @@ public class Mirror
     private Quadrant quadrant;
     private static JFrame mirrorFrame = new JFrame();
     private static JPanel[] widgetPanels = new JPanel[4];
+    
+    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final Dimension widgetDim = new Dimension(screenDim.width/2-25, screenDim.height/2-25);
 
     /**
      * Constructor for objects of class Mirror
@@ -145,25 +148,27 @@ public class Mirror
         Mirror lmirror = Mirror.GetInstance();
         WeatherWidget weather = WeatherWidget.getInstance();
         NewsWidget news = NewsWidget.GetInstance();
-        TrafficWidget traf = TrafficWidget.getInstance();
+        TrafficWidget traffic = TrafficWidget.getInstance();
         
         Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
         weather.singlePress();
         //news.singlePress();
         
-        lmirror.AddWidget(weather);
-        lmirror.AddWidget(news);
-        lmirror.AddWidget(traf);
-        lmirror.AddWidget(weather);
+        
+        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(traffic);
+        
         
         mirrorFrame = new JFrame();
         
         JPanel mirrorPanel = new JPanel();
         mirrorPanel.setLayout(new GridLayout(2,2,50,50));
         mirrorPanel.setBackground(Color.BLACK);
-        Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
-        mirrorPanel.setPreferredSize(screen);
+        //Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
+        mirrorPanel.setPreferredSize(screenDim);
         
         for(int i = 0; i < mirror.Widgets.length; i++){
             widgetPanels[i] = new JPanel();
@@ -174,8 +179,11 @@ public class Mirror
 
         mirrorFrame.add(mirrorPanel);
         mirrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mirrorFrame.setPreferredSize(screen);
-        mirrorFrame.setUndecorated(true);
+        mirrorFrame.setPreferredSize(screenDim);
+        
+        //leave it decorated during development.
+        //mirrorFrame.setUndecorated(true);
+        
         mirrorFrame.getContentPane().setBackground(Color.BLACK);
         //Display the window.
         mirrorFrame.pack();
@@ -219,6 +227,7 @@ public class Mirror
         else
         {
             mirrorFrame.remove(widgetPanels[3]);
+            
             //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
             mirrorFrame.revalidate();
         }

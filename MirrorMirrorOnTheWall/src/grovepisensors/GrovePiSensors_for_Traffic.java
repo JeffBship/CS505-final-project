@@ -1,14 +1,10 @@
 package grovepisensors;
 
 
-import newswidget.NewsFrame;
 import com.pi4j.io.i2c.I2CFactory;
-import edu.ccsu.cs505.compob.OBComponent;
 import org.iot.raspberry.grovepi.pi4j.GrovePi4J;
 import java.io.IOException;
 import org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor;
-import static org.iot.raspberry.grovepi.devices.GroveTemperatureAndHumiditySensor.Type.DHT11;
-import trafficwidget.TrafficFrame;
 
 /**
  * Short program to show that the sensors are working properly.
