@@ -5,8 +5,6 @@ package cs505.group1.state;
 
 import static MirrorMirrorOnTheWall.Mirror.widgetDim;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import javax.swing.JPanel;
 
 /**
@@ -14,7 +12,7 @@ import javax.swing.JPanel;
  * @version 2017.10.29
  */
 public abstract class ButtonState {
-    protected static JPanel statePanel = new JPanel();
+    protected JPanel statePanel = new JPanel();
   
     /**
      * removes all objects from the JPanel
