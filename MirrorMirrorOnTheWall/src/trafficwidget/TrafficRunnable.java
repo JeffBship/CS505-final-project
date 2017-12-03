@@ -15,7 +15,9 @@ class TrafficRunnable implements Runnable {
         
         String[] info = TrafficReal.loadInfo();
         //TrafficState.setStatePanel(TrafficPanel.createTrafficPanel(info));
+        System.out.println("Done loading real info");
         Mirror.GetInstance().UpdateUI();
+        
       } catch (IOException ex) {
       }
     }

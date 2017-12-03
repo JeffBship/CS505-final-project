@@ -81,7 +81,7 @@ public class TrafficState extends ButtonState {
         }
         
         //get real data in a separate thread, it should update mirror
-        //(new Thread(new TrafficRunnable())).start();
+        (new Thread(new TrafficRunnable())).start();
         
         return statePanel;
     }
