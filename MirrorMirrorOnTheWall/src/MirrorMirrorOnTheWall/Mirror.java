@@ -29,6 +29,8 @@ public class Mirror
     private static JFrame mirrorFrame = new JFrame();
     private static JPanel[] widgetPanels = new JPanel[4];
 
+    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
     /**
      * Constructor for objects of class Mirror
      */

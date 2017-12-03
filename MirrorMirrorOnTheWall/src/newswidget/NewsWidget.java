@@ -12,6 +12,7 @@ import java.util.Observable;
 public class NewsWidget extends Widget {
 
   public static NewsWidget news = new NewsWidget(new NewsState());
+  
   private NewsWidget(ButtonState buttonState) {
     super(buttonState);
     this.buttonState = buttonState;

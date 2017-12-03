@@ -3,77 +3,67 @@ package clockwidget;
 import javax.swing.JFrame;
 import WeatherWidget.Widget;
 import cs505.group1.state.ButtonState;
+import java.awt.Color;
 import java.util.Observable;
+import javax.swing.JPanel;
 /**
  *
  * @author James Luczynski
  */
 public class ClockWidget extends Widget{
     
-    private ClockPanel panel;
-    
+    private boolean clockMoving = false;
+
     static JFrame frame;// only for main
     
-    public static void main(String[] args) throws InterruptedException{
-        frame = new JFrame();                   //create frame
-        frame.setSize(800, 800);              //size 1000 x 1000
-        frame.setUndecorated(true);             //no top menu bar
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //GridLayout g = new GridLayout(2,2);
-        frame.setLayout(null);
-        
-        ClockPanel p = new ClockPanel(0, 0, 200, 200);
-        //ClockPanel q = new ClockPanel(350, 0, 300, 300);
-        
-        //ClockLabel r = new ClockLabel();
-        ClockLabel l = new ClockLabel();
-        p.addClockLabel(l);
-        //q.addClockLabel(r);
-        
-        frame.add(p.getPanel());
-       // frame.add(q.getPanel());
-        
-        frame.setLocation(100, 100);
-        frame.setVisible(true);      
-        p.longPress();    
-        Thread.sleep(2000);
-       // p.singlePress();
-        Thread.sleep(2000);
-        p.doublePress();
-        Thread.sleep(10000);
-        p.longPress();
-        p.singlePress();
-        Thread.sleep(100);
-        p.singlePress();
-    }       
-    
-    
-    
-    
-    
+
     public ClockWidget(ButtonState buttonState){
         super(buttonState);
-        panel = new ClockPanel(0,0,200,200);
-        panel.addClockLabel(new ClockLabel());
     }
     
     public void showInactiveState(){
-        
+        if (clockMoving)
+            longPress();
     }
     
     public void showNoNetworkState(){
         
     }
     
-    public void singlePress(){}
+    public void singlePress(){
+        buttonState.singlePress();
+    }
     
-    public void doublePress(){}
+    public void doublePress(){
+        buttonState.doublePress();
+    }
     
-    public void longPress(){}
+    public void longPress(){
+        clockMoving = !clockMoving;
+        buttonState.longPress();
+    }
     
     public String toString(){
-        return "";
+        return "CLOCK WIDGET";
     }    
+    
     public void update(Observable observer, Object object){}
+    
+       
+    public static void main(String[] args) throws InterruptedException{
+        frame = new JFrame();
+        ClockState cs = new ClockState();       //create clock state, constructor adds clockLabel 
+        ClockWidget cw = new ClockWidget(cs);
+        JPanel panel = cs.GetStatePanel();
+        frame.setBounds(0, 0, 1000, 1000);
+        frame.add(cs.GetStatePanel());
+        frame.setBackground(Color.BLUE);
+        cs.GetStatePanel().setBounds(0, 0, ClockState.WIDTH, ClockState.HEIGHT);
+        frame.setVisible(true);
+        Thread.sleep(10000);
+        cw.longPress();
+        
+        Thread.sleep(10000);
+        cw.showInactiveState();
+    }    
 }
