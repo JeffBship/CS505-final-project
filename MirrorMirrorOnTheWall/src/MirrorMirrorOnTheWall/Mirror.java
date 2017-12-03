@@ -150,7 +150,7 @@ public class Mirror
      * @throws com.pi4j.io.i2c.I2CFactory.UnsupportedBusNumberException
      * @throws InterruptedException 
      */
-    public static void main(String args[]) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException
+    public static void main(String args[]) throws IOException, I2CFactory.UnsupportedBusNumberException, InterruptedException, AWTException
     {
         //does stuff
         Mirror lmirror = Mirror.GetInstance();
@@ -197,6 +197,14 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
+        //go to full screen mode (COMMAND ONLY WORKS ON PI)
+        Robot t1000 = new Robot();
+        t1000.keyPress(18);
+        t1000.keyPress(122);
+        t1000.keyRelease(122);
+        t1000.keyRelease(18);
+        
+        
        //GrovePiSensors.StartSensors();
        
        //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
@@ -206,12 +214,8 @@ public class Mirror
        //Mirror.GetInstance().InvokeSinglePress();
        
         //testing, temporary code
-      Mirror.GetInstance().SetActive(Quadrant.TWO);
-      Thread.sleep(3000);
-      for(int x=1;x<20;x++){
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(3000);
-      }
+      //Mirror.GetInstance().SetActive(Quadrant.TWO);
+      
      
       
        
