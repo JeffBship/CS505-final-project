@@ -80,11 +80,11 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
     */
     public void setQuadrant(Quadrant num)
     {
-	oldState = currentState;
-	currentState = num;
-//	if (oldState != currentState){
-//		System.out.println(currentState);
-//	}
+        oldState = currentState;
+        currentState = num;
+        if (oldState != currentState){
+        System.out.println(currentState);
+      }
     }
      /**
      * Computes the current angle in degrees of the Grove rotary sensor based on the byte array read from the sensor
