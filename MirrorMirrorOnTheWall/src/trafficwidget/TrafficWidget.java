@@ -40,8 +40,8 @@ public class TrafficWidget extends Widget{
   public void showNoNetworkState(){}
   @Override
   public String toString(){return null;}
-  @Override
-  public void update(Observable o, Object arg) {}
+//  @Override
+//  public void update(Observable o, Object arg) {}
   
   public static TrafficWidget getInstance(){
     if (traffic==null){

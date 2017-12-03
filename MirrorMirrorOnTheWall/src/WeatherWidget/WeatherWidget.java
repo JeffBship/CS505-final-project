@@ -3,7 +3,6 @@ package WeatherWidget;
 
 import cs505.group1.weatherstates.*;
 import cs505.group1.state.ButtonState;
-import java.util.Observable;
 
 /*
  * This class handles the weather widget for the MirrorMirrorOnTheWall project.
@@ -162,10 +161,10 @@ public class WeatherWidget extends Widget {
         setState(new WeatherInactiveState());
     }
 
-    @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void update(Observable o, Object arg) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
     
     @Override
     public void setState(ButtonState  buttonState){
