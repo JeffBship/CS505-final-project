@@ -12,13 +12,18 @@ import javax.swing.JPanel;
  */
 public class ClockWidget extends Widget{
     
+    private static ClockWidget clockWidget = new ClockWidget(new ClockState());
     private boolean clockMoving = false;
 
     static JFrame frame;// only for main
     
 
-    public ClockWidget(ButtonState buttonState){
+    private ClockWidget(ButtonState buttonState){
         super(buttonState);
+    }
+    
+    public static ClockWidget getInstance(){
+        return clockWidget;
     }
     
     public void showInactiveState(){

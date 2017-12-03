@@ -111,15 +111,19 @@ public class Mirror
         else switch (quad) {
             case ONE:
                 activeWidget = GetWidget(0);
+                AddBorderToWidgetPanel(0);
                 break;
             case TWO:
                 activeWidget = GetWidget(1);
+                AddBorderToWidgetPanel(1);
                 break;
             case THREE:
                 activeWidget = GetWidget(2);
+                AddBorderToWidgetPanel(2);
                 break;
             default:
                 activeWidget = GetWidget(3);
+                AddBorderToWidgetPanel(3);
                 break;
         }
     }
@@ -152,23 +156,15 @@ public class Mirror
         WeatherWidget weather = WeatherWidget.getInstance();
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
-        
-        ClockState clockState = new ClockState();
-        ClockWidget clock = new ClockWidget(clockState);
+        ClockWidget clock = ClockWidget.getInstance();
         
         //for testing 
         weather.singlePress();
-        //news.singlePress();
         
         lmirror.AddWidget(weather);
         lmirror.AddWidget(traffic);
         lmirror.AddWidget(news);
         lmirror.AddWidget(clock);
-        
-        //Make sure that we set the active widget after the widgets are added to the array
-        Mirror.GetInstance().SetActive(Quadrant.ONE);
-        
-        //For testing, feel free to update this from Q1 to any of the quads.
 
         mirrorFrame = new JFrame();
         
@@ -178,13 +174,16 @@ public class Mirror
         //Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
         mirrorPanel.setPreferredSize(screenDim);
         
-        for(int i = 0; i < mirror.Widgets.length; i++){
+        for(int i = 0; i < Mirror.GetInstance().Widgets.length; i++){
             widgetPanels[i] = new JPanel();
-            widgetPanels[i].add(mirror.GetWidget(i).getState().GetStatePanel());
+            widgetPanels[i].add(Mirror.GetInstance().GetWidget(i).getState().GetStatePanel());
             widgetPanels[i].setBackground(Color.BLACK);
+            widgetPanels[i].setPreferredSize(widgetDim);
             mirrorPanel.add(widgetPanels[i]);
         }
 
+        //Make sure that we set the active widget after the widgets are added to the array
+        Mirror.GetInstance().SetActive(Quadrant.ONE);
         mirrorFrame.add(mirrorPanel);
         mirrorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mirrorFrame.setPreferredSize(screenDim);
@@ -204,6 +203,19 @@ public class Mirror
        Mirror.GetInstance().InvokeDoublePress();
        Thread.sleep(10000);
        Mirror.GetInstance().InvokeSinglePress();
+    }
+    
+    /**
+     * Adds a green border to a specific widget panel. (Used for Active WidgetPanel)
+     * @param index 
+     */
+    private void AddBorderToWidgetPanel(int index)
+    {
+        widgetPanels[index].setBorder(BorderFactory.createMatteBorder(
+                                    5, 5, 5, 5, Color.GREEN));
+        if(mirrorFrame.isVisible()){
+            RepaintMirrorFrame();
+        }
     }
     
     /**
