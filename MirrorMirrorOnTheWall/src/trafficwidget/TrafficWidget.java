@@ -7,7 +7,7 @@ import cs505.group1.state.ButtonState;
 import java.util.Observable;
  
 
-public class TrafficWidget extends Widget {
+public class TrafficWidget extends Widget{
 
   private static TrafficWidget traffic = null;
   

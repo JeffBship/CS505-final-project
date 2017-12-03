@@ -44,7 +44,7 @@ public class TrafficPanel {
       
       SimpleAttributeSet trafficFont = FontFactory.createSmall("traffic");
       
-      System.out.println("info is..... " + info[0] + " " + info[1]);
+      System.out.println("iN CREATE traffic pannel  info is..... " + info[0] + " " + info[1]);
       
       String traffic = "\n\n\n    Current drive time to " + info[0] + " is " + info[1] + ".";
       

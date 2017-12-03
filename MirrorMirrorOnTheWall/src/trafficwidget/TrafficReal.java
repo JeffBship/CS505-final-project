@@ -37,14 +37,15 @@ class TrafficReal extends TrafficProxyAbstract {
   
   public static void nextDestination(){
     destination++;
-    if (destination > urlArray.length ){
+    if (destination > urlArray.length-1 ){
       destination = 0;
     }
+    System.out.println("The destination index is:  " +destination );
   }
   public static void previousDestination(){
     destination--;
     if (destination < 0 ){
-      destination = urlArray.length;
+      destination = urlArray.length-1;
     }
   }
   

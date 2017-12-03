@@ -206,23 +206,14 @@ public class Mirror
        //Mirror.GetInstance().InvokeSinglePress();
        
         //testing, temporary code
-      Mirror.GetInstance().SetActive(Quadrant.FOUR);
-      Thread.sleep(2000);
-      news.singlePress();
+      Mirror.GetInstance().SetActive(Quadrant.TWO);
+      Thread.sleep(3000);
+      for(int x=1;x<20;x++){
       Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
+      Thread.sleep(3000);
+      }
+     
       
-      
-      Thread.sleep(2000);news.doublePress();
-      Mirror.GetInstance().InvokeDoublePress();
        
        
        
@@ -310,6 +301,11 @@ public class Mirror
             UpdateWidgetPanel(3, bs.GetStatePanel());
         }
         RepaintMirrorFrame();
+    } 
+    
+    public void UpdateTrafficUI(JPanel trafficPanel){  
+      UpdateWidgetPanel(1, trafficPanel);
+      RepaintMirrorFrame();
     } 
     
     /**
