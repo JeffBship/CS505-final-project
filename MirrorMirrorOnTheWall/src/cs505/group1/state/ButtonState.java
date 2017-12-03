@@ -5,6 +5,7 @@ package cs505.group1.state;
 
 import static MirrorMirrorOnTheWall.Mirror.widgetDim;
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JPanel;
 
 /**
@@ -23,7 +24,8 @@ public abstract class ButtonState {
     
     public JPanel GetStatePanel(){
         statePanel.setBackground(Color.BLACK);
-        statePanel.setPreferredSize(widgetDim);
+        Dimension dim = new Dimension(widgetDim.width-25,widgetDim.height-50);
+        statePanel.setPreferredSize(dim);
         return statePanel;
     }
   

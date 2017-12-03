@@ -160,15 +160,11 @@ public class Mirror
         
         //for testing 
         weather.singlePress();
-        //news.singlePress();
         
         lmirror.AddWidget(weather);
         lmirror.AddWidget(traffic);
         lmirror.AddWidget(news);
         lmirror.AddWidget(clock);
-        
-        
-        //For testing, feel free to update this from Q1 to any of the quads.
 
         mirrorFrame = new JFrame();
         
@@ -178,10 +174,11 @@ public class Mirror
         //Dimension screen =Toolkit.getDefaultToolkit().getScreenSize();
         mirrorPanel.setPreferredSize(screenDim);
         
-        for(int i = 0; i < mirror.Widgets.length; i++){
+        for(int i = 0; i < Mirror.GetInstance().Widgets.length; i++){
             widgetPanels[i] = new JPanel();
-            widgetPanels[i].add(mirror.GetWidget(i).getState().GetStatePanel());
+            widgetPanels[i].add(Mirror.GetInstance().GetWidget(i).getState().GetStatePanel());
             widgetPanels[i].setBackground(Color.BLACK);
+            widgetPanels[i].setPreferredSize(widgetDim);
             mirrorPanel.add(widgetPanels[i]);
         }
 
@@ -208,6 +205,10 @@ public class Mirror
        Mirror.GetInstance().InvokeSinglePress();
     }
     
+    /**
+     * Adds a green border to a specific widget panel. (Used for Active WidgetPanel)
+     * @param index 
+     */
     private void AddBorderToWidgetPanel(int index)
     {
         widgetPanels[index].setBorder(BorderFactory.createMatteBorder(
