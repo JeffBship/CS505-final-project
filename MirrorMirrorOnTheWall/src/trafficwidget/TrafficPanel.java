@@ -40,21 +40,29 @@ public class TrafficPanel {
       
       JTextPane textPane = new JTextPane();
       textPane.setBackground(Color.black);
+      //textPane.setViewportBorder(null);
+      //textPane.setBorder(BorderFactory.createLineBorder(Color.black));
+      
       StyledDocument doc = textPane.getStyledDocument();
       
       SimpleAttributeSet trafficFont = FontFactory.createSmall("traffic");
       
-      System.out.println("iN CREATE traffic pannel  info is..... " + info[0] + " " + info[1]);
+      //System.out.println("iN CREATE traffic pannel  info is..... " + info[0] + " " + info[1]);
       
       String traffic = "\n\n\n    Current drive time to " + info[0] + " is " + info[1] + ".";
       
       doc.insertString(0,traffic, trafficFont);
       
       JScrollPane scrollPane = new JScrollPane( textPane );
+      scrollPane.setBackground(Color.black);
+      scrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
+      
       JPanel trafficPanel = new JPanel();
       trafficPanel.add(scrollPane);
       
       JPanel result = new JPanel();
+      result.setBackground(Color.black);
+      result.setBorder(BorderFactory.createLineBorder(Color.black));
       result.add(scrollPane);
       return result;
       } 

@@ -54,11 +54,15 @@ class NewsPanel {
       newsPanel.add(textPane);
       JScrollPane scrollPane = new JScrollPane(newsPanel);
       scrollPane.setViewportView(textPane);
-      
+      scrollPane.setBackground(Color.black);
+      scrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
       newsPanel.add(scrollPane);
       scrollPane.getVerticalScrollBar().setValue(0);    // scroll bar to top
       scrollPane.getHorizontalScrollBar().setValue(0);
 
+      
+      
+      
       return newsPanel;
   }
 }
