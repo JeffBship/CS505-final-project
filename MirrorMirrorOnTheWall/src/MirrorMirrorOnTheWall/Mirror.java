@@ -106,7 +106,6 @@ public class Mirror
      */
     public void SetActive(Quadrant quad)
     {
-      AddBlackBorderToWidgets();
         if (null == quad)
             activeWidget = GetWidget(3);
         else switch (quad) {
@@ -154,7 +153,7 @@ public class Mirror
     {
         //does stuff
         Mirror lmirror = Mirror.GetInstance();
-        //WeatherWidget weather = WeatherWidget.getInstance();
+        WeatherWidget weather = WeatherWidget.getInstance();
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
         ClockWidget clock = ClockWidget.getInstance();
@@ -162,10 +161,10 @@ public class Mirror
         //for testing 
         //weather.singlePress();
         
-        lmirror.AddWidget(traffic);
-        lmirror.AddWidget(traffic);
-        lmirror.AddWidget(news);
         lmirror.AddWidget(clock);
+        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(clock);
+        lmirror.AddWidget(news);
 
         mirrorFrame = new JFrame();
         
@@ -197,38 +196,13 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-       //GrovePiSensors.StartSensors();
+       GrovePiSensors.StartSensors();
        
        //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
-       Thread.sleep(2000);
-       Mirror.GetInstance().InvokeDoublePress();
-       Thread.sleep(2000);
-       Mirror.GetInstance().InvokeSinglePress();
-       
-       //testing, temporary code
-      Mirror.GetInstance().SetActive(Quadrant.THREE);
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      Thread.sleep(2000);
-      news.singlePress();
-      Mirror.GetInstance().InvokeSinglePress();
-      
-      
-      
-      
-      Thread.sleep(2000);news.doublePress();
-      Mirror.GetInstance().InvokeDoublePress();
-       
-       
-       
-       
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeDoublePress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeSinglePress();
     }
     
     /**
@@ -243,22 +217,6 @@ public class Mirror
             RepaintMirrorFrame();
         }
     }
-    /**
-     * Adds a green border to a specific widget panel. (Used for Active WidgetPanel)
-     * @param index 
-     */
-    private void AddBlackBorderToWidgets()
-    {
-      for (int i=0;i<4;i++){
-        widgetPanels[i].setBorder(BorderFactory.createMatteBorder(
-                                    5, 5, 5, 5, Color.BLACK));
-        if(mirrorFrame.isVisible()){
-            RepaintMirrorFrame();
-        }
-      }
-    }
-    
-    
     
     /**
      * Invokes the single press method on the active widget
