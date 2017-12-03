@@ -36,7 +36,6 @@ public class HourlyForecastState extends WeatherState {
          
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         {
-            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
             String temp = hm.get("Temperature").toString();
             

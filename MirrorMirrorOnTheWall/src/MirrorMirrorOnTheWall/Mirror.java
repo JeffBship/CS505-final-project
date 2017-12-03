@@ -3,6 +3,7 @@ package MirrorMirrorOnTheWall;
 
 import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
+import clockwidget.ClockState;
 import clockwidget.ClockWidget;
 import com.pi4j.io.i2c.I2CFactory;
 import cs505.group1.state.ButtonState;
@@ -32,8 +33,8 @@ public class Mirror
     public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
     public static final Dimension widgetDim = new Dimension(screenDim.width/2-25, screenDim.height/2-25);
 
-//    public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-//    public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
+    //public static final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
+    //public static final Dimension widgetDim = new Dimension(screenDim.width/2, screenDim.height/2);
     /**
      * Constructor for objects of class Mirror
      */
@@ -94,7 +95,7 @@ public class Mirror
      * 
      * @return widget
      */
-    public Widget GetActive()
+    public  Widget GetActive()
     {
         if (null == quadrant)
             return GetWidget(3);
@@ -152,15 +153,25 @@ public class Mirror
         NewsWidget news = NewsWidget.GetInstance();
         TrafficWidget traffic = TrafficWidget.getInstance();
         
-        Mirror.GetInstance().SetActive(Quadrant.TWO);
+        ClockState clockState = new ClockState();
+        ClockWidget clock = new ClockWidget(clockState);
+        
+        Mirror.GetInstance().SetActive(Quadrant.ONE);
         //for testing 
         //weather.singlePress();
         //news.singlePress();
         
+        lmirror.AddWidget(traffic);
+        lmirror.AddWidget(news);
+        
+        //using traffic in quad3 during testing to save weather calls
+        //lmirror.AddWidget(traffic);
         lmirror.AddWidget(weather);
-        lmirror.AddWidget(weather);
-        lmirror.AddWidget(weather);
-        lmirror.AddWidget(weather);
+        
+        
+        lmirror.AddWidget(clock);
+        
+        
         
         mirrorFrame = new JFrame();
         
@@ -189,13 +200,11 @@ public class Mirror
         mirrorFrame.pack();
         mirrorFrame.setVisible(true);
         
-
        GrovePiSensors.StartSensors();
        //Thread.sleep(10000);
        //Mirror.GetInstance().InvokeDoublePress();
        //Thread.sleep(10000);
        //Mirror.GetInstance().InvokeLongPress();
-
     }
     
     public void InvokeSinglePress()
@@ -204,51 +213,36 @@ public class Mirror
         UpdateUI();
     }
     
-    /**
-     * Replaces the current panel content with new content
-     * @param index
-     * @param updatePanel 
-     */
-    private void UpdateWidgetPanel(int index, JPanel updatePanel)
+    //needs to be public for trafficProxy to work
+    public  void UpdateUI()
     {
-            widgetPanels[index].removeAll();
-            widgetPanels[index].add(updatePanel);
-    }
-    
-    /**
-     * Repaints the frame after updates
-     */
-    private void RepaintFrame()
-    {
-        mirrorFrame.revalidate();
-        mirrorFrame.repaint();
-    }
-    
-    /**
-     * Updates the UI
-     */
-    private void UpdateUI()
-    {
-        ButtonState bs = GetActive().getState();
         if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            UpdateWidgetPanel(0,bs.GetStatePanel());
+            ButtonState bs = GetActive().getState();
+            widgetPanels[0].removeAll();
+            widgetPanels[0].add(bs.GetStatePanel());
+            mirrorFrame.revalidate();
+            mirrorFrame.repaint();
         }
         else if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-            
-            UpdateWidgetPanel(0,bs.GetStatePanel());
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
         }
         else if(GetActive() == Mirror.GetInstance().GetWidget(0))
         {
-           
-            UpdateWidgetPanel(0,bs.GetStatePanel());
+            mirrorFrame.remove(widgetPanels[2]);
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
         }
         else
         {
-            UpdateWidgetPanel(0,bs.GetStatePanel());
+            mirrorFrame.remove(widgetPanels[3]);
+            
+            //mirrorFrame.add(WeatherWidget.getInstance().getState().GetStatePanel());
+            mirrorFrame.revalidate();
         }
-        RepaintFrame();
     } 
     
     public void InvokeDoublePress()

@@ -331,7 +331,6 @@ public class Weather_Service
             return "3.png";
         }
         else if(icon == WeatherPattern.CLOUDY.getPatternID() 
-                || icon == WeatherPattern.MOSTLY_CLOUDY.getPatternID() 
                 || icon == WeatherPattern.DREARY.getPatternID()
                 || icon == WeatherPattern.FOG.getPatternID())
         {
