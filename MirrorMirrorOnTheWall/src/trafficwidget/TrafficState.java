@@ -71,7 +71,7 @@ public class TrafficState extends ButtonState {
         
         String[] info = {"",""};
         try {
-          info = TrafficReal.loadInfo();
+          info = TrafficProxy.loadInfo();
           statePanel = TrafficPanel.createTrafficPanel(info);
         } catch (IOException | BadLocationException ex) {
         }
