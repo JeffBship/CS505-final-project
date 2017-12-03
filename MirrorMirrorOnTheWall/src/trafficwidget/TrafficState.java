@@ -4,8 +4,6 @@ package trafficwidget;
 import static MirrorMirrorOnTheWall.Mirror.widgetDim;
 import cs505.group1.state.ButtonState;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
@@ -13,11 +11,11 @@ import javax.swing.text.BadLocationException;
 public class TrafficState extends ButtonState {
     
   public static void main(String[] args){
-    try {
-      String[] info = TrafficProxyAbstract.loadInfo();
-      TrafficPanel.main(info);
-    } catch (IOException ex) {
-    }
+    //try {
+      //String[] info = TrafficProxyAbstract.loadInfo();
+      //TrafficPanel.main(info);
+    //} catch (IOException ex) {
+    //}
     }
   
     @Override
@@ -69,15 +67,13 @@ public class TrafficState extends ButtonState {
     
     public JPanel GetStatePanel(){
         statePanel.setBackground(Color.BLACK);
-        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         statePanel.setPreferredSize(widgetDim);
         
         String[] info = {"",""};
         try {
-          info = TrafficProxyAbstract.loadInfo();
+          info = TrafficReal.loadInfo();
           statePanel = TrafficPanel.createTrafficPanel(info);
-        } catch (IOException ex) {
-        } catch (BadLocationException ex) {
+        } catch (IOException | BadLocationException ex) {
         }
         
         return statePanel;

@@ -190,10 +190,10 @@ public class Mirror
         mirrorFrame.setVisible(true);
         
        //GrovePiSensors.StartSensors();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeDoublePress();
-       Thread.sleep(10000);
-       Mirror.GetInstance().InvokeLongPress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeDoublePress();
+       //Thread.sleep(10000);
+       //Mirror.GetInstance().InvokeLongPress();
     }
     
     public void InvokeSinglePress()
