@@ -23,10 +23,8 @@ public class ClockState extends ButtonState implements Runnable{
          
     public void run(){
         clockLabel.refreshTime();
-    }  
-    
+    }    
 
-    
     public ButtonState singlePress(){
         clockLabel.cycleFontSize();
         return this;

@@ -93,7 +93,7 @@ public class FontFactory extends SimpleAttributeSet{
   private static SimpleAttributeSet smallTraffic() {
     SimpleAttributeSet result = new SimpleAttributeSet();
     StyleConstants.setFontFamily(result,"Helvetica ");
-    StyleConstants.setFontSize(result, 40);
+    StyleConstants.setFontSize(result, 30);
     StyleConstants.setForeground(result, Color.CYAN);
     return result;
   }
