@@ -4,13 +4,11 @@
  * and open the template in the editor.
  */
 
-import MirrorMirrorOnTheWall.NetConnector;
 import WeatherWidget.WeatherWidget;
-import java.util.Observable;
+import cs505.group1.state.ButtonState;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import javax.swing.JPanel;
 import org.junit.Before;
 
 /**
@@ -101,16 +99,6 @@ public class WeatherWidgetTest {
         assertEquals(instance.getLocation(), location);
     }
 
-    /**
-     * Test of GetInstance method, of class WeatherWidget.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("GetInstance");
-        WeatherWidget result = WeatherWidget.getInstance();
-        
-        assertEquals(result.getClass().getName(),"WeatherWidget");
-    }
 
     /**
      * Test of showInactiveState method, of class WeatherWidget.
@@ -120,13 +108,11 @@ public class WeatherWidgetTest {
         System.out.println("showInactiveState");
         WeatherWidget instance = WeatherWidget.getInstance();
         
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        
-        System.setOut(new PrintStream(outContent));
-        
         instance.showInactiveState();
         
-        assertEquals(outContent.toString(),"Show Inactive State\n");
+        ButtonState newState = instance.getState();
+        
+        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.WeatherInactiveState"));
     }
 
     /**
@@ -137,65 +123,54 @@ public class WeatherWidgetTest {
         System.out.println("showNoNetworkState");
         WeatherWidget instance = WeatherWidget.getInstance();
         
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        
-        System.setOut(new PrintStream(outContent));
-        
         instance.showNoNetworkState();
         
-        assertEquals(outContent.toString(),"Show No Network State\n");
+        ButtonState newState = instance.getState();
+        
+        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.NoNetworkConnectionState"));
     }
 
-    /**
-     * Test of update method, of class WeatherWidget.
-     */
+  
+
+    
     @Test
-    public void testUpdate_boolean_False() {
-        System.out.println("update");
-        boolean isConnected = false;
+    public void testSinglePress()
+    {
+        System.out.println("SinglePress");
         WeatherWidget instance = WeatherWidget.getInstance();
+        instance.singlePress();
+        JPanel panel = instance.getState().GetStatePanel();
         
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        int count = panel.getComponentCount();
         
-        System.setOut(new PrintStream(outContent));
+        assertTrue(count > 0); 
         
-        instance.update(isConnected);
-        
-        assertEquals("Show No Network State\n",outContent.toString());
     }
     
-      /**
-     * Test of update method, of class WeatherWidget.
-     */
     @Test
-    public void testUpdate_boolean_True() {
-        System.out.println("update");
-        boolean isConnected = true;
+    public void testDoublePress()
+    {
+        System.out.println("DoublePress");
+        WeatherWidget instance = WeatherWidget.getInstance();
+        instance.doublePress();
+        JPanel panel = instance.getState().GetStatePanel();
+        
+        assertTrue(panel.getComponentCount() > 0); 
+    }
+    
+    @Test
+    public void testLongPress()
+    {
+        System.out.println("LongPress");
         WeatherWidget instance = WeatherWidget.getInstance();
         
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        ButtonState currState = instance.getState();
         
-        System.setOut(new PrintStream(outContent));
+        instance.longPress();
         
-        instance.update(isConnected);
+        ButtonState newState = instance.getState();
         
-        assertEquals("",outContent.toString());
-    }
-
-
-
-    /**
-     * Test of resetSingleton method, of class WeatherWidget.
-     */
-    @Test
-    public void testResetSingleton() {
-         System.out.println("resetSingleton");
-        WeatherWidget old = WeatherWidget.getInstance();
-        WeatherWidget.resetSingleton();
-        
-        WeatherWidget newIns = WeatherWidget.getInstance();
-        
-        assertTrue(old.equals(newIns));
+        assertTrue(newState != currState); 
     }
     
 }

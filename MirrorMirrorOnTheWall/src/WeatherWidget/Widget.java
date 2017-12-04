@@ -5,16 +5,14 @@ package WeatherWidget;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import MirrorMirrorOnTheWall.NetConnector;
-import MirrorMirrorOnTheWall.NetObserver;
+
 import cs505.group1.state.*;
 /**
  *
  * @author melmulcahy
  * @since 11/4/2016
  */
-public abstract class Widget extends ButtonContext implements NetObserver {
-    private NetConnector netConnector;
+public abstract class Widget extends ButtonContext {
     
     public abstract void showInactiveState();
     
@@ -23,21 +21,6 @@ public abstract class Widget extends ButtonContext implements NetObserver {
     public Widget(ButtonState buttonState){
         super(buttonState);  //calls the parent class constructor
         this.buttonState = buttonState; 
-    }
-    /**
-    * If there is no network connection, display the no network state
-    * @param isConnected status of the network connection
-    */
-    
-    @Override
-    public void update(boolean isConnected) {
-        
-        //TODO: Implement States
-        if(!isConnected)
-        {
-            showNoNetworkState();
-        }
-        
     }
 
     @Override

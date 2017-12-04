@@ -1,5 +1,7 @@
 package grovepisensors;
 
+import MirrorMirrorOnTheWall.Mirror;
+
 /**
  * This class implements the interface Runnable so that instances of this class can be handled by a Thread.
  * The ButtonPressDistinguisher class receives updates from a GroveDigitalInputSensorListener 
@@ -39,7 +41,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
     /**
      * The length of the time interval in which two presses must occur in for a Double Press.
      */
-    private final int DOUBLE_PRESS_TIME_INTERVAL = 1000;
+    private final int DOUBLE_PRESS_TIME_INTERVAL = 1500;
     /**
      * Holds what last type of press was.
      */
@@ -53,6 +55,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      * @See GroveDigitalInputSensorListener
      * @Override update in GroveInputSensorObserver
      */
+    @Override
     public void update(byte[] b){  //parameter value of no use here
         long timeOfAction = System.currentTimeMillis();
         
@@ -83,6 +86,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
      * the predetermined period of time.  The run method determines that a Single Press has occurred and notifies the appropriate objec
      * @Override run in interface Runnable
      */
+    @Override
     public void run(){
         try{
             Thread.sleep(DOUBLE_PRESS_TIME_INTERVAL);  //after "enough" time has elapsed,
@@ -99,7 +103,23 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
     /**
      * Responsible for notifying active widget of press type that has just occurred.
      */
+    @Override
     public void notifyWidgets(){
-        System.out.println(pressType + " press");
+      
+      if(null == pressType)
+      {
+          Mirror.GetInstance().InvokeLongPress();
+      }
+      else switch (pressType) {
+            case SINGLE:
+                Mirror.GetInstance().InvokeSinglePress();
+                break;
+            case DOUBLE:
+                Mirror.GetInstance().InvokeDoublePress();
+                break;
+            default:
+                Mirror.GetInstance().InvokeLongPress();
+                break;
+        }
     }
 }

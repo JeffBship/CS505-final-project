@@ -1,11 +1,8 @@
 package WeatherWidget;
 
 
-import States.NoNetworkConnectionState;
-import States.HourlyDayForcastState;
-import States.WeatherInactiveState;
+import cs505.group1.weatherstates.*;
 import cs505.group1.state.ButtonState;
-import java.util.Observable;
 
 /*
  * This class handles the weather widget for the MirrorMirrorOnTheWall project.
@@ -21,10 +18,11 @@ public class WeatherWidget extends Widget {
     private String currentWeather = "";
     private int currentTemperature = 0;
     private String location;
-    private static WeatherWidget weatherWidget = new WeatherWidget(new HourlyDayForcastState());
+    private static WeatherWidget weatherWidget = new WeatherWidget(new SingleDayForecastState());
     
     /**
      * Default constructor. Sets location to New Britain, CT.
+     * @param buttonState
      */
     protected WeatherWidget(ButtonState buttonState)
     {
@@ -114,7 +112,7 @@ public class WeatherWidget extends Widget {
      */
     public static void resetSingleton()
     {
-        weatherWidget = new WeatherWidget(new HourlyDayForcastState());
+        weatherWidget = new WeatherWidget(new SingleDayForecastState());
     }
     
     /**
@@ -130,7 +128,8 @@ public class WeatherWidget extends Widget {
     }
 
     @Override
-    public void singlePress() {
+    public void singlePress() 
+    {
         ButtonState currentState = getState();
         currentState.singlePress();
     }
@@ -144,7 +143,7 @@ public class WeatherWidget extends Widget {
     @Override
     public void longPress() {
         ButtonState currentState = getState();
-        currentState.longPress();
+        setState(currentState.longPress());
     }
 
     @Override
@@ -162,10 +161,20 @@ public class WeatherWidget extends Widget {
         setState(new WeatherInactiveState());
     }
 
+//    @Override
+//    public void update(Observable o, Object arg) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
     @Override
-    public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void setState(ButtonState  buttonState){
+        ButtonState oldState = getState();
+      this.buttonState = buttonState;
+      if(this.buttonState != oldState)
+      {
+          WeatherWidget.getInstance().singlePress();
+      }
+    };
 
     
 }
