@@ -54,19 +54,21 @@ class CnnRSS extends RSShandler {
     final String DESCEND    = "]]></description>";
     //add another title if one exists
     Story newStory;
-    while ( source.contains(TITLESTART) ){
+    while ( source.contains(TITLESTART) && source.contains(TITLEEND) ){
       //remove leading characters
       source = source.substring( source.indexOf(TITLESTART) + TITLESTART.length());
       //extract the title
       newStory = (new Story( source.substring(0, source.indexOf(TITLEEND))   ));
       //remove the title from source
       source = source.substring( source.indexOf(TITLEEND) + TITLEEND.length() );
-      //check if newStory has a description 
-      if (source.indexOf(DESCSTART)<source.indexOf(TITLESTART)){
-        //remove, extract,remove as with title
-        source = source.substring( source.indexOf(DESCSTART) + DESCSTART.length());
-        newStory.setDescription(source.substring(0,source.indexOf(DESCEND)));
-        source = source.substring( source.indexOf(DESCEND) + DESCEND.length() );
+      //check if there is a description before the next title
+      if ( source.indexOf(DESCSTART)<source.indexOf(TITLESTART)
+           && source.contains(DESCSTART)
+           && source.contains(DESCEND) ) {
+          //remove, extract,remove as with title
+          source = source.substring( source.indexOf(DESCSTART) + DESCSTART.length());
+          newStory.setDescription(source.substring(0,source.indexOf(DESCEND)));
+          source = source.substring( source.indexOf(DESCEND) + DESCEND.length() );
       }
       cnnList.add(newStory);
     }

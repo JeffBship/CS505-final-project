@@ -37,7 +37,6 @@ class NewsPanel {
       StyledDocument doc = textPane.getStyledDocument();
       
       //add the titles and descriptions, in appropriate fonts
-      
       try {
         for(Story story:rss.getStoryList()) { 
           doc.insertString(doc.getLength(), "\n"+story.title+"\n",rss.getBigFont() );
@@ -52,10 +51,12 @@ class NewsPanel {
       JPanel newsPanel = new JPanel(new BorderLayout());
       newsPanel.setSize(widgetDim);
       newsPanel.add(textPane);
+      
       JScrollPane scrollPane = new JScrollPane(newsPanel);
       scrollPane.setViewportView(textPane);
       scrollPane.setBackground(Color.black);
       scrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
+      
       newsPanel.add(scrollPane);
       scrollPane.getVerticalScrollBar().setValue(0);    // scroll bar to top
       scrollPane.getHorizontalScrollBar().setValue(0);

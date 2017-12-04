@@ -5,7 +5,9 @@ package trafficwidget;
 
 // merge with WidgetController at some point and extend the WidgetState
 
+import static MirrorMirrorOnTheWall.Mirror.widgetDim;
 import cs505.group1.font.FontFactory;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -40,8 +42,7 @@ public class TrafficPanel {
       
       JTextPane textPane = new JTextPane();
       textPane.setBackground(Color.black);
-      //textPane.setViewportBorder(null);
-      //textPane.setBorder(BorderFactory.createLineBorder(Color.black));
+      textPane.setSize(widgetDim);
       
       StyledDocument doc = textPane.getStyledDocument();
       
@@ -49,21 +50,24 @@ public class TrafficPanel {
       
       //System.out.println("iN CREATE traffic pannel  info is..... " + info[0] + " " + info[1]);
       
-      String traffic = "\n\n\n    Current drive time to " + info[0] + " is " + info[1] + ".";
+      String traffic = "\n  Current drive\n"
+        + "  to " + info[0] + "\n  is " + info[1] + ".";
       
       doc.insertString(0,traffic, trafficFont);
       
-      JScrollPane scrollPane = new JScrollPane( textPane );
+      JPanel trafficPanel = new JPanel(new BorderLayout());
+      trafficPanel.setSize(widgetDim);
+      trafficPanel.add(textPane);
+      
+      JScrollPane scrollPane = new JScrollPane( trafficPanel );
+      scrollPane.setViewportView(textPane);
       scrollPane.setBackground(Color.black);
       scrollPane.setBorder(BorderFactory.createLineBorder(Color.black));
       
-      JPanel trafficPanel = new JPanel();
       trafficPanel.add(scrollPane);
-      
-      JPanel result = new JPanel();
-      result.setBackground(Color.black);
-      result.setBorder(BorderFactory.createLineBorder(Color.black));
-      result.add(scrollPane);
-      return result;
+      scrollPane.getVerticalScrollBar().setValue(0);    // scroll bar to top
+      scrollPane.getHorizontalScrollBar().setValue(0);
+
+      return trafficPanel;
       } 
   }

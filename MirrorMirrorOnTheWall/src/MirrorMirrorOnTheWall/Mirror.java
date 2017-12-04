@@ -203,7 +203,7 @@ public class Mirror
         t1000.keyRelease(18);
         
         
-       //GrovePiSensors.StartSensors();
+       GrovePiSensors.StartSensors();
        
        //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
        //Thread.sleep(10000);
@@ -212,7 +212,11 @@ public class Mirror
        //Mirror.GetInstance().InvokeSinglePress();
        
         //testing, temporary code
-      //Mirror.GetInstance().SetActive(Quadrant.TWO);
+        /*for (int x=0;x<50;x++){
+        Mirror.GetInstance().SetActive(Quadrant.TWO);
+        Thread.sleep(4000);
+        Mirror.GetInstance().InvokeSinglePress();
+        }*/
       
        
     }

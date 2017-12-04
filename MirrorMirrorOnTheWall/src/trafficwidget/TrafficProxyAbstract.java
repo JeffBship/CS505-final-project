@@ -14,23 +14,8 @@ import java.net.MalformedURLException;
  * @author ao0729
  */
 abstract class TrafficProxyAbstract  {
-  
-
-  public static void nextDestination(){
-    TrafficReal.nextDestination();
-  }
-  public static void previousDestination(){
-    TrafficReal.previousDestination();
-  }
     
-  public static String[] loadInfo() throws MalformedURLException, IOException{
-    
-    try {
-      TrafficPanel.main(TrafficProxy.loadInfo());
-      TrafficPanel.main(TrafficReal.loadInfo());
-    } catch (IOException ex) {
-      System.out.println("IOException in loadInfo");
-    }
+  public  static String[] loadInfo() throws MalformedURLException, IOException{
     
   return null;
   };

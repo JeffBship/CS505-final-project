@@ -15,13 +15,6 @@ import java.io.IOException;
 abstract class TrafficInterface  {
   
 
-  public static void nextDestination(){
-    TrafficReal.nextDestination();
-  }
-  public static void previousDestination(){
-    TrafficReal.previousDestination();
-  }
-    
   public static String[] loadInfo() {
     
     try {

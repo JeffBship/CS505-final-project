@@ -56,7 +56,7 @@ class FoxRSS extends RSShandler {
     
     Story newStory;
     //add another title if one exists
-    while ( source.contains(TITLESTART) ){
+    while ( source.contains(TITLESTART) && source.contains(TITLEEND) ){
       //remove leading characters
       source = source.substring( source.indexOf(TITLESTART) + TITLESTART.length());
       //extract the title
@@ -64,7 +64,9 @@ class FoxRSS extends RSShandler {
       //remove the title from source
       source = source.substring( source.indexOf(TITLEEND) + TITLEEND.length() );
       //check if newStory has a description 
-      if (source.indexOf(ITEMSTART)<source.indexOf(TITLESTART)){
+      if (source.indexOf(ITEMSTART)<source.indexOf(TITLESTART)
+           && source.contains(ITEMSTART)
+           && source.contains(ITEMEND) ) {
         //remove, extract,remove as with title
         source = source.substring( source.indexOf(ITEMSTART) + ITEMSTART.length());
         newStory.setDescription(source.substring(0,source.indexOf(ITEMEND)));
