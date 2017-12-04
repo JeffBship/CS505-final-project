@@ -43,8 +43,8 @@ public class NewsWidget extends Widget {
   public void showNoNetworkState(){}
   @Override
   public String toString(){return "NEWS";}
-  @Override
-  public void update(Observable o, Object arg) {}
+//  @Override
+//  public void update(Observable o, Object arg) {}
   
   public static NewsWidget GetInstance()
   {

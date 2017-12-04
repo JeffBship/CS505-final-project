@@ -3,7 +3,6 @@ package MirrorMirrorOnTheWall;
 
 import WeatherWidget.WeatherWidget;
 import WeatherWidget.Widget;
-import clockwidget.ClockState;
 import clockwidget.ClockWidget;
 import com.pi4j.io.i2c.I2CFactory;
 import cs505.group1.state.ButtonState;
@@ -159,10 +158,9 @@ public class Mirror
         TrafficWidget traffic = TrafficWidget.getInstance();
         ClockWidget clock = ClockWidget.getInstance();
         
-        //for testing 
-        //weather.singlePress();
+        weather.singlePress();
         
-        lmirror.AddWidget(clock);
+        lmirror.AddWidget(weather);
         lmirror.AddWidget(traffic);
         lmirror.AddWidget(clock);
         lmirror.AddWidget(news);
@@ -216,10 +214,6 @@ public class Mirror
         //testing, temporary code
       //Mirror.GetInstance().SetActive(Quadrant.TWO);
       
-     
-      
-       
-       
        
     }
     

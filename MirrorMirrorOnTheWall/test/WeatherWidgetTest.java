@@ -8,8 +8,7 @@ import WeatherWidget.WeatherWidget;
 import cs505.group1.state.ButtonState;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import javax.swing.JPanel;
 import org.junit.Before;
 
 /**
@@ -131,40 +130,7 @@ public class WeatherWidgetTest {
         assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.NoNetworkConnectionState"));
     }
 
-    /**
-     * Test of update method, of class WeatherWidget.
-     */
-    @Test
-    public void testUpdate_boolean_False() {
-        System.out.println("update");
-        boolean isConnected = false;
-        WeatherWidget instance = WeatherWidget.getInstance();
-        
-        instance.update(isConnected);
-        
-        ButtonState newState = instance.getState();
-        System.out.println(newState.getClass().getName());
-        assertTrue(newState.getClass().getName().equals("cs505.group1.weatherstates.NoNetworkConnectionState"));
-    }
-    
-      /**
-     * Test of update method, of class WeatherWidget.
-     */
-    @Test
-    public void testUpdate_boolean_True() {
-        System.out.println("update");
-        boolean isConnected = true;
-        WeatherWidget instance = WeatherWidget.getInstance();
-        
-        ButtonState currState = instance.getState();
-        
-        instance.update(isConnected);
-        
-        ButtonState newState = instance.getState();
-        
-         assertTrue(newState == currState);
-    }
-
+  
 
     
     @Test
@@ -172,13 +138,12 @@ public class WeatherWidgetTest {
     {
         System.out.println("SinglePress");
         WeatherWidget instance = WeatherWidget.getInstance();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        
-        System.setOut(new PrintStream(outContent));
-        
         instance.singlePress();
+        JPanel panel = instance.getState().GetStatePanel();
         
-       assertTrue(outContent.toString().contains(".png") && outContent.toString().contains("F"));
+        int count = panel.getComponentCount();
+        
+        assertTrue(count > 0); 
         
     }
     
@@ -187,13 +152,10 @@ public class WeatherWidgetTest {
     {
         System.out.println("DoublePress");
         WeatherWidget instance = WeatherWidget.getInstance();
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        
-        System.setOut(new PrintStream(outContent));
-        
         instance.doublePress();
+        JPanel panel = instance.getState().GetStatePanel();
         
-        assertTrue(!outContent.toString().equals("")); 
+        assertTrue(panel.getComponentCount() > 0); 
     }
     
     @Test
