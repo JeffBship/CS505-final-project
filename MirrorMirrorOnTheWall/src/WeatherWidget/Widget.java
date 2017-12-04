@@ -23,7 +23,6 @@ public abstract class Widget extends ButtonContext {
         this.buttonState = buttonState; 
     }
 
-
     @Override
     public abstract void singlePress();
 

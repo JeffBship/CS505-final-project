@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  * @version 2017.10.29
  */
 public abstract class ButtonState {
-    public JPanel statePanel = new JPanel();
+    protected JPanel statePanel = new JPanel();
   
     /**
      * removes all objects from the JPanel

@@ -52,20 +52,16 @@ public class ClockLabel {
         refreshTime();
     }
     
+    public boolean isMinutes(){
+        return (clockTime instanceof ClockTimeMinutes);
+    }
+    
     public void refreshTime(){
         label.setText(clockTime.get());
     }
     
     public String toString(){
         return label.getText();
-    }
-    
-    public int getWidth(){
-        return width;
-    }
-    
-    public int getHeight(){
-        return height;
     }
     
     private static class ClockFont{
