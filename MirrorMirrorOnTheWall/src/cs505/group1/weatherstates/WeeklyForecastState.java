@@ -32,7 +32,6 @@ public class WeeklyForecastState extends WeatherState{
         
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         {
-            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
             double tempMin = Double.parseDouble(hm.get("TempMax").toString());
             double tempMax = Double.parseDouble(hm.get("TempMin").toString());
