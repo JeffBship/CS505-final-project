@@ -8,8 +8,6 @@ import WeatherWidget.WeatherWidget;
 import cs505.group1.state.ButtonState;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import javax.swing.JPanel;
 import org.junit.Before;
 

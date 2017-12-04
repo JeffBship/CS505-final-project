@@ -27,9 +27,12 @@ public class WeeklyForecastState extends WeatherState{
         ResetStatePanel();
         List data = getData();
             
-        if(data == null || data.isEmpty()){
+        if(data == null || data.isEmpty())
+            return new WeatherInactiveState();
+        
         ((ArrayList<HashMap>)data).forEach((hm) -> 
         {
+            System.out.println(hm);
             int icon = Integer.parseInt(hm.get("Icon").toString());
             double tempMin = Double.parseDouble(hm.get("TempMax").toString());
             double tempMax = Double.parseDouble(hm.get("TempMin").toString());
@@ -44,11 +47,7 @@ public class WeeklyForecastState extends WeatherState{
             statePanel.add(imgLabel);
             statePanel.add(lblTemp);
         });
-        }
-        else
-        {
-            System.out.println("");
-        }
+        
         return this;
     }
 
@@ -99,7 +98,7 @@ public class WeeklyForecastState extends WeatherState{
     @Override
     protected List getData()
     {
-        return Weather_Service.getInstance().GetDailyForecast();
+        return Weather_Service.getInstance().GetWeeklyForecast();
     }
 }
 
