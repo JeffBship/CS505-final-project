@@ -70,9 +70,9 @@ public class RotaryStateDeterminer implements GroveInputSensorObserver
         else if (degrees >= 75.0 && degrees < 150.0)
             setQuadrant(Quadrant.TWO);
         else if (degrees >= 150.0 && degrees < 225.0)
-        setQuadrant(Quadrant.THREE);
-        else
         setQuadrant(Quadrant.FOUR);
+        else
+        setQuadrant(Quadrant.THREE);
     }
     /**
     * Sets quadrant

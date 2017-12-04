@@ -16,10 +16,10 @@ class TrafficProxy extends TrafficProxyAbstract {
   
   
     
-  public static String[] loadInfo() throws MalformedURLException, IOException{
+  public static String[] loadInfo(String name) throws MalformedURLException, IOException{
     String time="";
     String[] result = new String[2];
-    result[0] = "<please wait>";
+    result[0] = name;
     result[1] = "<please wait>";
     return result;
   }

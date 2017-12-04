@@ -41,7 +41,7 @@ public class ButtonPressDistinguisher implements GroveInputSensorObserver, Runna
     /**
      * The length of the time interval in which two presses must occur in for a Double Press.
      */
-    private final int DOUBLE_PRESS_TIME_INTERVAL = 1000;
+    private final int DOUBLE_PRESS_TIME_INTERVAL = 1500;
     /**
      * Holds what last type of press was.
      */

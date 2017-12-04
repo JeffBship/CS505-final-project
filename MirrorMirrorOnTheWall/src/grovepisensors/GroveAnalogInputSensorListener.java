@@ -20,7 +20,7 @@ public class GroveAnalogInputSensorListener extends GroveInputSensorListener imp
     /**
      * The amount of time in milliseconds between consecutive reads of the Grove analog input sensor values.
      */    
-    private final int READ_DELAY = 250;
+    private final int READ_DELAY = 500;
     /**
      * Instantiates a GroveAnalogInputSensorListener and begins making reads of its associated Grove input sensor immediately.
      * @param grovePi the GrovePi instance representing the physical GrovePi device.
