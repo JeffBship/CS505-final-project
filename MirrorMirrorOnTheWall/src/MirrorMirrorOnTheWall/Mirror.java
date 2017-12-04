@@ -203,7 +203,7 @@ public class Mirror
         t1000.keyRelease(18);
         
         
-       //GrovePiSensors.StartSensors();
+        GrovePiSensors.StartSensors();
        
        //USE THIS TO TEST INVOKING YOUR BUTTON PRESSES TO UPDATE THE UI
        //Thread.sleep(10000);

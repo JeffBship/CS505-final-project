@@ -25,15 +25,15 @@ public class ClockLabel {
         label = new JLabel(clockTime.get());
         label.setForeground(ClockFont.nextColor());
         label.setBounds(0, 0, width, height);
-        label.setFont(ClockFont.nextFont());
+        label.setFont(ClockFont.currentFont);
     }
     
     public JLabel getLabel(){
         return label;
     }    
     
-    public void cycleFont(){
-        label.setFont(ClockFont.nextFont());
+    public void cycleFontSize(){
+        label.setFont(ClockFont.nextFontSize());
     }
     
     public void cycleColor(){
@@ -50,6 +50,10 @@ public class ClockLabel {
             width -= delta;
         }
         refreshTime();
+    }
+    
+    public boolean isMinutes(){
+        return (clockTime instanceof ClockTimeMinutes);
     }
     
     public void refreshTime(){
@@ -69,28 +73,30 @@ public class ClockLabel {
     }
     
     private static class ClockFont{
-        static Font currentFont;
         
-        static int fontStyle = 0;
+        static final int FONT_STYLE = 0;
         static int fontSize = 50;
         
-        static String[] fontName = {"Wingdings", "Comic Sans", "Times New Roman", "Algerian"};
-        static int fontInd = 0;
+        static final String FONT_NAME = "Times New Roman";
+        static Font currentFont = new Font(FONT_NAME, FONT_STYLE, fontSize);
         
         static Color currentColor;
-        static Color[] color = {Color.RED, Color.LIGHT_GRAY, Color.ORANGE, Color.BLUE, Color.YELLOW};
+        static final Color[] COLOR = {Color.RED, Color.LIGHT_GRAY, Color.ORANGE, Color.BLUE, 
+            Color.YELLOW, Color.PINK, Color.DARK_GRAY, Color.CYAN, Color.ORANGE};        
         static int colorInd = -1;
         
-        static Font nextFont(){
-            fontInd = (fontInd + 1) % fontName.length;
-            currentFont = new Font(fontName[fontInd], fontStyle, fontSize);
-            return currentFont;
+        static Color nextColor(){
+            colorInd = (colorInd + 1) % COLOR.length;
+            currentColor = COLOR[colorInd];
+            return currentColor;
         }
         
-        static Color nextColor(){
-            colorInd = (colorInd + 1) % color.length;
-            currentColor = color[colorInd];
-            return currentColor;
+        static Font nextFontSize(){
+            fontSize += 4;
+            if (fontSize > 66)
+                fontSize = 38;
+            currentFont = new Font(FONT_NAME, FONT_STYLE, fontSize);
+            return currentFont;
         }
     }
 }
